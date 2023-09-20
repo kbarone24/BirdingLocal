@@ -7,9 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C69758B2ABB521600D5F3B5 /* EBirdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758A2ABB521600D5F3B5 /* EBirdService.swift */; };
+		8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758C2ABB539400D5F3B5 /* LocationService.swift */; };
+		8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */; };
+		8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975902ABB595400D5F3B5 /* HomeScreenViewModel.swift */; };
+		8C6975942ABB5C1800D5F3B5 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */; };
+		8C6975962ABB5FFF00D5F3B5 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975952ABB5FFF00D5F3B5 /* NotificationNames.swift */; };
 		8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */; };
 		8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */; };
-		8CE9F4BD2AB0D17F006DCD54 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BC2AB0D17F006DCD54 /* ViewController.swift */; };
+		8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */; };
 		8CE9F4C02AB0D17F006DCD54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BE2AB0D17F006DCD54 /* Main.storyboard */; };
 		8CE9F4C32AB0D17F006DCD54 /* Birding_Local.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4C12AB0D17F006DCD54 /* Birding_Local.xcdatamodeld */; };
 		8CE9F4C52AB0D180006DCD54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */; };
@@ -17,10 +23,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8C69758A2ABB521600D5F3B5 /* EBirdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBirdService.swift; sourceTree = "<group>"; };
+		8C69758C2ABB539400D5F3B5 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
+		8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
+		8C6975902ABB595400D5F3B5 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
+		8C6975952ABB5FFF00D5F3B5 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Birding Local.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		8CE9F4BC2AB0D17F006DCD54 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		8CE9F4BF2AB0D17F006DCD54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8CE9F4C22AB0D17F006DCD54 /* Birding_Local.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Birding_Local.xcdatamodel; sourceTree = "<group>"; };
 		8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -33,12 +44,57 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6975942ABB5C1800D5F3B5 /* IdentifiedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8C6975852ABB4E1900D5F3B5 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				8C69758A2ABB521600D5F3B5 /* EBirdService.swift */,
+				8C69758C2ABB539400D5F3B5 /* LocationService.swift */,
+				8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		8C6975862ABB4E2600D5F3B5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9F4C12AB0D17F006DCD54 /* Birding_Local.xcdatamodeld */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8C6975872ABB4E4200D5F3B5 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */,
+				8C6975902ABB595400D5F3B5 /* HomeScreenViewModel.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		8C6975882ABB4E7300D5F3B5 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				8CE9F4BE2AB0D17F006DCD54 /* Main.storyboard */,
+				8CE9F4C62AB0D180006DCD54 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		8C6975892ABB4E9300D5F3B5 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				8C6975952ABB5FFF00D5F3B5 /* NotificationNames.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		8CE9F4AC2AB0D17F006DCD54 = {
 			isa = PBXGroup;
 			children = (
@@ -58,14 +114,15 @@
 		8CE9F4B72AB0D17F006DCD54 /* Birding Local */ = {
 			isa = PBXGroup;
 			children = (
+				8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */,
+				8CE9F4C92AB0D180006DCD54 /* Info.plist */,
 				8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */,
 				8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */,
-				8CE9F4BC2AB0D17F006DCD54 /* ViewController.swift */,
-				8CE9F4BE2AB0D17F006DCD54 /* Main.storyboard */,
-				8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */,
-				8CE9F4C62AB0D180006DCD54 /* LaunchScreen.storyboard */,
-				8CE9F4C92AB0D180006DCD54 /* Info.plist */,
-				8CE9F4C12AB0D17F006DCD54 /* Birding_Local.xcdatamodeld */,
+				8C6975892ABB4E9300D5F3B5 /* Resources */,
+				8C6975872ABB4E4200D5F3B5 /* Home */,
+				8C6975862ABB4E2600D5F3B5 /* Models */,
+				8C6975852ABB4E1900D5F3B5 /* Services */,
+				8C6975882ABB4E7300D5F3B5 /* Storyboards */,
 			);
 			path = "Birding Local";
 			sourceTree = "<group>";
@@ -86,6 +143,9 @@
 			dependencies = (
 			);
 			name = "Birding Local";
+			packageProductDependencies = (
+				8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */,
+			);
 			productName = "Birding Local";
 			productReference = 8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */;
 			productType = "com.apple.product-type.application";
@@ -114,6 +174,9 @@
 				Base,
 			);
 			mainGroup = 8CE9F4AC2AB0D17F006DCD54;
+			packageReferences = (
+				8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
+			);
 			productRefGroup = 8CE9F4B62AB0D17F006DCD54 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -141,10 +204,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8CE9F4BD2AB0D17F006DCD54 /* ViewController.swift in Sources */,
+				8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */,
+				8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */,
 				8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */,
+				8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */,
+				8C6975962ABB5FFF00D5F3B5 /* NotificationNames.swift in Sources */,
 				8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */,
 				8CE9F4C32AB0D17F006DCD54 /* Birding_Local.xcdatamodeld in Sources */,
+				8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */,
+				8C69758B2ABB521600D5F3B5 /* EBirdService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -362,6 +430,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/pointfreeco/swift-identified-collections";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
+			productName = IdentifiedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
 		8CE9F4C12AB0D17F006DCD54 /* Birding_Local.xcdatamodeld */ = {
