@@ -18,7 +18,6 @@
 		8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */; };
 		8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */; };
 		8CE9F4C02AB0D17F006DCD54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BE2AB0D17F006DCD54 /* Main.storyboard */; };
-		8CE9F4C32AB0D17F006DCD54 /* Birding_Local.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4C12AB0D17F006DCD54 /* Birding_Local.xcdatamodeld */; };
 		8CE9F4C52AB0D180006DCD54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */; };
 		8CE9F4C82AB0D180006DCD54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CE9F4C62AB0D180006DCD54 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
@@ -35,7 +34,6 @@
 		8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenController.swift; sourceTree = "<group>"; };
 		8CE9F4BF2AB0D17F006DCD54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8CE9F4C22AB0D17F006DCD54 /* Birding_Local.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Birding_Local.xcdatamodel; sourceTree = "<group>"; };
 		8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8CE9F4C72AB0D180006DCD54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8CE9F4C92AB0D180006DCD54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -66,7 +64,6 @@
 		8C6975862ABB4E2600D5F3B5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				8CE9F4C12AB0D17F006DCD54 /* Birding_Local.xcdatamodeld */,
 				8C6975972ABB841000D5F3B5 /* BirdSighting.swift */,
 			);
 			path = Models;
@@ -214,7 +211,6 @@
 				8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */,
 				8C6975962ABB5FFF00D5F3B5 /* NotificationNames.swift in Sources */,
 				8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */,
-				8CE9F4C32AB0D17F006DCD54 /* Birding_Local.xcdatamodeld in Sources */,
 				8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */,
 				8C69758B2ABB521600D5F3B5 /* EBirdService.swift in Sources */,
 			);
@@ -455,19 +451,6 @@
 			productName = IdentifiedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
-
-/* Begin XCVersionGroup section */
-		8CE9F4C12AB0D17F006DCD54 /* Birding_Local.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8CE9F4C22AB0D17F006DCD54 /* Birding_Local.xcdatamodel */,
-			);
-			currentVersion = 8CE9F4C22AB0D17F006DCD54 /* Birding_Local.xcdatamodel */;
-			path = Birding_Local.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8CE9F4AD2AB0D17F006DCD54 /* Project object */;
 }
