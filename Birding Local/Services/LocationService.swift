@@ -11,16 +11,15 @@ import UIKit
 
 protocol LocationServiceProtocol {
     var currentLocation: CLLocation? { get set }
-    var cachedCity: String? { get set }
     var gotInitialLocation: Bool { get set }
     func checkLocationAuth() -> UIAlertController?
     func currentLocationStatus() -> CLAuthorizationStatus
     func locationAlert() -> UIAlertController
+    func getCity() async -> String?
 }
 
 final class LocationService: NSObject, LocationServiceProtocol {
     var currentLocation: CLLocation?
-    var cachedCity: String?
     var gotInitialLocation = false
     
     private lazy var locationManager = CLLocationManager()
@@ -77,6 +76,42 @@ final class LocationService: NSObject, LocationServiceProtocol {
         return alert
     }
 
+    func getCity() async -> String? {
+        await withUnsafeContinuation { continuation in
+            Task {
+                guard let currentLocation else {
+                    continuation.resume(returning: "")
+                    return
+                }
+                
+                var addressString = ""
+                let locale = Locale(identifier: "en")
+                CLGeocoder().reverseGeocodeLocation(currentLocation, preferredLocale: locale) { placemarks, error in
+                    guard error == nil, let placemark = placemarks?.first else {
+                        continuation.resume(returning: nil)
+                        return
+                    }
+
+                    if let locality = placemark.locality {
+                        addressString = locality
+                    }
+
+                    if let country = placemark.country {
+                        if !addressString.isEmpty {
+                            addressString += ", "
+                        }
+                        // show city/state if US city, city/country if intl
+                        if country == "United States", let administrativeArea = placemark.administrativeArea {
+                            addressString += administrativeArea
+                        } else {
+                            addressString += country
+                        }
+                    }
+                    continuation.resume(returning: addressString)
+                }
+            }
+        }
+    }
 }
 
 extension LocationService: CLLocationManagerDelegate {

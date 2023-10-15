@@ -12,8 +12,21 @@
 		8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */; };
 		8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975902ABB595400D5F3B5 /* HomeScreenViewModel.swift */; };
 		8C6975942ABB5C1800D5F3B5 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */; };
-		8C6975962ABB5FFF00D5F3B5 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975952ABB5FFF00D5F3B5 /* NotificationNames.swift */; };
 		8C6975982ABB841000D5F3B5 /* BirdSighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975972ABB841000D5F3B5 /* BirdSighting.swift */; };
+		8C6975FA2AD89AAE00D5F3B5 /* HomeScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975F92AD89AAE00D5F3B5 /* HomeScreenCell.swift */; };
+		8C6975FC2AD89B7900D5F3B5 /* CommonNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */; };
+		8C6975FF2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6975FE2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf */; };
+		8C6976012AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976002AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf */; };
+		8C69761B2AD8A7EE00D5F3B5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C69761A2AD8A7EE00D5F3B5 /* SnapKit */; };
+		8C69761E2AD8A96100D5F3B5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C69761D2AD8A96100D5F3B5 /* SDWebImage */; };
+		8C6976212AD8AABE00D5F3B5 /* UITableViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976202AD8AABE00D5F3B5 /* UITableViewCellExtension.swift */; };
+		8C6976232ADB1B3100D5F3B5 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976222ADB1B3100D5F3B5 /* ArrayExtension.swift */; };
+		8C6976252ADB274100D5F3B5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */; };
+		8C6976272ADB45CC00D5F3B5 /* HomeScreenTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976262ADB45CC00D5F3B5 /* HomeScreenTitleView.swift */; };
+		8C6976292ADB464600D5F3B5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976282ADB464500D5F3B5 /* SF-Pro-Text-Regular.otf */; };
+		8C69762B2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69762A2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift */; };
+		8C69762D2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C69762C2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf */; };
+		8C69762F2ADC86A100D5F3B5 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */; };
 		8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */; };
 		8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */; };
 		8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */; };
@@ -27,8 +40,19 @@
 		8C69758C2ABB539400D5F3B5 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
 		8C6975902ABB595400D5F3B5 /* HomeScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenViewModel.swift; sourceTree = "<group>"; };
-		8C6975952ABB5FFF00D5F3B5 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		8C6975972ABB841000D5F3B5 /* BirdSighting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BirdSighting.swift; sourceTree = "<group>"; };
+		8C6975F92AD89AAE00D5F3B5 /* HomeScreenCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenCell.swift; sourceTree = "<group>"; };
+		8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonNames.swift; sourceTree = "<group>"; };
+		8C6975FE2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Medium.otf"; sourceTree = "<group>"; };
+		8C6976002AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Bold.otf"; sourceTree = "<group>"; };
+		8C6976202AD8AABE00D5F3B5 /* UITableViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewCellExtension.swift; sourceTree = "<group>"; };
+		8C6976222ADB1B3100D5F3B5 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		8C6976262ADB45CC00D5F3B5 /* HomeScreenTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenTitleView.swift; sourceTree = "<group>"; };
+		8C6976282ADB464500D5F3B5 /* SF-Pro-Text-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Regular.otf"; sourceTree = "<group>"; };
+		8C69762A2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeScreenTableViewHeader.swift; sourceTree = "<group>"; };
+		8C69762C2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
+		8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Birding Local.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -44,7 +68,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C69761E2AD8A96100D5F3B5 /* SDWebImage in Frameworks */,
 				8C6975942ABB5C1800D5F3B5 /* IdentifiedCollections in Frameworks */,
+				8C69761B2AD8A7EE00D5F3B5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -74,6 +100,9 @@
 			children = (
 				8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */,
 				8C6975902ABB595400D5F3B5 /* HomeScreenViewModel.swift */,
+				8C6975F92AD89AAE00D5F3B5 /* HomeScreenCell.swift */,
+				8C6976262ADB45CC00D5F3B5 /* HomeScreenTitleView.swift */,
+				8C69762A2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -90,9 +119,32 @@
 		8C6975892ABB4E9300D5F3B5 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				8C6975952ABB5FFF00D5F3B5 /* NotificationNames.swift */,
+				8C6975FD2AD89C2000D5F3B5 /* Fonts */,
+				8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		8C6975FD2AD89C2000D5F3B5 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				8C69762C2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf */,
+				8C6976282ADB464500D5F3B5 /* SF-Pro-Text-Regular.otf */,
+				8C6976002AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf */,
+				8C6975FE2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		8C69761F2AD8AA9E00D5F3B5 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				8C6976202AD8AABE00D5F3B5 /* UITableViewCellExtension.swift */,
+				8C6976222ADB1B3100D5F3B5 /* ArrayExtension.swift */,
+				8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */,
+				8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		8CE9F4AC2AB0D17F006DCD54 = {
@@ -123,6 +175,7 @@
 				8C6975862ABB4E2600D5F3B5 /* Models */,
 				8C6975852ABB4E1900D5F3B5 /* Services */,
 				8C6975882ABB4E7300D5F3B5 /* Storyboards */,
+				8C69761F2AD8AA9E00D5F3B5 /* Extensions */,
 			);
 			path = "Birding Local";
 			sourceTree = "<group>";
@@ -145,6 +198,8 @@
 			name = "Birding Local";
 			packageProductDependencies = (
 				8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */,
+				8C69761A2AD8A7EE00D5F3B5 /* SnapKit */,
+				8C69761D2AD8A96100D5F3B5 /* SDWebImage */,
 			);
 			productName = "Birding Local";
 			productReference = 8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */;
@@ -176,6 +231,8 @@
 			mainGroup = 8CE9F4AC2AB0D17F006DCD54;
 			packageReferences = (
 				8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
+				8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */,
+				8C69761C2AD8A96100D5F3B5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 8CE9F4B62AB0D17F006DCD54 /* Products */;
 			projectDirPath = "";
@@ -191,9 +248,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C6976292ADB464600D5F3B5 /* SF-Pro-Text-Regular.otf in Resources */,
+				8C6975FF2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf in Resources */,
+				8C6976012AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf in Resources */,
 				8CE9F4C82AB0D180006DCD54 /* LaunchScreen.storyboard in Resources */,
 				8CE9F4C52AB0D180006DCD54 /* Assets.xcassets in Resources */,
 				8CE9F4C02AB0D17F006DCD54 /* Main.storyboard in Resources */,
+				8C69762D2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -207,12 +268,19 @@
 				8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */,
 				8C6975982ABB841000D5F3B5 /* BirdSighting.swift in Sources */,
 				8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */,
+				8C69762B2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift in Sources */,
+				8C6976232ADB1B3100D5F3B5 /* ArrayExtension.swift in Sources */,
 				8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */,
+				8C6975FA2AD89AAE00D5F3B5 /* HomeScreenCell.swift in Sources */,
+				8C6976272ADB45CC00D5F3B5 /* HomeScreenTitleView.swift in Sources */,
+				8C69762F2ADC86A100D5F3B5 /* DoubleExtension.swift in Sources */,
 				8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */,
-				8C6975962ABB5FFF00D5F3B5 /* NotificationNames.swift in Sources */,
+				8C6975FC2AD89B7900D5F3B5 /* CommonNames.swift in Sources */,
 				8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */,
+				8C6976252ADB274100D5F3B5 /* UIImageExtension.swift in Sources */,
 				8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */,
 				8C69758B2ABB521600D5F3B5 /* EBirdService.swift in Sources */,
+				8C6976212AD8AABE00D5F3B5 /* UITableViewCellExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -342,7 +410,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -359,7 +427,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S7MW4WDQQA;
+				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -367,7 +435,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -388,7 +456,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S7MW4WDQQA;
+				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -396,7 +464,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -442,6 +510,22 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		8C69761C2AD8A96100D5F3B5 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 5.18.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -449,6 +533,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
 			productName = IdentifiedCollections;
+		};
+		8C69761A2AD8A7EE00D5F3B5 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		8C69761D2AD8A96100D5F3B5 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C69761C2AD8A96100D5F3B5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

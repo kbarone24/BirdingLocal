@@ -20,9 +20,55 @@ final class EBirdService: EBirdServiceProtocol {
             Task(priority: .high) {
                 let latitude = location.coordinate.latitude
                 let longitude = location.coordinate.longitude
-                let urlString = getURLString(latitude: latitude, longitude: longitude, radius: radius, maxResults: maxResults, startIndex: startIndex)
+                var daysBack = 4
+                let initialIndex = startIndex
+
+                var sightings = await runSightingsFetch(
+                    latitude: latitude,
+                    longitude: longitude,
+                    radius: radius,
+                    maxResults: maxResults,
+                    startIndex: initialIndex,
+                    daysBack: daysBack
+                )
+
+                // go further back in time to fetch enough sightings to fill page
+                while sightings.count < 8, daysBack < 128 {
+                    daysBack *= 2
+
+                    let additionalSightings = await runSightingsFetch(
+                        latitude: latitude,
+                        longitude: longitude,
+                        radius: radius,
+                        maxResults: maxResults - sightings.count,
+                        startIndex: initialIndex + sightings.count,
+                        daysBack: daysBack
+                    )
+                    sightings.append(contentsOf: additionalSightings)
+                }
+
+                for i in 0..<sightings.count {
+                    let imageInfo = await fetchBirdImageInfo(for: sightings[i])
+                    sightings[i].imageURL = imageInfo.imageURL
+                    sightings[i].audioURL = imageInfo.audioURL
+                }
+                continuation.resume(returning: sightings)
+            }
+        }
+    }
+
+    private func runSightingsFetch(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, startIndex: Int, daysBack: Int) async -> [BirdSighting] {
+        await withUnsafeContinuation { continuation in
+            Task {
+                let urlString = getURLString(
+                    latitude: latitude,
+                    longitude: longitude,
+                    radius: radius,
+                    maxResults: maxResults,
+                    startIndex: startIndex,
+                    daysBack: daysBack
+                )
                 guard let url = URL(string: urlString) else {
-                    print("invalid URL")
                     continuation.resume(returning: [])
                     return
                 }
@@ -31,16 +77,8 @@ final class EBirdService: EBirdServiceProtocol {
                 let (data, _) = try await session.data(from: url)
 
                 let decoder = JSONDecoder()
-                var sightings = try decoder.decode([BirdSighting].self, from: data)
-                sightings.removeAll(where: { !$0.obsValid }) // remove any bad observations
-
-                for i in 0..<sightings.count {
-                    let imageInfo = await fetchBirdImageInfo(for: sightings[i])
-                    sightings[i].imageURL = imageInfo.imageURL
-                    sightings[i].audioURL = imageInfo.audioURL
-                    print("image info", imageInfo.imageURL, imageInfo.audioURL)
-                }
-                continuation.resume(returning: sightings)
+                let sightings = try? decoder.decode([BirdSighting].self, from: data)
+                continuation.resume(returning: sightings ?? [])
             }
         }
     }
@@ -78,12 +116,6 @@ final class EBirdService: EBirdServiceProtocol {
                     }
 
                     do {
-                        if let jsonString = String(data: data, encoding: .utf8) {
-                            print(jsonString)
-                        } else {
-                            print("Failed to convert data to a JSON string.")
-                        }
-
                         // Decode jsonString to extract the article's cover image
                         if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
                            let query = jsonObject["query"] as? [String: Any],
@@ -110,9 +142,8 @@ final class EBirdService: EBirdServiceProtocol {
     }
 
 
-    private func getURLString(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, startIndex: Int) -> String {
+    private func getURLString(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, startIndex: Int, daysBack: Int) -> String {
         let baseURL = "https://api.ebird.org/v2/data/obs/geo/recent"
-        let daysBack = 7
         return "\(baseURL)?lat=\(latitude)&lng=\(longitude)&maxResults=\(maxResults)&dist=\(radius)&back=\(daysBack)&startIndex=\(startIndex)&key=\(self.apiKey)"
     }
 }
