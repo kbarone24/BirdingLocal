@@ -17,7 +17,7 @@ class HomeScreenViewModel {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
 
     struct Input {
-        let radius: PassthroughSubject<Double, Never>
+        let fetchInput: PassthroughSubject<(radius: Double?, useStartIndex: Bool), Never>
         let city: PassthroughSubject<String?, Never>
     }
 
@@ -33,7 +33,7 @@ class HomeScreenViewModel {
     var cachedSightings = [BirdSighting]()
 
     let initialFetchLimit = 20
-    let paginatingFetchLimit = 10
+    let paginatingFetchLimit = 14
 
     init(serviceContainer: ServiceContainer) {
         guard let ebirdService = try? serviceContainer.service(for: \.ebirdService),
@@ -48,10 +48,10 @@ class HomeScreenViewModel {
     }
 
     func bindForSightings(to input: Input) -> Output {
-        let request = input.radius
+        let request = input.fetchInput
             .receive(on: DispatchQueue.global())
-            .flatMap { [unowned self] radius in
-                (self.fetchSightings(radius: radius))
+            .flatMap { [unowned self] fetchInput in
+                (self.fetchSightings(radius: fetchInput.radius ?? self.cachedRadius, useStartIndex: fetchInput.useStartIndex))
             }
             .map { $0 }
 
@@ -121,7 +121,8 @@ class HomeScreenViewModel {
 
 
     private func fetchSightings(
-        radius: Double
+        radius: Double,
+        useStartIndex: Bool
     ) -> AnyPublisher<(sightings: [BirdSighting], radius: Double), Never> {
         Deferred {
             Future { [weak self] promise in
@@ -131,17 +132,25 @@ class HomeScreenViewModel {
                 }
 
                 Task {
-                    let maxResults = self.cachedSightings.isEmpty ? self.initialFetchLimit : self.paginatingFetchLimit
+                    // ebird api doesn't allow for actual pagination so need to fetch everything and remove duplicates
+                    let maxResults = self.cachedSightings.isEmpty ? self.initialFetchLimit : self.cachedSightings.count + self.paginatingFetchLimit
+                    let cachedSightings = useStartIndex ? self.cachedSightings : []
+                    print("max results", maxResults)
 
                     let sightings = await self.ebirdService.fetchSightings(
                         for: self.locationService.currentLocation ?? CLLocation(),
                         radius: radius.inKM(),
                         maxResults: maxResults,
-                        startIndex: self.cachedSightings.count
+                        cachedSightings: cachedSightings
                     )
-                    promise(.success((sightings, radius)))
+                    // attach to cached sightings on pagination
+                    var allSightings = useStartIndex ?
+                    (self.cachedSightings + sightings).removingDuplicates() :
+                    sightings
 
-                    self.cachedSightings = sightings
+                    promise(.success((allSightings, radius)))
+
+                    self.cachedSightings = allSightings
                     self.cachedRadius = radius
                 }
             }

@@ -23,13 +23,15 @@ class HomeScreenController: UIViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     typealias DataSource = UITableViewDiffableDataSource<Section, Item>
 
-    let radius = PassthroughSubject<Double, Never>()
+    let fetchInput = PassthroughSubject<(radius: Double?, useStartIndex: Bool), Never>()
     let city = PassthroughSubject<String?, Never>()
 
     private lazy var viewModel = HomeScreenViewModel(serviceContainer: ServiceContainer.shared)
     private lazy var subscriptions = Set<AnyCancellable>()
 
     private lazy var titleView = HomeScreenTitleView()
+
+    private lazy var activityFooterView = ActivityFooterView()
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -45,11 +47,34 @@ class HomeScreenController: UIViewController {
         tableView.backgroundColor = Colors.PrimaryBlue.color
         tableView.clipsToBounds = true
         tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 48, right: 0)
+        tableView.allowsSelection = false
+        tableView.contentInset = UIEdgeInsets(top: 16, left: 0, bottom: 32, right: 0)
+        tableView.sectionFooterHeight = 20
         tableView.register(HomeScreenCell.self, forCellReuseIdentifier: HomeScreenCell.reuseID)
         tableView.register(HomeScreenTableViewHeader.self, forHeaderFooterViewReuseIdentifier: HomeScreenTableViewHeader.reuseID)
         return tableView
     }()
+
+    private lazy var refreshControl: UIRefreshControl = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.tintColor = .white
+        refreshControl.addTarget(self, action: #selector(forceRefresh), for: .valueChanged)
+        return refreshControl
+    }()
+
+    var isRefreshingPagination = false {
+        didSet {
+            // show bottom activity indicator during pagination
+            DispatchQueue.main.async {
+                if self.isRefreshingPagination, !self.datasource.snapshot().itemIdentifiers.isEmpty {
+                    print("unhide footer")
+                    self.activityFooterView.isHidden = false
+                } else {
+                    self.activityFooterView.isHidden = true
+                }
+            }
+        }
+    }
 
     private(set) lazy var datasource: DataSource = {
         let dataSource = DataSource(tableView: tableView) { [weak self] tableView, indexPath, item in
@@ -77,9 +102,12 @@ class HomeScreenController: UIViewController {
             $0.leading.trailing.equalToSuperview()
         }
 
+        activityFooterView.isHidden = true
+        tableView.tableFooterView = activityFooterView
+        tableView.refreshControl = refreshControl
         view.addSubview(tableView)
         tableView.snp.makeConstraints {
-            $0.top.equalTo(titleView.snp.bottom).offset(8)
+            $0.top.equalTo(titleView.snp.bottom).offset(12)
             $0.leading.trailing.bottom.equalToSuperview()
         }
 
@@ -91,7 +119,7 @@ class HomeScreenController: UIViewController {
         }
 
         let input = Input(
-            radius: radius,
+            fetchInput: fetchInput,
             city: city
         )
         let sightingsOutput = viewModel.bindForSightings(to: input)
@@ -101,6 +129,8 @@ class HomeScreenController: UIViewController {
                 // apply to datasource
                 self?.applySnapshot(snapshot: snapshot)
                 self?.activityIndicator.stopAnimating()
+                self?.refreshControl.endRefreshing()
+                self?.isRefreshingPagination = false
             }
             .store(in: &subscriptions)
 
@@ -112,13 +142,13 @@ class HomeScreenController: UIViewController {
                 self?.applySnapshot(snapshot: snapshot)
             }
             .store(in: &subscriptions)
-        
+
 
         if viewModel.locationService.gotInitialLocation {
-            // otherwise refresh sent by internal noti
-            radius.send(viewModel.cachedRadius)
+            fetchInput.send((nil, false))
             city.send(nil)
         }
+        // else refresh sent by internal noti
     }
 
     private func applySnapshot(snapshot: Snapshot) {
@@ -145,8 +175,12 @@ class HomeScreenController: UIViewController {
 
     @objc func gotInitialLocation() {
         // view model -> fetch birds
-        radius.send(viewModel.cachedRadius)
+        fetchInput.send((radius: nil, useStartIndex: false))
         city.send(nil)
+    }
+
+    @objc func forceRefresh() {
+
     }
 }
 
@@ -163,6 +197,14 @@ extension HomeScreenController: UITableViewDelegate {
             let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: HomeScreenTableViewHeader.reuseID) as? HomeScreenTableViewHeader
             header?.configure(title: "Nearby sightings")
             return header
+        }
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let snapshot = datasource.snapshot()
+        if (indexPath.row >= snapshot.numberOfItems - 2) && !isRefreshingPagination {
+            isRefreshingPagination = true
+            fetchInput.send((radius: nil, useStartIndex: true))
         }
     }
 }

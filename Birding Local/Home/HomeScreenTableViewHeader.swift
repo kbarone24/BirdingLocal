@@ -18,7 +18,6 @@ class HomeScreenTableViewHeader: UITableViewHeaderFooterView {
 
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        backgroundColor = nil
 
         contentView.addSubview(headerLabel)
         headerLabel.snp.makeConstraints {

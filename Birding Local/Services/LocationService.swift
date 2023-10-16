@@ -116,7 +116,7 @@ final class LocationService: NSObject, LocationServiceProtocol {
 
 extension LocationService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        
+        manager.startUpdatingLocation()
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -127,6 +127,7 @@ extension LocationService: CLLocationManagerDelegate {
 
         // notification for user first responding to notification request. Will notify home screen to fetch birds based on user location
         if !gotInitialLocation {
+            print("got initial location")
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: NotificationNames.GotInitialLocation.rawValue)))
             gotInitialLocation = true
         }

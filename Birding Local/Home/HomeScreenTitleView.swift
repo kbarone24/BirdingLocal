@@ -14,6 +14,7 @@ class HomeScreenTitleView: UIView {
         label.text = "Current Location"
         label.textColor = Colors.AccentWhite.color
         label.font = Fonts.SFProRegular.font(with: .sublabel)
+        label.isHidden = true
         return label
     }()
 

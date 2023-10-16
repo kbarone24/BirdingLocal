@@ -9,27 +9,26 @@ import Foundation
 import CoreLocation
 
 protocol EBirdServiceProtocol {
-    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, startIndex: Int) async -> [BirdSighting]
+    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting]) async -> [BirdSighting]
 }
 
 final class EBirdService: EBirdServiceProtocol {
     private let apiKey = "reta932vajr1"
 
-    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, startIndex: Int) async -> [BirdSighting] {
+    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting]) async -> [BirdSighting] {
         await withUnsafeContinuation { continuation in
             Task(priority: .high) {
                 let latitude = location.coordinate.latitude
                 let longitude = location.coordinate.longitude
                 var daysBack = 4
-                let initialIndex = startIndex
 
                 var sightings = await runSightingsFetch(
                     latitude: latitude,
                     longitude: longitude,
                     radius: radius,
                     maxResults: maxResults,
-                    startIndex: initialIndex,
-                    daysBack: daysBack
+                    daysBack: daysBack,
+                    cachedSightings: cachedSightings
                 )
 
                 // go further back in time to fetch enough sightings to fill page
@@ -40,9 +39,9 @@ final class EBirdService: EBirdServiceProtocol {
                         latitude: latitude,
                         longitude: longitude,
                         radius: radius,
-                        maxResults: maxResults - sightings.count,
-                        startIndex: initialIndex + sightings.count,
-                        daysBack: daysBack
+                        maxResults: maxResults,
+                        daysBack: daysBack,
+                        cachedSightings: cachedSightings
                     )
                     sightings.append(contentsOf: additionalSightings)
                 }
@@ -57,7 +56,7 @@ final class EBirdService: EBirdServiceProtocol {
         }
     }
 
-    private func runSightingsFetch(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, startIndex: Int, daysBack: Int) async -> [BirdSighting] {
+    private func runSightingsFetch(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, daysBack: Int, cachedSightings: [BirdSighting]) async -> [BirdSighting] {
         await withUnsafeContinuation { continuation in
             Task {
                 let urlString = getURLString(
@@ -65,7 +64,6 @@ final class EBirdService: EBirdServiceProtocol {
                     longitude: longitude,
                     radius: radius,
                     maxResults: maxResults,
-                    startIndex: startIndex,
                     daysBack: daysBack
                 )
                 guard let url = URL(string: urlString) else {
@@ -77,8 +75,18 @@ final class EBirdService: EBirdServiceProtocol {
                 let (data, _) = try await session.data(from: url)
 
                 let decoder = JSONDecoder()
-                let sightings = try? decoder.decode([BirdSighting].self, from: data)
-                continuation.resume(returning: sightings ?? [])
+                var sightings = try? decoder.decode([BirdSighting].self, from: data)
+
+                // cant use end document / start index with EBird API so fetch everything, remove sightings that have already been cached
+                var finalSightings = [BirdSighting]()
+                if let sightings {
+                    for i in 0..<sightings.count {
+                        if !cachedSightings.contains(sightings[i]) {
+                            finalSightings.append(sightings[i])
+                        }
+                    }
+                }
+                continuation.resume(returning: finalSightings)
             }
         }
     }
@@ -142,8 +150,8 @@ final class EBirdService: EBirdServiceProtocol {
     }
 
 
-    private func getURLString(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, startIndex: Int, daysBack: Int) -> String {
+    private func getURLString(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, daysBack: Int) -> String {
         let baseURL = "https://api.ebird.org/v2/data/obs/geo/recent"
-        return "\(baseURL)?lat=\(latitude)&lng=\(longitude)&maxResults=\(maxResults)&dist=\(radius)&back=\(daysBack)&startIndex=\(startIndex)&key=\(self.apiKey)"
+        return "\(baseURL)?lat=\(latitude)&lng=\(longitude)&maxResults=\(maxResults)&dist=\(radius)&back=\(daysBack)&key=\(self.apiKey)"
     }
 }
