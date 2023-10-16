@@ -13,8 +13,6 @@ protocol EBirdServiceProtocol {
 }
 
 final class EBirdService: EBirdServiceProtocol {
-    private let apiKey = "reta932vajr1"
-
     func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting]) async -> [BirdSighting] {
         await withUnsafeContinuation { continuation in
             Task(priority: .high) {
@@ -151,7 +149,15 @@ final class EBirdService: EBirdServiceProtocol {
 
 
     private func getURLString(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, daysBack: Int) -> String {
+        var keys: NSDictionary?
+        if let path = Bundle.main.path(forResource: "Keys", ofType: "plist") {
+            keys = NSDictionary(contentsOfFile: path)
+        }
+        guard let keys, let apiKey = keys["eBirdAPIKey"] as? String, apiKey != "" else {
+            return ""
+        }
+
         let baseURL = "https://api.ebird.org/v2/data/obs/geo/recent"
-        return "\(baseURL)?lat=\(latitude)&lng=\(longitude)&maxResults=\(maxResults)&dist=\(radius)&back=\(daysBack)&key=\(self.apiKey)"
+        return "\(baseURL)?lat=\(latitude)&lng=\(longitude)&maxResults=\(maxResults)&dist=\(radius)&back=\(daysBack)&key=\(apiKey)"
     }
 }
