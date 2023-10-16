@@ -180,7 +180,8 @@ class HomeScreenController: UIViewController {
     }
 
     @objc func forceRefresh() {
-
+        fetchInput.send((radius: nil, useStartIndex: false))
+        city.send(nil)
     }
 }
 
