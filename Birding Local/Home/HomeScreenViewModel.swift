@@ -17,7 +17,8 @@ class HomeScreenViewModel {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
 
     struct Input {
-        let refresh: PassthroughSubject<Bool, Never>
+        let fetchInput: PassthroughSubject<(radius: Double?, useStartIndex: Bool), Never>
+        let city: PassthroughSubject<String?, Never>
     }
 
     struct Output {
@@ -27,11 +28,12 @@ class HomeScreenViewModel {
     let ebirdService: EBirdServiceProtocol
     let locationService: LocationServiceProtocol
 
+    var cachedCity: String = ""
+    var cachedRadius: Double = 5
     var cachedSightings = [BirdSighting]()
-    var radius: Double = 10
 
     let initialFetchLimit = 20
-    let paginatingFetchLimit = 10
+    let paginatingFetchLimit = 14
 
     init(serviceContainer: ServiceContainer) {
         guard let ebirdService = try? serviceContainer.service(for: \.ebirdService),
@@ -45,19 +47,19 @@ class HomeScreenViewModel {
         self.locationService = locationService
     }
 
-    func bind(to input: Input) -> Output {
-        let request = input.refresh
+    func bindForSightings(to input: Input) -> Output {
+        let request = input.fetchInput
             .receive(on: DispatchQueue.global())
-            .flatMap { [unowned self] refresh in
-                (self.fetchSightings(refresh: refresh))
+            .flatMap { [unowned self] fetchInput in
+                (self.fetchSightings(radius: fetchInput.radius ?? self.cachedRadius, useStartIndex: fetchInput.useStartIndex))
             }
             .map { $0 }
 
         let snapshot = request
             .receive(on: DispatchQueue.main)
-            .map { sightings in
+            .map { (sightings, radius) in
                 var snapshot = Snapshot()
-                snapshot.appendSections([.main])
+                snapshot.appendSections([.main(radius: radius, city: self.cachedCity)])
                 _ = sightings.map {
                     snapshot.appendItems([.item(sighting: $0)])
                 }
@@ -67,33 +69,89 @@ class HomeScreenViewModel {
         return Output(snapshot: snapshot)
     }
 
-    private func fetchSightings(
-        refresh: Bool
-    ) -> AnyPublisher<([BirdSighting]), Never> {
+    func bindForCity(to input: Input) -> Output {
+        let request = input.city
+            .receive(on: DispatchQueue.global())
+            .flatMap { [unowned self] city in
+                (self.fetchCity(city: city))
+            }
+            .map { $0 }
+
+        let snapshot = request
+            .receive(on: DispatchQueue.main)
+            .map { city in
+                var snapshot = Snapshot()
+                snapshot.appendSections([.main(radius: self.cachedRadius, city: city)])
+                _ = self.cachedSightings.map {
+                    snapshot.appendItems([.item(sighting: $0)])
+                }
+                return snapshot
+
+            }
+            .eraseToAnyPublisher()
+        return Output(snapshot: snapshot)
+    }
+
+    private func fetchCity(
+        city: String?
+    ) -> AnyPublisher<(String), Never> {
         Deferred {
             Future { [weak self] promise in
                 guard let self else {
-                    promise(.success([]))
+                    promise(.success(""))
                     return
                 }
 
-                guard refresh else {
-                    promise(.success(self.cachedSightings))
+                // passed through city
+                if let city {
+                    self.cachedCity = city
+                    promise(.success(city))
                     return
                 }
 
                 Task {
-                    let maxResults = self.cachedSightings.isEmpty ? self.initialFetchLimit : self.paginatingFetchLimit
+                    let city = await self.locationService.getCity() ?? ""
+                    self.cachedCity = city
+                    promise(.success(city))
+                }
+            }
+        }
+        .eraseToAnyPublisher()
+    }
+
+
+    private func fetchSightings(
+        radius: Double,
+        useStartIndex: Bool
+    ) -> AnyPublisher<(sightings: [BirdSighting], radius: Double), Never> {
+        Deferred {
+            Future { [weak self] promise in
+                guard let self else {
+                    promise(.success(([], 0)))
+                    return
+                }
+
+                Task {
+                    // ebird api doesn't allow for actual pagination so need to fetch everything and remove duplicates
+                    let maxResults = self.cachedSightings.isEmpty ? self.initialFetchLimit : self.cachedSightings.count + self.paginatingFetchLimit
+                    let cachedSightings = useStartIndex ? self.cachedSightings : []
+                    print("max results", maxResults)
 
                     let sightings = await self.ebirdService.fetchSightings(
                         for: self.locationService.currentLocation ?? CLLocation(),
-                        radius: self.radius,
+                        radius: radius.inKM(),
                         maxResults: maxResults,
-                        startIndex: self.cachedSightings.count
+                        cachedSightings: cachedSightings
                     )
-                    promise(.success(sightings))
+                    // attach to cached sightings on pagination
+                    var allSightings = useStartIndex ?
+                    (self.cachedSightings + sightings).removingDuplicates() :
+                    sightings
 
-                    self.cachedSightings = sightings
+                    promise(.success((allSightings, radius)))
+
+                    self.cachedSightings = allSightings
+                    self.cachedRadius = radius
                 }
             }
         }
