@@ -28,8 +28,9 @@ class HomeScreenViewModel {
     let ebirdService: EBirdServiceProtocol
     let locationService: LocationServiceProtocol
 
-    var cachedCity: String = ""
-    var cachedRadius: Double = 5
+    var cachedCity: String?
+    var cachedLocation: CLLocation?
+    var cachedRadius: Double = 2
     var cachedSightings = [BirdSighting]()
 
     let initialFetchLimit = 20
@@ -59,7 +60,7 @@ class HomeScreenViewModel {
             .receive(on: DispatchQueue.main)
             .map { (sightings, radius) in
                 var snapshot = Snapshot()
-                snapshot.appendSections([.main(radius: radius, city: self.cachedCity)])
+                snapshot.appendSections([.main(radius: radius, city: self.cachedCity ?? "")])
                 _ = sightings.map {
                     snapshot.appendItems([.item(sighting: $0)])
                 }
@@ -110,9 +111,10 @@ class HomeScreenViewModel {
                 }
 
                 Task {
-                    let city = await self.locationService.getCity() ?? ""
-                    self.cachedCity = city
-                    promise(.success(city))
+                    let locationInfo = await self.locationService.getCity()
+                    self.cachedCity = locationInfo.city
+                    self.cachedLocation = locationInfo.location
+                    promise(.success(city ?? ""))
                 }
             }
         }

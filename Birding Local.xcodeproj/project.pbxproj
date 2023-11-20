@@ -28,8 +28,13 @@
 		8C69762D2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C69762C2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf */; };
 		8C69762F2ADC86A100D5F3B5 /* DoubleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */; };
 		8C6976312ADCD4B100D5F3B5 /* ActivityFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976302ADCD4B100D5F3B5 /* ActivityFooterView.swift */; };
-		8C6976332ADD8FCC00D5F3B5 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976322ADD8FCC00D5F3B5 /* Keys.plist */; };
 		8C6976352ADDCF1E00D5F3B5 /* .gitIgnore in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976342ADDCF1E00D5F3B5 /* .gitIgnore */; };
+		8C6976372ADDD16700D5F3B5 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976362ADDD16700D5F3B5 /* Keys.plist */; };
+		8C6976392AE9817D00D5F3B5 /* LocationEditorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976382AE9817D00D5F3B5 /* LocationEditorController.swift */; };
+		8C69763C2AE98C2500D5F3B5 /* LocationEditorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763B2AE98C2500D5F3B5 /* LocationEditorViewModel.swift */; };
+		8C69763E2AE9969200D5F3B5 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */; };
+		8C6976402AE996FE00D5F3B5 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */; };
+		8C6976422AE99A8B00D5F3B5 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */; };
 		8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */; };
 		8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */; };
 		8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */; };
@@ -57,8 +62,13 @@
 		8C69762C2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "SF-Pro-Text-Semibold.otf"; sourceTree = "<group>"; };
 		8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleExtension.swift; sourceTree = "<group>"; };
 		8C6976302ADCD4B100D5F3B5 /* ActivityFooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityFooterView.swift; sourceTree = "<group>"; };
-		8C6976322ADD8FCC00D5F3B5 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		8C6976342ADDCF1E00D5F3B5 /* .gitIgnore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitIgnore; sourceTree = "<group>"; };
+		8C6976362ADDD16700D5F3B5 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
+		8C6976382AE9817D00D5F3B5 /* LocationEditorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEditorController.swift; sourceTree = "<group>"; };
+		8C69763B2AE98C2500D5F3B5 /* LocationEditorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationEditorViewModel.swift; sourceTree = "<group>"; };
+		8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
+		8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
+		8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Birding Local.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -97,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				8C6975972ABB841000D5F3B5 /* BirdSighting.swift */,
+				8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,8 +161,19 @@
 				8C6976222ADB1B3100D5F3B5 /* ArrayExtension.swift */,
 				8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */,
 				8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */,
+				8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		8C69763A2AE9818D00D5F3B5 /* LocationEditor */ = {
+			isa = PBXGroup;
+			children = (
+				8C6976382AE9817D00D5F3B5 /* LocationEditorController.swift */,
+				8C69763B2AE98C2500D5F3B5 /* LocationEditorViewModel.swift */,
+				8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */,
+			);
+			path = LocationEditor;
 			sourceTree = "<group>";
 		};
 		8CE9F4AC2AB0D17F006DCD54 = {
@@ -176,11 +198,12 @@
 				8C6976342ADDCF1E00D5F3B5 /* .gitIgnore */,
 				8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */,
 				8CE9F4C92AB0D180006DCD54 /* Info.plist */,
-				8C6976322ADD8FCC00D5F3B5 /* Keys.plist */,
+				8C6976362ADDD16700D5F3B5 /* Keys.plist */,
 				8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */,
 				8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */,
 				8C6975892ABB4E9300D5F3B5 /* Resources */,
 				8C6975872ABB4E4200D5F3B5 /* Home */,
+				8C69763A2AE9818D00D5F3B5 /* LocationEditor */,
 				8C6975862ABB4E2600D5F3B5 /* Models */,
 				8C6975852ABB4E1900D5F3B5 /* Services */,
 				8C6975882ABB4E7300D5F3B5 /* Storyboards */,
@@ -257,7 +280,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C6976332ADD8FCC00D5F3B5 /* Keys.plist in Resources */,
 				8C6976292ADB464600D5F3B5 /* SF-Pro-Text-Regular.otf in Resources */,
 				8C6975FF2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf in Resources */,
 				8C6976012AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf in Resources */,
@@ -266,6 +288,7 @@
 				8CE9F4C02AB0D17F006DCD54 /* Main.storyboard in Resources */,
 				8C69762D2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf in Resources */,
 				8C6976352ADDCF1E00D5F3B5 /* .gitIgnore in Resources */,
+				8C6976372ADDD16700D5F3B5 /* Keys.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */,
+				8C6976402AE996FE00D5F3B5 /* SearchResult.swift in Sources */,
 				8C6976312ADCD4B100D5F3B5 /* ActivityFooterView.swift in Sources */,
 				8C6975982ABB841000D5F3B5 /* BirdSighting.swift in Sources */,
 				8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */,
@@ -289,8 +313,12 @@
 				8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */,
 				8C6975FC2AD89B7900D5F3B5 /* CommonNames.swift in Sources */,
 				8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */,
+				8C6976392AE9817D00D5F3B5 /* LocationEditorController.swift in Sources */,
+				8C69763E2AE9969200D5F3B5 /* SearchResultCell.swift in Sources */,
 				8C6976252ADB274100D5F3B5 /* UIImageExtension.swift in Sources */,
 				8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */,
+				8C69763C2AE98C2500D5F3B5 /* LocationEditorViewModel.swift in Sources */,
+				8C6976422AE99A8B00D5F3B5 /* UIButtonExtension.swift in Sources */,
 				8C69758B2ABB521600D5F3B5 /* EBirdService.swift in Sources */,
 				8C6976212AD8AABE00D5F3B5 /* UITableViewCellExtension.swift in Sources */,
 			);
@@ -438,7 +466,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
@@ -467,7 +495,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";

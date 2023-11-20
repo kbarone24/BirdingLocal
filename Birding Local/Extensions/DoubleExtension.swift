@@ -11,4 +11,8 @@ extension Double {
     func inKM() -> Double {
         return self * 1.60934
     }
+
+    func inMiles() -> Double {
+        return self * 0.621371
+    }
 }

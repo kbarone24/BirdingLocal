@@ -97,6 +97,7 @@ class HomeScreenController: UIViewController {
         registerNotifications()
 
         view.addSubview(titleView)
+        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(titleViewTap)))
         titleView.snp.makeConstraints {
             $0.top.equalTo(48)
             $0.leading.trailing.equalToSuperview()
@@ -182,6 +183,18 @@ class HomeScreenController: UIViewController {
     @objc func forceRefresh() {
         fetchInput.send((radius: nil, useStartIndex: false))
         city.send(nil)
+    }
+
+    @objc func titleViewTap() {
+        let vc = LocationEditorController(viewModel: LocationEditorViewModel(
+            serviceContainer: ServiceContainer.shared,
+            currentLocation: viewModel.cachedLocation ?? CLLocation(),
+            city: viewModel.cachedCity ?? "",
+            radius: viewModel.cachedRadius
+        ))
+        DispatchQueue.main.async {
+            self.present(vc, animated: true)
+        }
     }
 }
 

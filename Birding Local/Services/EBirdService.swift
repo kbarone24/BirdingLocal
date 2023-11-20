@@ -73,7 +73,7 @@ final class EBirdService: EBirdServiceProtocol {
                 let (data, _) = try await session.data(from: url)
 
                 let decoder = JSONDecoder()
-                var sightings = try? decoder.decode([BirdSighting].self, from: data)
+                let sightings = try? decoder.decode([BirdSighting].self, from: data)
 
                 // cant use end document / start index with EBird API so fetch everything, remove sightings that have already been cached
                 var finalSightings = [BirdSighting]()

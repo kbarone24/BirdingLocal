@@ -12,7 +12,7 @@ class HomeScreenTableViewHeader: UITableViewHeaderFooterView {
     private var headerLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProSemibold.font(with: .header)
+        label.font = Fonts.SFProSemibold.font(with: 25)
         return label
     }()
 

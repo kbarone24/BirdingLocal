@@ -28,7 +28,7 @@ class HomeScreenCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProBold.font(with: .label)
+        label.font = Fonts.SFProBold.font(with: 18)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
@@ -37,7 +37,7 @@ class HomeScreenCell: UITableViewCell {
     private lazy var timestampLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.AccentGray.color
-        label.font = Fonts.SFProMedium.font(with: .sublabel)
+        label.font = Fonts.SFProMedium.font(with: 14)
         return label
     }()
 

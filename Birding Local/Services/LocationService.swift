@@ -15,13 +15,13 @@ protocol LocationServiceProtocol {
     func checkLocationAuth() -> UIAlertController?
     func currentLocationStatus() -> CLAuthorizationStatus
     func locationAlert() -> UIAlertController
-    func getCity() async -> String?
+    func getCity() async -> (city: String?, location: CLLocation?)
 }
 
 final class LocationService: NSObject, LocationServiceProtocol {
     var currentLocation: CLLocation?
     var gotInitialLocation = false
-    
+
     private lazy var locationManager = CLLocationManager()
 
     override init() {
@@ -76,11 +76,11 @@ final class LocationService: NSObject, LocationServiceProtocol {
         return alert
     }
 
-    func getCity() async -> String? {
+    func getCity() async -> (city: String?, location: CLLocation?) {
         await withUnsafeContinuation { continuation in
             Task {
                 guard let currentLocation else {
-                    continuation.resume(returning: "")
+                    continuation.resume(returning: (city: nil, location: nil))
                     return
                 }
                 
@@ -88,7 +88,7 @@ final class LocationService: NSObject, LocationServiceProtocol {
                 let locale = Locale(identifier: "en")
                 CLGeocoder().reverseGeocodeLocation(currentLocation, preferredLocale: locale) { placemarks, error in
                     guard error == nil, let placemark = placemarks?.first else {
-                        continuation.resume(returning: nil)
+                        continuation.resume(returning: (nil, nil))
                         return
                     }
 
@@ -107,7 +107,8 @@ final class LocationService: NSObject, LocationServiceProtocol {
                             addressString += country
                         }
                     }
-                    continuation.resume(returning: addressString)
+
+                    continuation.resume(returning: (city: addressString, location: currentLocation))
                 }
             }
         }
