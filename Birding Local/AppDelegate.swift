@@ -83,6 +83,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
             let locationService = LocationService()
             try ServiceContainer.shared.register(service: locationService, for: \.locationService)
+
+            let mapsService = MapsService()
+            try ServiceContainer.shared.register(service: mapsService, for: \.mapsService)
         } catch {
             fatalError("Unable to initialize services: \(error.localizedDescription)")
         }

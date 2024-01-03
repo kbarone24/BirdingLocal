@@ -6,29 +6,40 @@
 //
 
 import Foundation
+import CoreLocation
+import MapKit
 
 class SearchResult {
-    var city: String
-    var state: String?
-    var country: String?
+    var id: String
+    var titleString: String
+    var subtitleString: String
+    var completerResult: MKLocalSearchCompletion
+    var coordinate: CLLocationCoordinate2D?
 
-    init(city: String, state: String? = nil, country: String? = nil) {
-        self.city = city
-        self.state = state
-        self.country = country
+    var combinedString: String {
+        var combined = titleString
+        if subtitleString != "" {
+            combined += ", \(subtitleString)"
+        }
+        return combined
+    }
+
+    init(title: String, subtitle: String, completerResult: MKLocalSearchCompletion) {
+        self.id = UUID().uuidString
+        self.titleString = title
+        self.subtitleString = subtitle
+        self.completerResult = completerResult
     }
 }
 
 extension SearchResult: Hashable {
     static func == (lhs: SearchResult, rhs: SearchResult) -> Bool {
-        return lhs.city == rhs.city &&
-        lhs.state ?? "" == rhs.state ?? "" &&
-        lhs.country ?? "" == rhs.country ?? ""
+        return lhs.titleString == rhs.titleString &&
+        lhs.subtitleString == rhs.subtitleString
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(city)
-        hasher.combine(state)
-        hasher.combine(country)
+        hasher.combine(titleString)
+        hasher.combine(subtitleString)
     }
 }

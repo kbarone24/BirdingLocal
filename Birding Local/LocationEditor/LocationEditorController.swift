@@ -10,45 +10,20 @@ import UIKit
 import Combine
 import MapKit
 
+protocol LocationEditorDelegate: AnyObject {
+    func finishPassing(radius: Double, location: CLLocation)
+}
+
 class LocationEditorController: UIViewController {
     typealias Input = LocationEditorViewModel.Input
-    typealias DataSource = UITableViewDiffableDataSource<Section, Item>
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
 
+    weak var delegate: LocationEditorDelegate?
     private let viewModel: LocationEditorViewModel
-    private let searchText = PassthroughSubject<String, Never>()
+
+    private let location = PassthroughSubject<CLLocation, Never>()
+    private let city = PassthroughSubject<String, Never>()
+    private let radius = PassthroughSubject<Double, Never>()
     private var subscriptions = Set<AnyCancellable>()
-
-    private lazy var dataSource: DataSource = {
-        let dataSource = DataSource(tableView: tableView) { tableView, indexPath, item in
-            switch item {
-            case .item(let searchResult):
-                let cell = tableView.dequeueReusableCell(withIdentifier: SearchResultCell.reuseID, for: indexPath) as? SearchResultCell
-                //  cell?.configure(searchResult: searchResult)
-                return cell
-            }
-        }
-        return dataSource
-    }()
-    
-    enum Section: Hashable {
-        case main
-    }
-
-    enum Item: Hashable {
-        case item(searchResult: SearchResult)
-    }
-
-    private lazy var tableView: UITableView = {
-        let table = UITableView()
-        table.backgroundColor = UIColor(named: "SpotBlack")
-        table.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 300, right: 0)
-        table.separatorStyle = .none
-        table.showsVerticalScrollIndicator = false
-        table.register(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseID)
-        table.rowHeight = UITableView.automaticDimension
-        return table
-    }()
 
     private lazy var activityIndicator = UIActivityIndicatorView()
 
@@ -81,11 +56,11 @@ class LocationEditorController: UIViewController {
         return label
     }()
 
-    private lazy var searchContainer: UIView = {
+    private lazy var locationContainer: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
         view.layer.borderColor = Colors.PrimaryGray.color.withAlphaComponent(0.25).cgColor
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(searchTap)))
+        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(locationTap)))
         return view
     }()
 
@@ -99,49 +74,33 @@ class LocationEditorController: UIViewController {
         return label
     }()
 
-    private lazy var searchButton: UILabel = {
+    private lazy var cityLabel: UILabel = {
         let label = UILabel()
-        label.text = viewModel.city
         label.textColor = Colors.PrimaryBlue.color
         label.font = Fonts.SFProMedium.font(with: 14)
         label.layer.cornerRadius = 4
         return label
     }()
 
-    private lazy var radiusContainer: UIView = {
-        let view = UIView()
-        view.layer.borderWidth = 1
-        view.layer.borderColor = Colors.PrimaryGray.color.withAlphaComponent(0.25).cgColor
-        view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(radiusTap)))
-        return view
-    }()
+    private lazy var radiusContainer = UIView()
 
     private lazy var radiusLabel: UILabel = {
         let label = UILabel()
         label.text = "Radius"
         label.textColor = Colors.PrimaryGray.color
-        label.font = Fonts.SFProMedium.font(with: 12)
+        label.font = Fonts.SFProMedium.font(with: 16)
         return label
     }()
 
-    private lazy var radiusButton: UILabel = {
-        let label = UILabel()
-        label.text = "\(viewModel.radius) mi"
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProMedium.font(with: 14)
-        label.layer.cornerRadius = 4
-        return label
-    }()
+    private lazy var radiusSlider = RadiusSlider(radius: viewModel.cachedRadius)
 
-    private lazy var downCarat = UIImageView(image: UIImage(named: "DownCarat"))
-
-    private lazy var applyButton: UIButton = {
+    private lazy var saveButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = Colors.PrimaryBlue.color
         button.layer.cornerRadius = 4
         button.setAttributedTitle(
             NSAttributedString(
-                string: "Apply",
+                string: "Save",
                 attributes: [
                     .foregroundColor: Colors.AccentWhite.color,
                     .font: Fonts.SFProBold.font(with: 16)
@@ -153,6 +112,8 @@ class LocationEditorController: UIViewController {
 
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
+        // TODO: enable user interaction with ability to change radius
+        mapView.isUserInteractionEnabled = false
         mapView.showsUserLocation = true
         mapView.mapType = .mutedStandard
         mapView.delegate = self
@@ -198,86 +159,121 @@ class LocationEditorController: UIViewController {
         }
 
 
-        view.addSubview(searchContainer)
-        searchContainer.snp.makeConstraints {
+        view.addSubview(locationContainer)
+        locationContainer.snp.makeConstraints {
             $0.top.equalTo(searchLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalTo(separatorLine).inset(20)
             $0.height.equalTo(56)
         }
 
-        searchContainer.addSubview(locationPin)
+        locationContainer.addSubview(locationPin)
         locationPin.snp.makeConstraints {
             $0.leading.equalTo(16)
             $0.centerY.equalToSuperview()
         }
 
-        searchContainer.addSubview(locationLabel)
+        locationContainer.addSubview(locationLabel)
         locationLabel.snp.makeConstraints {
             $0.leading.equalTo(locationPin.snp.trailing).offset(16)
-            $0.bottom.equalTo(searchContainer.snp.centerY).offset(-2)
+            $0.bottom.equalTo(locationContainer.snp.centerY).offset(-2)
         }
 
-        searchContainer.addSubview(searchButton)
-        searchButton.snp.makeConstraints {
+        locationContainer.addSubview(cityLabel)
+        cityLabel.snp.makeConstraints {
             $0.leading.equalTo(locationLabel)
-            $0.top.equalTo(searchContainer.snp.centerY).offset(2)
+            $0.top.equalTo(locationContainer.snp.centerY).offset(2)
         }
 
         view.addSubview(radiusContainer)
         radiusContainer.snp.makeConstraints {
-            $0.leading.trailing.height.equalTo(searchContainer)
-            $0.top.equalTo(searchContainer.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(80)
+            $0.top.equalTo(locationContainer.snp.bottom).offset(4)
         }
 
         radiusContainer.addSubview(radiusLabel)
         radiusLabel.snp.makeConstraints {
-            $0.leading.equalTo(16)
-            $0.bottom.equalTo(radiusContainer.snp.centerY).offset(-2)
+            $0.leading.equalTo(searchLabel)
+            $0.top.equalTo(16)
         }
 
-        radiusContainer.addSubview(radiusButton)
-        radiusButton.snp.makeConstraints {
-            $0.leading.equalTo(radiusLabel)
-            $0.top.equalTo(radiusContainer.snp.centerY).offset(2)
+        radiusContainer.addSubview(radiusSlider)
+        
+        radiusSlider.delegate = self
+        radiusSlider.snp.makeConstraints {
+            $0.top.equalTo(radiusLabel.snp.bottom).offset(4)
+            $0.leading.trailing.bottom.equalToSuperview()
         }
 
-        radiusContainer.addSubview(downCarat)
-        downCarat.snp.makeConstraints {
-            $0.centerY.equalToSuperview().offset(1)
-            $0.trailing.equalTo(-16)
-        }
-
-        view.addSubview(applyButton)
-        applyButton.snp.makeConstraints {
-            $0.leading.trailing.equalTo(radiusContainer)
+        view.addSubview(saveButton)
+        saveButton.snp.makeConstraints {
+            $0.leading.trailing.equalTo(locationContainer)
             $0.height.equalTo(50)
-            $0.bottom.equalTo(-20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-16)
         }
 
         view.addSubview(mapView)
         mapView.snp.makeConstraints {
-            $0.leading.trailing.equalTo(applyButton)
+            $0.leading.trailing.equalTo(saveButton)
             $0.top.equalTo(radiusContainer.snp.bottom).offset(16)
-            $0.bottom.equalTo(applyButton.snp.top).offset(-32)
+            $0.bottom.equalTo(saveButton.snp.top).offset(-16)
         }
 
+        let input = Input(
+            location: location,
+            city: city,
+            radius: radius)
+        let output = viewModel.bind(to: input)
+
+        output.location
+            .sink { [weak self] location in
+                self?.setMapView(location: location, radius: self?.viewModel.cachedRadius ?? 1000)
+            }
+            .store(in: &subscriptions)
+
+        output.city
+            .sink { [weak self] city in
+                self?.setCity(city: city)
+            }
+            .store(in: &subscriptions)
+
+        output.radius
+            .sink { [weak self] radius in
+                self?.setMapView(location: self?.viewModel.cachedLocation ?? CLLocation(), radius: radius)
+            }
+            .store(in: &subscriptions)
+
+        location.send(viewModel.cachedLocation)
+        city.send(viewModel.cachedCity)
+        radius.send(viewModel.cachedRadius)
+    }
+
+    private func setMapView(location: CLLocation, radius: Double) {
         mapView.setRegion(
             MKCoordinateRegion(
-                center: viewModel.currentLocation.coordinate,
-                latitudinalMeters: viewModel.radius.inKM() * 1000 * 4,
-                longitudinalMeters: viewModel.radius.inKM() * 1000 * 4
+                center: location.coordinate,
+                latitudinalMeters: radius.inKM() * 1000 * 4,
+                longitudinalMeters: radius.inKM() * 1000 * 4
             ),
-            animated: false
+            animated: true
         )
-        addRadiusCircle(location: viewModel.currentLocation.coordinate, radius: viewModel.radius)
+        addRadiusCircle(location: location.coordinate, radius: radius)
+    }
+
+    private func setCity(city: String) {
+        cityLabel.text = city
     }
 
     @objc func closeTap() {
         close()
     }
 
-    @objc func searchTap() {
-        print("search")
+    @objc func locationTap() {
+        DispatchQueue.main.async {
+            let searchController = SearchLocationController(viewModel: SearchLocationViewModel(serviceContainer: ServiceContainer.shared))
+            searchController.delegate = self
+            self.present(searchController, animated: true)
+        }
     }
 
     @objc func radiusTap() {
@@ -285,7 +281,7 @@ class LocationEditorController: UIViewController {
     }
 
     @objc func applyTap() {
-        //TODO: configure delegate and passback
+        delegate?.finishPassing(radius: viewModel.cachedRadius, location: viewModel.cachedLocation)
         close()
     }
 
@@ -298,6 +294,11 @@ class LocationEditorController: UIViewController {
 
 extension LocationEditorController: MKMapViewDelegate {
     func addRadiusCircle(location: CLLocationCoordinate2D, radius: Double) {
+        // remove any already-drawn overlays
+        for overlay in mapView.overlays {
+            mapView.removeOverlay(overlay)
+        }
+
         let circle = MKCircle(center: location, radius: radius.inKM() * 1000)
         mapView.addOverlay(circle)
     }
@@ -311,5 +312,18 @@ extension LocationEditorController: MKMapViewDelegate {
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
+    }
+}
+
+extension LocationEditorController: SearchLocationDelegate {
+    func finishPassing(searchResult: SearchResult) {
+        location.send(CLLocation(latitude: searchResult.coordinate?.latitude ?? 0.0, longitude: searchResult.coordinate?.longitude ?? 0.0))
+        city.send(searchResult.titleString)
+    }
+}
+
+extension LocationEditorController: PrivacySliderDelegate {
+    func finishPassing(radius: Double) {
+        self.radius.send(radius)
     }
 }

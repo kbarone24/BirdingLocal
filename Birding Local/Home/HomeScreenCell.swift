@@ -45,7 +45,7 @@ class HomeScreenCell: UITableViewCell {
         let view = UIImageView()
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 110 / 2
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.00)
         return view
     }()
 
@@ -105,6 +105,8 @@ class HomeScreenCell: UITableViewCell {
                 options: .highPriority,
                 context: [.imageTransformer: transformer]
             )
+        } else {
+            birdImage.image = UIImage(named: "DefaultBird")
         }
     }
 

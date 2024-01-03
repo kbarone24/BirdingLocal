@@ -35,6 +35,13 @@
 		8C69763E2AE9969200D5F3B5 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */; };
 		8C6976402AE996FE00D5F3B5 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */; };
 		8C6976422AE99A8B00D5F3B5 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */; };
+		8CB87A922B3CD43A00E9B5E8 /* MapsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A912B3CD43A00E9B5E8 /* MapsService.swift */; };
+		8CB87A962B3E297500E9B5E8 /* RadiusSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A952B3E297500E9B5E8 /* RadiusSlider.swift */; };
+		8CB87A982B3F635800E9B5E8 /* HapticGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */; };
+		8CB87A9A2B3F6FC500E9B5E8 /* SliderPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A992B3F6FC500E9B5E8 /* SliderPosition.swift */; };
+		8CB87A9C2B44C82E00E9B5E8 /* UISearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A9B2B44C82E00E9B5E8 /* UISearchBarExtension.swift */; };
+		8CC9633D2B142B77005B1375 /* SearchLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC9633C2B142B77005B1375 /* SearchLocationController.swift */; };
+		8CC9633F2B142B7F005B1375 /* SearchLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC9633E2B142B7F005B1375 /* SearchLocationViewModel.swift */; };
 		8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */; };
 		8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */; };
 		8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4BC2AB0D17F006DCD54 /* HomeScreenController.swift */; };
@@ -69,6 +76,13 @@
 		8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		8CB87A912B3CD43A00E9B5E8 /* MapsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsService.swift; sourceTree = "<group>"; };
+		8CB87A952B3E297500E9B5E8 /* RadiusSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadiusSlider.swift; sourceTree = "<group>"; };
+		8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticGenerator.swift; sourceTree = "<group>"; };
+		8CB87A992B3F6FC500E9B5E8 /* SliderPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderPosition.swift; sourceTree = "<group>"; };
+		8CB87A9B2B44C82E00E9B5E8 /* UISearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarExtension.swift; sourceTree = "<group>"; };
+		8CC9633C2B142B77005B1375 /* SearchLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationController.swift; sourceTree = "<group>"; };
+		8CC9633E2B142B7F005B1375 /* SearchLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewModel.swift; sourceTree = "<group>"; };
 		8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Birding Local.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8CE9F4BA2AB0D17F006DCD54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -98,6 +112,7 @@
 			children = (
 				8C69758A2ABB521600D5F3B5 /* EBirdService.swift */,
 				8C69758C2ABB539400D5F3B5 /* LocationService.swift */,
+				8CB87A912B3CD43A00E9B5E8 /* MapsService.swift */,
 				8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */,
 			);
 			path = Services;
@@ -139,6 +154,7 @@
 			children = (
 				8C6975FD2AD89C2000D5F3B5 /* Fonts */,
 				8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */,
+				8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -162,6 +178,7 @@
 				8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */,
 				8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */,
 				8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */,
+				8CB87A9B2B44C82E00E9B5E8 /* UISearchBarExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -171,9 +188,20 @@
 			children = (
 				8C6976382AE9817D00D5F3B5 /* LocationEditorController.swift */,
 				8C69763B2AE98C2500D5F3B5 /* LocationEditorViewModel.swift */,
-				8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */,
+				8CB87A952B3E297500E9B5E8 /* RadiusSlider.swift */,
+				8CB87A992B3F6FC500E9B5E8 /* SliderPosition.swift */,
 			);
 			path = LocationEditor;
+			sourceTree = "<group>";
+		};
+		8CC9633B2B142B66005B1375 /* SearchLocation */ = {
+			isa = PBXGroup;
+			children = (
+				8CC9633C2B142B77005B1375 /* SearchLocationController.swift */,
+				8CC9633E2B142B7F005B1375 /* SearchLocationViewModel.swift */,
+				8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */,
+			);
+			path = SearchLocation;
 			sourceTree = "<group>";
 		};
 		8CE9F4AC2AB0D17F006DCD54 = {
@@ -204,6 +232,7 @@
 				8C6975892ABB4E9300D5F3B5 /* Resources */,
 				8C6975872ABB4E4200D5F3B5 /* Home */,
 				8C69763A2AE9818D00D5F3B5 /* LocationEditor */,
+				8CC9633B2B142B66005B1375 /* SearchLocation */,
 				8C6975862ABB4E2600D5F3B5 /* Models */,
 				8C6975852ABB4E1900D5F3B5 /* Services */,
 				8C6975882ABB4E7300D5F3B5 /* Storyboards */,
@@ -300,18 +329,25 @@
 			buildActionMask = 2147483647;
 			files = (
 				8CE9F4BD2AB0D17F006DCD54 /* HomeScreenController.swift in Sources */,
+				8CC9633D2B142B77005B1375 /* SearchLocationController.swift in Sources */,
+				8CB87A982B3F635800E9B5E8 /* HapticGenerator.swift in Sources */,
 				8C6976402AE996FE00D5F3B5 /* SearchResult.swift in Sources */,
+				8CC9633F2B142B7F005B1375 /* SearchLocationViewModel.swift in Sources */,
 				8C6976312ADCD4B100D5F3B5 /* ActivityFooterView.swift in Sources */,
 				8C6975982ABB841000D5F3B5 /* BirdSighting.swift in Sources */,
 				8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */,
 				8C69762B2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift in Sources */,
+				8CB87A9C2B44C82E00E9B5E8 /* UISearchBarExtension.swift in Sources */,
 				8C6976232ADB1B3100D5F3B5 /* ArrayExtension.swift in Sources */,
 				8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */,
+				8CB87A9A2B3F6FC500E9B5E8 /* SliderPosition.swift in Sources */,
 				8C6975FA2AD89AAE00D5F3B5 /* HomeScreenCell.swift in Sources */,
+				8CB87A922B3CD43A00E9B5E8 /* MapsService.swift in Sources */,
 				8C6976272ADB45CC00D5F3B5 /* HomeScreenTitleView.swift in Sources */,
 				8C69762F2ADC86A100D5F3B5 /* DoubleExtension.swift in Sources */,
 				8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */,
 				8C6975FC2AD89B7900D5F3B5 /* CommonNames.swift in Sources */,
+				8CB87A962B3E297500E9B5E8 /* RadiusSlider.swift in Sources */,
 				8CE9F4BB2AB0D17F006DCD54 /* SceneDelegate.swift in Sources */,
 				8C6976392AE9817D00D5F3B5 /* LocationEditorController.swift in Sources */,
 				8C69763E2AE9969200D5F3B5 /* SearchResultCell.swift in Sources */,

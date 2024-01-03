@@ -100,6 +100,7 @@ class HomeScreenTitleView: UIView {
         radiusLabel.text = "\(radius) mile radius"
 
         currentLocationLabel.isHidden = city.isEmpty || radius == 0
+        radiusLabel.isHidden = city.isEmpty || radius == 0
         separatorView.isHidden = city.isEmpty || radius == 0
         locationPinIcon.isHidden = city.isEmpty
     }

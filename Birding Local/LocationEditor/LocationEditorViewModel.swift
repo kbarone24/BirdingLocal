@@ -11,28 +11,27 @@ import UIKit
 import CoreLocation
 
 class LocationEditorViewModel {
-    typealias Section = LocationEditorController.Section
-    typealias Item = LocationEditorController.Item
-    typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
-
     struct Input {
-        let searchText: PassthroughSubject<String, Never>
+        let location: PassthroughSubject<CLLocation, Never>
+        let city: PassthroughSubject<String, Never>
+        let radius: PassthroughSubject<Double, Never>
     }
 
     struct Output {
-        let snapshot: AnyPublisher<Snapshot, Never>
+        let location: AnyPublisher<CLLocation, Never>
+        let city: AnyPublisher<String, Never>
+        let radius: AnyPublisher<Double, Never>
     }
-    private var cancellables = Set<AnyCancellable>()
 
     let locationService: LocationServiceProtocol
-    var currentLocation: CLLocation
-    var city: String
-    var radius: Double
+    var cachedLocation: CLLocation
+    var cachedCity: String
+    var cachedRadius: Double
 
     init(serviceContainer: ServiceContainer, currentLocation: CLLocation, city: String, radius: Double) {
-        self.currentLocation = currentLocation
-        self.city = city
-        self.radius = radius
+        self.cachedLocation = currentLocation
+        self.cachedCity = city
+        self.cachedRadius = radius
 
         guard let locationService = try? serviceContainer.service(for: \.locationService)
         else {
@@ -40,5 +39,43 @@ class LocationEditorViewModel {
             return
         }
         self.locationService = locationService
+    }
+
+    func bind(to input: Input) -> Output {
+        let inputItems = Publishers.CombineLatest3(
+            input.location,
+            input.city,
+            input.radius
+        )
+
+        let combinedInput = inputItems
+        let locationPublisher = input.location
+            .map { location in
+                self.cachedLocation = location
+                return location
+            }
+            .eraseToAnyPublisher()
+
+        let cityPublisher = input.city
+            .map { city in
+                self.cachedCity = city
+                return city
+            }
+            .eraseToAnyPublisher()
+
+        let radiusPublisher = input.radius
+            .map { radius in
+                self.cachedRadius = radius
+                return radius
+            }
+            .eraseToAnyPublisher()
+
+        let output = Output(
+            location: locationPublisher,
+            city: cityPublisher,
+            radius: radiusPublisher
+        )
+
+        return output
     }
 }
