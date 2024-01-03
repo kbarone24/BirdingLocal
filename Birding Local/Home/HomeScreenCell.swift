@@ -28,7 +28,7 @@ class HomeScreenCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProBold.font(with: .label)
+        label.font = Fonts.SFProBold.font(with: 18)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
@@ -37,7 +37,7 @@ class HomeScreenCell: UITableViewCell {
     private lazy var timestampLabel: UILabel = {
         let label = UILabel()
         label.textColor = Colors.AccentGray.color
-        label.font = Fonts.SFProMedium.font(with: .sublabel)
+        label.font = Fonts.SFProMedium.font(with: 14)
         return label
     }()
 
@@ -45,7 +45,7 @@ class HomeScreenCell: UITableViewCell {
         let view = UIImageView()
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 110 / 2
-        view.backgroundColor = .lightGray
+        view.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.00)
         return view
     }()
 
@@ -105,6 +105,8 @@ class HomeScreenCell: UITableViewCell {
                 options: .highPriority,
                 context: [.imageTransformer: transformer]
             )
+        } else {
+            birdImage.image = UIImage(named: "DefaultBird")
         }
     }
 

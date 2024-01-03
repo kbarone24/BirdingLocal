@@ -23,8 +23,12 @@ class HomeScreenController: UIViewController {
     typealias Snapshot = NSDiffableDataSourceSnapshot<Section, Item>
     typealias DataSource = UITableViewDiffableDataSource<Section, Item>
 
-    let fetchInput = PassthroughSubject<(radius: Double?, useStartIndex: Bool), Never>()
-    let city = PassthroughSubject<String?, Never>()
+    let refresh = PassthroughSubject<Bool, Never>()
+    let fetchInput = PassthroughSubject<(currentLocation: CLLocation?, radius: Double?, useStartIndex: Bool), Never>()
+    let city = PassthroughSubject<(passedLocation: CLLocation?, radius: Double?), Never>()
+
+//    private var passedLocation: CLLocation?
+//    private var passedRadius: Double?
 
     private lazy var viewModel = HomeScreenViewModel(serviceContainer: ServiceContainer.shared)
     private lazy var subscriptions = Set<AnyCancellable>()
@@ -67,7 +71,6 @@ class HomeScreenController: UIViewController {
             // show bottom activity indicator during pagination
             DispatchQueue.main.async {
                 if self.isRefreshingPagination, !self.datasource.snapshot().itemIdentifiers.isEmpty {
-                    print("unhide footer")
                     self.activityFooterView.isHidden = false
                 } else {
                     self.activityFooterView.isHidden = true
@@ -97,6 +100,7 @@ class HomeScreenController: UIViewController {
         registerNotifications()
 
         view.addSubview(titleView)
+        titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(titleViewTap)))
         titleView.snp.makeConstraints {
             $0.top.equalTo(48)
             $0.leading.trailing.equalToSuperview()
@@ -119,9 +123,21 @@ class HomeScreenController: UIViewController {
         }
 
         let input = Input(
+            refresh: refresh,
             fetchInput: fetchInput,
             city: city
         )
+
+        // just return cached posts and maintain activity animation
+        let cachedOutput = viewModel.bindForCachedSightings(to: input)
+        cachedOutput.snapshot
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] snapshot in
+                // apply to datasource
+                self?.applySnapshot(snapshot: snapshot)
+            }
+            .store(in: &subscriptions)
+
         let sightingsOutput = viewModel.bindForSightings(to: input)
         sightingsOutput.snapshot
             .receive(on: DispatchQueue.main)
@@ -145,8 +161,8 @@ class HomeScreenController: UIViewController {
 
 
         if viewModel.locationService.gotInitialLocation {
-            fetchInput.send((nil, false))
-            city.send(nil)
+            fetchInput.send((nil, nil, false))
+            city.send((passedLocation: nil, radius: nil))
         }
         // else refresh sent by internal noti
     }
@@ -175,13 +191,26 @@ class HomeScreenController: UIViewController {
 
     @objc func gotInitialLocation() {
         // view model -> fetch birds
-        fetchInput.send((radius: nil, useStartIndex: false))
-        city.send(nil)
+        fetchInput.send((currentLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius, useStartIndex: false))
+        city.send((passedLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius))
     }
 
     @objc func forceRefresh() {
-        fetchInput.send((radius: nil, useStartIndex: false))
-        city.send(nil)
+        fetchInput.send((currentLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius, useStartIndex: false))
+        city.send((passedLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius))
+    }
+
+    @objc func titleViewTap() {
+        let vc = LocationEditorController(viewModel: LocationEditorViewModel(
+            serviceContainer: ServiceContainer.shared,
+            currentLocation: viewModel.cachedLocation ?? CLLocation(),
+            city: viewModel.cachedCity ?? "",
+            radius: viewModel.cachedRadius
+        ))
+        DispatchQueue.main.async {
+            vc.delegate = self
+            self.present(vc, animated: true)
+        }
     }
 }
 
@@ -205,7 +234,18 @@ extension HomeScreenController: UITableViewDelegate {
         let snapshot = datasource.snapshot()
         if (indexPath.row >= snapshot.numberOfItems - 2) && !isRefreshingPagination {
             isRefreshingPagination = true
-            fetchInput.send((radius: nil, useStartIndex: true))
+            fetchInput.send((currentLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius, useStartIndex: true))
         }
+    }
+}
+
+extension HomeScreenController: LocationEditorDelegate {
+    func finishPassing(radius: Double, location: CLLocation) {
+        viewModel.cachedSightings = []
+        refresh.send(false)
+        city.send((passedLocation: location, radius: radius))
+
+        isRefreshingPagination = true
+        fetchInput.send((currentLocation: location, radius: radius, useStartIndex: false))
     }
 }

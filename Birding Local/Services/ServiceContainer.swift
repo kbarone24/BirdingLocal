@@ -21,6 +21,7 @@ final class ServiceContainer {
 
     private(set) var locationService: LocationServiceProtocol?
     private(set) var ebirdService: EBirdServiceProtocol?
+    private (set) var mapsService: MapsService?
 
     func register<T>(service: T, for keyPath: KeyPath<ServiceContainer, T?>) throws {
 

@@ -13,6 +13,7 @@ enum Colors: String {
     case AccentGray
     case AccentWhite
     case PrimaryBlue
+    case PrimaryGray
     case SecondaryYellow
 
     var color: UIColor {
@@ -26,16 +27,9 @@ enum Fonts: String {
     case SFProRegular = "SFProText-Regular"
     case SFProSemibold = "SFProText-Semibold"
 
-    func font(with size: FontSize) -> UIFont {
-        return UIFont(name: rawValue, size: size.rawValue) ?? UIFont()
+    func font(with size: CGFloat) -> UIFont {
+        return UIFont(name: rawValue, size: size) ?? UIFont()
     }
-}
-
-enum FontSize: CGFloat {
-    case header = 25
-    case subheader = 20
-    case label = 18
-    case sublabel = 14
 }
 
 enum NotificationNames: String {
