@@ -11,8 +11,8 @@ import UIKit
 class HomeScreenTableViewHeader: UITableViewHeaderFooterView {
     private var headerLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProSemibold.font(with: 25)
+        label.textColor = Colors.AccentWhite.uicolor
+        label.font = Fonts.SFProSemibold.uifont(with: 25)
         return label
     }()
 

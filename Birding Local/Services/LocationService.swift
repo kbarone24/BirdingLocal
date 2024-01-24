@@ -8,13 +8,13 @@
 import Foundation
 import CoreLocation
 import UIKit
+import WidgetKit
 
 protocol LocationServiceProtocol {
     var currentLocation: CLLocation? { get set }
     var gotInitialLocation: Bool { get set }
-    func checkLocationAuth() -> UIAlertController?
+    func checkLocationAuth()
     func currentLocationStatus() -> CLAuthorizationStatus
-    func locationAlert() -> UIAlertController
     func getCity(passedLocation: CLLocation?) async -> (city: String?, location: CLLocation?)
 }
 
@@ -29,51 +29,29 @@ final class LocationService: NSObject, LocationServiceProtocol {
         locationManager.delegate = self
     }
 
-    @discardableResult
-    func checkLocationAuth() -> UIAlertController? {
+    func checkLocationAuth() {
         switch locationManager.authorizationStatus {
         case .notDetermined:
-            locationManager.requestAlwaysAuthorization()
+            locationManager.requestWhenInUseAuthorization()
             // prompt user to open their settings if they havent allowed location services
-            return nil
 
-        case .restricted, .denied:
-            return locationAlert()
+        case .restricted:
+          //  return locationAlert()
+            return
+
+        case .denied:
+            print("denied")
 
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
-            return nil
 
         @unknown default:
-            return nil
+            return
         }
     }
 
     func currentLocationStatus() -> CLAuthorizationStatus {
         return locationManager.authorizationStatus
-    }
-
-    func locationAlert() -> UIAlertController {
-        let alert = UIAlertController(
-            title: "Birding Local needs your location to find birds near you",
-            message: nil,
-            preferredStyle: .alert
-        )
-
-        alert.addAction(
-            UIAlertAction(title: "Settings", style: .default) { _ in
-                if let url = URL(string: UIApplication.openSettingsURLString) {
-                    UIApplication.shared.open(url, options: [:])
-                }
-            }
-        )
-
-        alert.addAction(
-            UIAlertAction(title: "Cancel", style: .cancel) { _ in
-            }
-        )
-
-        return alert
     }
 
     func getCity(passedLocation: CLLocation?) async -> (city: String?, location: CLLocation?) {
@@ -109,9 +87,18 @@ final class LocationService: NSObject, LocationServiceProtocol {
                     }
 
                     continuation.resume(returning: (city: addressString, location: location))
+                    self.saveToAppGroup(city: addressString)
                 }
             }
         }
+    }
+
+    private func saveToAppGroup(city: String) {
+        // save city data to App Group for use in widget
+        let sharedUserDefaults = UserDefaults(suiteName: AppGroupNames.defaultGroup.rawValue)
+        sharedUserDefaults?.set(city, forKey: "city")
+        sharedUserDefaults?.synchronize()
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
 
@@ -128,7 +115,6 @@ extension LocationService: CLLocationManagerDelegate {
 
         // notification for user first responding to notification request. Will notify home screen to fetch birds based on user location
         if !gotInitialLocation {
-            print("got initial location")
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: NotificationNames.GotInitialLocation.rawValue)))
             gotInitialLocation = true
         }

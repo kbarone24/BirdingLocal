@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import Combine
+import WidgetKit
 
 class HomeScreenController: UIViewController {
     enum Section: Hashable {
@@ -48,7 +49,7 @@ class HomeScreenController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.rowHeight = 118
-        tableView.backgroundColor = Colors.PrimaryBlue.color
+        tableView.backgroundColor = Colors.PrimaryBlue.uicolor
         tableView.clipsToBounds = true
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
@@ -94,7 +95,7 @@ class HomeScreenController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: gradient background
-        view.backgroundColor = Colors.PrimaryBlue.color
+        view.backgroundColor = Colors.PrimaryBlue.uicolor
 
         checkLocationAuth()
         registerNotifications()
@@ -164,7 +165,13 @@ class HomeScreenController: UIViewController {
             fetchInput.send((nil, nil, false))
             city.send((passedLocation: nil, radius: nil))
         }
-        // else refresh sent by internal noti
+
+        let sharedUserDefaults = UserDefaults(suiteName: AppGroupNames.defaultGroup.rawValue)
+        let latitude = sharedUserDefaults?.object(forKey: "latitude") as? Double ?? 0
+        let longitude = sharedUserDefaults?.object(forKey: "longitude") as? Double ?? 0
+        let currentRadius = sharedUserDefaults?.object(forKey: "radius") as? Double ?? 1
+        let city = sharedUserDefaults?.object(forKey: "city") as? String ?? ""
+        print(latitude, longitude, currentRadius, city)
     }
 
     private func applySnapshot(snapshot: Snapshot) {
@@ -183,10 +190,8 @@ class HomeScreenController: UIViewController {
     }
 
     private func checkLocationAuth() {
-        // register user for location services, if not authorized, show alert prompting user to open settings
-        if let alert = viewModel.locationService.checkLocationAuth() {
-            present(alert, animated: true)
-        }
+        // register user for location services
+        viewModel.locationService.checkLocationAuth()
     }
 
     @objc func gotInitialLocation() {

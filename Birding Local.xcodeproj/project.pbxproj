@@ -18,7 +18,6 @@
 		8C6975FF2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6975FE2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf */; };
 		8C6976012AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976002AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf */; };
 		8C69761B2AD8A7EE00D5F3B5 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8C69761A2AD8A7EE00D5F3B5 /* SnapKit */; };
-		8C69761E2AD8A96100D5F3B5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C69761D2AD8A96100D5F3B5 /* SDWebImage */; };
 		8C6976212AD8AABE00D5F3B5 /* UITableViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976202AD8AABE00D5F3B5 /* UITableViewCellExtension.swift */; };
 		8C6976232ADB1B3100D5F3B5 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976222ADB1B3100D5F3B5 /* ArrayExtension.swift */; };
 		8C6976252ADB274100D5F3B5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */; };
@@ -35,11 +34,27 @@
 		8C69763E2AE9969200D5F3B5 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */; };
 		8C6976402AE996FE00D5F3B5 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */; };
 		8C6976422AE99A8B00D5F3B5 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */; };
+		8C8D1D0F2B5B221E004C8ED5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */; };
+		8C8D1D102B5B29CE004C8ED5 /* Keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976362ADDD16700D5F3B5 /* Keys.plist */; };
+		8C8D1D4B2B609D81004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4A2B609D81004C8ED5 /* SDWebImage */; };
+		8C8D1D4E2B609E46004C8ED5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4D2B609E46004C8ED5 /* SDWebImageSwiftUI */; };
+		8C8D1D502B60A2C7004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */; };
+		8C8D1D522B60A2C7004C8ED5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D512B60A2C7004C8ED5 /* SDWebImageSwiftUI */; };
 		8CB87A922B3CD43A00E9B5E8 /* MapsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A912B3CD43A00E9B5E8 /* MapsService.swift */; };
 		8CB87A962B3E297500E9B5E8 /* RadiusSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A952B3E297500E9B5E8 /* RadiusSlider.swift */; };
 		8CB87A982B3F635800E9B5E8 /* HapticGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */; };
 		8CB87A9A2B3F6FC500E9B5E8 /* SliderPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A992B3F6FC500E9B5E8 /* SliderPosition.swift */; };
 		8CB87A9C2B44C82E00E9B5E8 /* UISearchBarExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A9B2B44C82E00E9B5E8 /* UISearchBarExtension.swift */; };
+		8CB87B612B5A12B500E9B5E8 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB87B602B5A12B500E9B5E8 /* WidgetKit.framework */; };
+		8CB87B632B5A12B500E9B5E8 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8CB87B622B5A12B500E9B5E8 /* SwiftUI.framework */; };
+		8CB87B662B5A12B500E9B5E8 /* Bird_WidgetBundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87B652B5A12B500E9B5E8 /* Bird_WidgetBundle.swift */; };
+		8CB87B682B5A12B500E9B5E8 /* Bird_Widget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87B672B5A12B500E9B5E8 /* Bird_Widget.swift */; };
+		8CB87B6A2B5A12B600E9B5E8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CB87B692B5A12B600E9B5E8 /* Assets.xcassets */; };
+		8CB87B6E2B5A12B600E9B5E8 /* Bird WidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 8CB87B5F2B5A12B500E9B5E8 /* Bird WidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		8CB87B742B5B0AA500E9B5E8 /* BirdSighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975972ABB841000D5F3B5 /* BirdSighting.swift */; };
+		8CB87B752B5B0AA800E9B5E8 /* EBirdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758A2ABB521600D5F3B5 /* EBirdService.swift */; };
+		8CB87B762B5B0AAA00E9B5E8 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758C2ABB539400D5F3B5 /* LocationService.swift */; };
+		8CB87B772B5B0B3700E9B5E8 /* CommonNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */; };
 		8CC9633D2B142B77005B1375 /* SearchLocationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC9633C2B142B77005B1375 /* SearchLocationController.swift */; };
 		8CC9633F2B142B7F005B1375 /* SearchLocationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CC9633E2B142B7F005B1375 /* SearchLocationViewModel.swift */; };
 		8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE9F4B82AB0D17F006DCD54 /* AppDelegate.swift */; };
@@ -49,6 +64,30 @@
 		8CE9F4C52AB0D180006DCD54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */; };
 		8CE9F4C82AB0D180006DCD54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8CE9F4C62AB0D180006DCD54 /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8CB87B6C2B5A12B600E9B5E8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8CE9F4AD2AB0D17F006DCD54 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8CB87B5E2B5A12B500E9B5E8;
+			remoteInfo = "Bird WidgetExtension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8CB87B572B5A0EEB00E9B5E8 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				8CB87B6E2B5A12B600E9B5E8 /* Bird WidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		8C69758A2ABB521600D5F3B5 /* EBirdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBirdService.swift; sourceTree = "<group>"; };
@@ -81,6 +120,15 @@
 		8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HapticGenerator.swift; sourceTree = "<group>"; };
 		8CB87A992B3F6FC500E9B5E8 /* SliderPosition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SliderPosition.swift; sourceTree = "<group>"; };
 		8CB87A9B2B44C82E00E9B5E8 /* UISearchBarExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISearchBarExtension.swift; sourceTree = "<group>"; };
+		8CB87B5F2B5A12B500E9B5E8 /* Bird WidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Bird WidgetExtension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8CB87B602B5A12B500E9B5E8 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		8CB87B622B5A12B500E9B5E8 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		8CB87B652B5A12B500E9B5E8 /* Bird_WidgetBundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird_WidgetBundle.swift; sourceTree = "<group>"; };
+		8CB87B672B5A12B500E9B5E8 /* Bird_Widget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bird_Widget.swift; sourceTree = "<group>"; };
+		8CB87B692B5A12B600E9B5E8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		8CB87B6B2B5A12B600E9B5E8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8CB87B782B5B0CBD00E9B5E8 /* Birding Local.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Birding Local.entitlements"; sourceTree = "<group>"; };
+		8CB87B792B5B0D9C00E9B5E8 /* Bird WidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Bird WidgetExtension.entitlements"; sourceTree = "<group>"; };
 		8CC9633C2B142B77005B1375 /* SearchLocationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationController.swift; sourceTree = "<group>"; };
 		8CC9633E2B142B7F005B1375 /* SearchLocationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationViewModel.swift; sourceTree = "<group>"; };
 		8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Birding Local.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,12 +142,24 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8CB87B5C2B5A12B500E9B5E8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C8D1D522B60A2C7004C8ED5 /* SDWebImageSwiftUI in Frameworks */,
+				8C8D1D502B60A2C7004C8ED5 /* SDWebImage in Frameworks */,
+				8CB87B632B5A12B500E9B5E8 /* SwiftUI.framework in Frameworks */,
+				8CB87B612B5A12B500E9B5E8 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8CE9F4B22AB0D17F006DCD54 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C69761E2AD8A96100D5F3B5 /* SDWebImage in Frameworks */,
+				8C8D1D4E2B609E46004C8ED5 /* SDWebImageSwiftUI in Frameworks */,
 				8C6975942ABB5C1800D5F3B5 /* IdentifiedCollections in Frameworks */,
+				8C8D1D4B2B609D81004C8ED5 /* SDWebImage in Frameworks */,
 				8C69761B2AD8A7EE00D5F3B5 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -194,6 +254,26 @@
 			path = LocationEditor;
 			sourceTree = "<group>";
 		};
+		8CB87B442B5A0EE900E9B5E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8CB87B602B5A12B500E9B5E8 /* WidgetKit.framework */,
+				8CB87B622B5A12B500E9B5E8 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8CB87B642B5A12B500E9B5E8 /* Bird Widget */ = {
+			isa = PBXGroup;
+			children = (
+				8CB87B652B5A12B500E9B5E8 /* Bird_WidgetBundle.swift */,
+				8CB87B672B5A12B500E9B5E8 /* Bird_Widget.swift */,
+				8CB87B6B2B5A12B600E9B5E8 /* Info.plist */,
+				8CB87B692B5A12B600E9B5E8 /* Assets.xcassets */,
+			);
+			path = "Bird Widget";
+			sourceTree = "<group>";
+		};
 		8CC9633B2B142B66005B1375 /* SearchLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -207,7 +287,10 @@
 		8CE9F4AC2AB0D17F006DCD54 = {
 			isa = PBXGroup;
 			children = (
+				8CB87B792B5B0D9C00E9B5E8 /* Bird WidgetExtension.entitlements */,
 				8CE9F4B72AB0D17F006DCD54 /* Birding Local */,
+				8CB87B642B5A12B500E9B5E8 /* Bird Widget */,
+				8CB87B442B5A0EE900E9B5E8 /* Frameworks */,
 				8CE9F4B62AB0D17F006DCD54 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -216,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */,
+				8CB87B5F2B5A12B500E9B5E8 /* Bird WidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -223,6 +307,7 @@
 		8CE9F4B72AB0D17F006DCD54 /* Birding Local */ = {
 			isa = PBXGroup;
 			children = (
+				8CB87B782B5B0CBD00E9B5E8 /* Birding Local.entitlements */,
 				8C6976342ADDCF1E00D5F3B5 /* .gitIgnore */,
 				8CE9F4C42AB0D180006DCD54 /* Assets.xcassets */,
 				8CE9F4C92AB0D180006DCD54 /* Info.plist */,
@@ -244,6 +329,27 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8CB87B5E2B5A12B500E9B5E8 /* Bird WidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8CB87B6F2B5A12B700E9B5E8 /* Build configuration list for PBXNativeTarget "Bird WidgetExtension" */;
+			buildPhases = (
+				8CB87B5B2B5A12B500E9B5E8 /* Sources */,
+				8CB87B5C2B5A12B500E9B5E8 /* Frameworks */,
+				8CB87B5D2B5A12B500E9B5E8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bird WidgetExtension";
+			packageProductDependencies = (
+				8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */,
+				8C8D1D512B60A2C7004C8ED5 /* SDWebImageSwiftUI */,
+			);
+			productName = "Bird WidgetExtension";
+			productReference = 8CB87B5F2B5A12B500E9B5E8 /* Bird WidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		8CE9F4B42AB0D17F006DCD54 /* Birding Local */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8CE9F4CC2AB0D180006DCD54 /* Build configuration list for PBXNativeTarget "Birding Local" */;
@@ -251,16 +357,19 @@
 				8CE9F4B12AB0D17F006DCD54 /* Sources */,
 				8CE9F4B22AB0D17F006DCD54 /* Frameworks */,
 				8CE9F4B32AB0D17F006DCD54 /* Resources */,
+				8CB87B572B5A0EEB00E9B5E8 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				8CB87B6D2B5A12B600E9B5E8 /* PBXTargetDependency */,
 			);
 			name = "Birding Local";
 			packageProductDependencies = (
 				8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */,
 				8C69761A2AD8A7EE00D5F3B5 /* SnapKit */,
-				8C69761D2AD8A96100D5F3B5 /* SDWebImage */,
+				8C8D1D4A2B609D81004C8ED5 /* SDWebImage */,
+				8C8D1D4D2B609E46004C8ED5 /* SDWebImageSwiftUI */,
 			);
 			productName = "Birding Local";
 			productReference = 8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */;
@@ -276,6 +385,9 @@
 				LastSwiftUpdateCheck = 1430;
 				LastUpgradeCheck = 1430;
 				TargetAttributes = {
+					8CB87B5E2B5A12B500E9B5E8 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
 					8CE9F4B42AB0D17F006DCD54 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
@@ -293,18 +405,29 @@
 			packageReferences = (
 				8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
 				8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */,
-				8C69761C2AD8A96100D5F3B5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				8C8D1D492B609D81004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 8CE9F4B62AB0D17F006DCD54 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				8CE9F4B42AB0D17F006DCD54 /* Birding Local */,
+				8CB87B5E2B5A12B500E9B5E8 /* Bird WidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8CB87B5D2B5A12B500E9B5E8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8C8D1D102B5B29CE004C8ED5 /* Keys.plist in Resources */,
+				8CB87B6A2B5A12B600E9B5E8 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8CE9F4B32AB0D17F006DCD54 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -324,6 +447,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8CB87B5B2B5A12B500E9B5E8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8CB87B752B5B0AA800E9B5E8 /* EBirdService.swift in Sources */,
+				8CB87B772B5B0B3700E9B5E8 /* CommonNames.swift in Sources */,
+				8C8D1D0F2B5B221E004C8ED5 /* UIImageExtension.swift in Sources */,
+				8CB87B682B5A12B500E9B5E8 /* Bird_Widget.swift in Sources */,
+				8CB87B762B5B0AAA00E9B5E8 /* LocationService.swift in Sources */,
+				8CB87B742B5B0AA500E9B5E8 /* BirdSighting.swift in Sources */,
+				8CB87B662B5A12B500E9B5E8 /* Bird_WidgetBundle.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8CE9F4B12AB0D17F006DCD54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -362,6 +499,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		8CB87B6D2B5A12B600E9B5E8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8CB87B5E2B5A12B500E9B5E8 /* Bird WidgetExtension */;
+			targetProxy = 8CB87B6C2B5A12B600E9B5E8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		8CE9F4BE2AB0D17F006DCD54 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -382,6 +527,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8CB87B702B5A12B700E9B5E8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Bird WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = H5355TZ8Q3;
+				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_PKGINFO_FILE = NO;
+				INFOPLIST_FILE = "Bird Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bird Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = Placeholder;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Kenny-Barone.Birding-Local.Bird-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8CB87B712B5A12B700E9B5E8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = "Bird WidgetExtension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = H5355TZ8Q3;
+				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_PKGINFO_FILE = NO;
+				INFOPLIST_FILE = "Bird Widget/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Bird Widget";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSLocationUsageDescription = Placeholder;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "Kenny-Barone.Birding-Local.Bird-Widget";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		8CE9F4CA2AB0D180006DCD54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -499,18 +706,23 @@
 		8CE9F4CD2AB0D180006DCD54 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Birding Local will use your location to find birds near you!";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -528,18 +740,23 @@
 		8CE9F4CE2AB0D180006DCD54 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Birding Local will use your location to find birds near you!";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -557,6 +774,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8CB87B6F2B5A12B700E9B5E8 /* Build configuration list for PBXNativeTarget "Bird WidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8CB87B702B5A12B700E9B5E8 /* Debug */,
+				8CB87B712B5A12B700E9B5E8 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		8CE9F4B02AB0D17F006DCD54 /* Build configuration list for PBXProject "Birding Local" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -594,12 +820,20 @@
 				minimumVersion = 5.0.0;
 			};
 		};
-		8C69761C2AD8A96100D5F3B5 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+		8C8D1D492B609D81004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 5.18.0;
+			};
+		};
+		8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -615,10 +849,25 @@
 			package = 8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
-		8C69761D2AD8A96100D5F3B5 /* SDWebImage */ = {
+		8C8D1D4A2B609D81004C8ED5 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 8C69761C2AD8A96100D5F3B5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			package = 8C8D1D492B609D81004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		8C8D1D4D2B609E46004C8ED5 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+		8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8D1D492B609D81004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
+		};
+		8C8D1D512B60A2C7004C8ED5 /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -13,7 +13,7 @@ import SDWebImage
 class HomeScreenCell: UITableViewCell {
     private lazy var contentArea: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.AccentWhite.color
+        view.backgroundColor = Colors.AccentWhite.uicolor
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 16
         return view
@@ -27,8 +27,8 @@ class HomeScreenCell: UITableViewCell {
 
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProBold.font(with: 18)
+        label.textColor = Colors.PrimaryBlue.uicolor
+        label.font = Fonts.SFProBold.uifont(with: 18)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
@@ -36,8 +36,8 @@ class HomeScreenCell: UITableViewCell {
 
     private lazy var timestampLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentGray.color
-        label.font = Fonts.SFProMedium.font(with: 14)
+        label.textColor = Colors.AccentGray.uicolor
+        label.font = Fonts.SFProMedium.uifont(with: 14)
         return label
     }()
 
@@ -51,7 +51,7 @@ class HomeScreenCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = Colors.PrimaryBlue.color
+        backgroundColor = Colors.PrimaryBlue.uicolor
 
         contentView.addSubview(contentArea)
         contentArea.snp.makeConstraints {
@@ -92,8 +92,8 @@ class HomeScreenCell: UITableViewCell {
     }
 
     func configure(sighting: BirdSighting) {
-        nameLabel.text = sighting.comName
-        timestampLabel.text = sighting.obsDt
+        nameLabel.text = sighting.commonName
+        timestampLabel.text = sighting.timestamp
 
         //TODO: format timestamp
 

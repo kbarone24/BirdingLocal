@@ -12,8 +12,8 @@ class HomeScreenTitleView: UIView {
     private var currentLocationLabel: UILabel = {
         let label = UILabel()
         label.text = "Current Location"
-        label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProRegular.font(with: 14)
+        label.textColor = Colors.AccentWhite.uicolor
+        label.font = Fonts.SFProRegular.uifont(with: 14)
         label.isHidden = true
         return label
     }()
@@ -32,14 +32,14 @@ class HomeScreenTitleView: UIView {
 
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProBold.font(with: 14)
+        label.textColor = Colors.AccentWhite.uicolor
+        label.font = Fonts.SFProBold.uifont(with: 14)
         return label
     }()
 
     private lazy var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.AccentWhite.color
+        view.backgroundColor = Colors.AccentWhite.uicolor
         view.layer.cornerRadius = 3.5 / 2
         view.isHidden = true
         return view
@@ -47,8 +47,8 @@ class HomeScreenTitleView: UIView {
 
     private lazy var radiusLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProBold.font(with: 14)
+        label.textColor = Colors.AccentWhite.uicolor
+        label.font = Fonts.SFProBold.uifont(with: 14)
         return label
     }()
 

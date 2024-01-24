@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 enum Colors: String {
     case AccentBlue
@@ -16,8 +17,12 @@ enum Colors: String {
     case PrimaryGray
     case SecondaryYellow
 
-    var color: UIColor {
+    var uicolor: UIColor {
         return UIColor(named: rawValue) ?? .clear
+    }
+
+    var color: Color {
+        return Color(rawValue)
     }
 }
 
@@ -27,11 +32,19 @@ enum Fonts: String {
     case SFProRegular = "SFProText-Regular"
     case SFProSemibold = "SFProText-Semibold"
 
-    func font(with size: CGFloat) -> UIFont {
+    func uifont(with size: CGFloat) -> UIFont {
         return UIFont(name: rawValue, size: size) ?? UIFont()
+    }
+
+    func font(with size: CGFloat) -> Font {
+        return Font.custom(rawValue, size: size)
     }
 }
 
 enum NotificationNames: String {
     case GotInitialLocation
+}
+
+enum AppGroupNames: String {
+    case defaultGroup = "Group.BirdingLocal"
 }

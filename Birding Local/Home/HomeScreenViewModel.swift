@@ -181,7 +181,8 @@ class HomeScreenViewModel {
                         for: currentLocation ?? self.locationService.currentLocation ?? CLLocation(),
                         radius: radius.inKM(),
                         maxResults: maxResults,
-                        cachedSightings: cachedSightings
+                        cachedSightings: cachedSightings,
+                        widgetFetch: false
                     )
                     // attach to cached sightings on pagination
                     let allSightings = useStartIndex ?

@@ -94,33 +94,33 @@ class SearchLocationController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Search Location"
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProBold.font(with: 20)
+        label.textColor = Colors.PrimaryBlue.uicolor
+        label.font = Fonts.SFProBold.uifont(with: 20)
         return label
     }()
 
     private lazy var separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.PrimaryGray.color.withAlphaComponent(0.25)
+        view.backgroundColor = Colors.PrimaryGray.uicolor.withAlphaComponent(0.25)
         return view
     }()
 
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.barStyle = .default
-        searchBar.tintColor = Colors.PrimaryGray.color
+        searchBar.tintColor = Colors.PrimaryGray.uicolor
         searchBar.barTintColor = .white
-        searchBar.searchTextField.textColor = Colors.PrimaryBlue.color
+        searchBar.searchTextField.textColor = Colors.PrimaryBlue.uicolor
         searchBar.searchTextField.backgroundColor = .white
         searchBar.backgroundImage = UIImage()
         searchBar.layer.shadowOpacity = 0
-        searchBar.layer.borderColor = Colors.PrimaryGray.color.withAlphaComponent(0.25).cgColor
+        searchBar.layer.borderColor = Colors.PrimaryGray.uicolor.withAlphaComponent(0.25).cgColor
         searchBar.layer.borderWidth = 1
         searchBar.layer.cornerRadius = 4
         searchBar.returnKeyType = .done
         searchBar.delegate = self
-        searchBar.setMagnifyingGlassColorTo(color: Colors.PrimaryGray.color)
-        searchBar.setClearButtonColorTo(color: Colors.PrimaryGray.color)
+        searchBar.setMagnifyingGlassColorTo(color: Colors.PrimaryGray.uicolor)
+        searchBar.setClearButtonColorTo(color: Colors.PrimaryGray.uicolor)
         return searchBar
     }()
 

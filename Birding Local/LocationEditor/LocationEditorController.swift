@@ -30,8 +30,8 @@ class LocationEditorController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Update Location"
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProBold.font(with: 20)
+        label.textColor = Colors.PrimaryBlue.uicolor
+        label.font = Fonts.SFProBold.uifont(with: 20)
         return label
     }()
 
@@ -44,40 +44,40 @@ class LocationEditorController: UIViewController {
 
     private lazy var separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.PrimaryGray.color.withAlphaComponent(0.25)
+        view.backgroundColor = Colors.PrimaryGray.uicolor.withAlphaComponent(0.25)
         return view
     }()
 
     private lazy var searchLabel: UILabel = {
         let label = UILabel()
         label.text = "Search by city"
-        label.textColor = Colors.PrimaryGray.color
-        label.font = Fonts.SFProMedium.font(with: 16)
+        label.textColor = Colors.PrimaryGray.uicolor
+        label.font = Fonts.SFProMedium.uifont(with: 16)
         return label
     }()
 
     private lazy var locationContainer: UIView = {
         let view = UIView()
         view.layer.borderWidth = 1
-        view.layer.borderColor = Colors.PrimaryGray.color.withAlphaComponent(0.25).cgColor
+        view.layer.borderColor = Colors.PrimaryGray.uicolor.withAlphaComponent(0.25).cgColor
         view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(locationTap)))
         return view
     }()
 
-    private lazy var locationPin = UIImageView(image: UIImage(named:"LocationPin")?.withTintColor(Colors.PrimaryGray.color))
+    private lazy var locationPin = UIImageView(image: UIImage(named:"LocationPin")?.withTintColor(Colors.PrimaryGray.uicolor))
 
     private lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.text = "Location"
-        label.textColor = Colors.PrimaryGray.color
-        label.font = Fonts.SFProMedium.font(with: 12)
+        label.textColor = Colors.PrimaryGray.uicolor
+        label.font = Fonts.SFProMedium.uifont(with: 12)
         return label
     }()
 
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProMedium.font(with: 14)
+        label.textColor = Colors.PrimaryBlue.uicolor
+        label.font = Fonts.SFProMedium.uifont(with: 14)
         label.layer.cornerRadius = 4
         return label
     }()
@@ -87,8 +87,8 @@ class LocationEditorController: UIViewController {
     private lazy var radiusLabel: UILabel = {
         let label = UILabel()
         label.text = "Radius"
-        label.textColor = Colors.PrimaryGray.color
-        label.font = Fonts.SFProMedium.font(with: 16)
+        label.textColor = Colors.PrimaryGray.uicolor
+        label.font = Fonts.SFProMedium.uifont(with: 16)
         return label
     }()
 
@@ -96,14 +96,14 @@ class LocationEditorController: UIViewController {
 
     private lazy var saveButton: UIButton = {
         let button = UIButton()
-        button.backgroundColor = Colors.PrimaryBlue.color
+        button.backgroundColor = Colors.PrimaryBlue.uicolor
         button.layer.cornerRadius = 4
         button.setAttributedTitle(
             NSAttributedString(
                 string: "Save",
                 attributes: [
-                    .foregroundColor: Colors.AccentWhite.color,
-                    .font: Fonts.SFProBold.font(with: 16)
+                    .foregroundColor: Colors.AccentWhite.uicolor,
+                    .font: Fonts.SFProBold.uifont(with: 16)
                 ]),
             for: .normal)
         button.addTarget(self, action: #selector(applyTap), for: .touchUpInside)

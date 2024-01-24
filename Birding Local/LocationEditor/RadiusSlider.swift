@@ -208,8 +208,8 @@ class SliderView: UIView {
 class SliderBall: UIView {
     private lazy var label: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProMedium.font(with: 16)
+        label.textColor = Colors.PrimaryBlue.uicolor
+        label.font = Fonts.SFProMedium.uifont(with: 16)
         return label
     }()
 
@@ -219,7 +219,7 @@ class SliderBall: UIView {
         backgroundColor = .white
         layer.cornerRadius = 18
         layer.borderWidth = 2
-        layer.borderColor = Colors.PrimaryBlue.color.cgColor
+        layer.borderColor = Colors.PrimaryBlue.uicolor.cgColor
 
         addSubview(label)
         label.snp.makeConstraints {
