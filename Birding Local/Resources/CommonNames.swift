@@ -46,5 +46,5 @@ enum NotificationNames: String {
 }
 
 enum AppGroupNames: String {
-    case defaultGroup = "Group.BirdingLocal"
+    case defaultGroup = "group.BirdingLocal"
 }

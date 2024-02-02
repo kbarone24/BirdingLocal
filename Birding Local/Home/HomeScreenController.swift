@@ -100,10 +100,12 @@ class HomeScreenController: UIViewController {
         checkLocationAuth()
         registerNotifications()
 
+        let safeArea = view.safeAreaLayoutGuide
+
         view.addSubview(titleView)
         titleView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(titleViewTap)))
         titleView.snp.makeConstraints {
-            $0.top.equalTo(48)
+            $0.top.equalTo(safeArea.snp.top).offset(28)
             $0.leading.trailing.equalToSuperview()
         }
 
@@ -171,7 +173,6 @@ class HomeScreenController: UIViewController {
         let longitude = sharedUserDefaults?.object(forKey: "longitude") as? Double ?? 0
         let currentRadius = sharedUserDefaults?.object(forKey: "radius") as? Double ?? 1
         let city = sharedUserDefaults?.object(forKey: "city") as? String ?? ""
-        print(latitude, longitude, currentRadius, city)
     }
 
     private func applySnapshot(snapshot: Snapshot) {

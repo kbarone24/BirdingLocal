@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8C25AC0E2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */; };
+		8C25AC0F2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */; };
 		8C69758B2ABB521600D5F3B5 /* EBirdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758A2ABB521600D5F3B5 /* EBirdService.swift */; };
 		8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758C2ABB539400D5F3B5 /* LocationService.swift */; };
 		8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */; };
@@ -40,6 +42,10 @@
 		8C8D1D4E2B609E46004C8ED5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4D2B609E46004C8ED5 /* SDWebImageSwiftUI */; };
 		8C8D1D502B60A2C7004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */; };
 		8C8D1D522B60A2C7004C8ED5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D512B60A2C7004C8ED5 /* SDWebImageSwiftUI */; };
+		8C8D1D672B61960F004C8ED5 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C69762C2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf */; };
+		8C8D1D682B619610004C8ED5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976282ADB464500D5F3B5 /* SF-Pro-Text-Regular.otf */; };
+		8C8D1D692B619612004C8ED5 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976002AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf */; };
+		8C8D1D6A2B619614004C8ED5 /* SF-Pro-Text-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6975FE2AD89C7400D5F3B5 /* SF-Pro-Text-Medium.otf */; };
 		8CB87A922B3CD43A00E9B5E8 /* MapsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A912B3CD43A00E9B5E8 /* MapsService.swift */; };
 		8CB87A962B3E297500E9B5E8 /* RadiusSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A952B3E297500E9B5E8 /* RadiusSlider.swift */; };
 		8CB87A982B3F635800E9B5E8 /* HapticGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */; };
@@ -90,6 +96,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightingGenerator.swift; sourceTree = "<group>"; };
 		8C69758A2ABB521600D5F3B5 /* EBirdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBirdService.swift; sourceTree = "<group>"; };
 		8C69758C2ABB539400D5F3B5 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
@@ -215,6 +222,7 @@
 				8C6975FD2AD89C2000D5F3B5 /* Fonts */,
 				8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */,
 				8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */,
+				8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -423,7 +431,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8C8D1D672B61960F004C8ED5 /* SF-Pro-Text-Semibold.otf in Resources */,
+				8C8D1D692B619612004C8ED5 /* SF-Pro-Text-Bold.otf in Resources */,
+				8C8D1D6A2B619614004C8ED5 /* SF-Pro-Text-Medium.otf in Resources */,
 				8C8D1D102B5B29CE004C8ED5 /* Keys.plist in Resources */,
+				8C8D1D682B619610004C8ED5 /* SF-Pro-Text-Regular.otf in Resources */,
 				8CB87B6A2B5A12B600E9B5E8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -457,6 +469,7 @@
 				8CB87B682B5A12B500E9B5E8 /* Bird_Widget.swift in Sources */,
 				8CB87B762B5B0AAA00E9B5E8 /* LocationService.swift in Sources */,
 				8CB87B742B5B0AA500E9B5E8 /* BirdSighting.swift in Sources */,
+				8C25AC0F2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */,
 				8CB87B662B5A12B500E9B5E8 /* Bird_WidgetBundle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -479,6 +492,7 @@
 				8CE9F4B92AB0D17F006DCD54 /* AppDelegate.swift in Sources */,
 				8CB87A9A2B3F6FC500E9B5E8 /* SliderPosition.swift in Sources */,
 				8C6975FA2AD89AAE00D5F3B5 /* HomeScreenCell.swift in Sources */,
+				8C25AC0E2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */,
 				8CB87A922B3CD43A00E9B5E8 /* MapsService.swift in Sources */,
 				8C6976272ADB45CC00D5F3B5 /* HomeScreenTitleView.swift in Sources */,
 				8C69762F2ADC86A100D5F3B5 /* DoubleExtension.swift in Sources */,

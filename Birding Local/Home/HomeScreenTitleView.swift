@@ -9,14 +9,6 @@ import Foundation
 import UIKit
 
 class HomeScreenTitleView: UIView {
-    private var currentLocationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Current Location"
-        label.textColor = Colors.AccentWhite.uicolor
-        label.font = Fonts.SFProRegular.uifont(with: 14)
-        label.isHidden = true
-        return label
-    }()
 
     private lazy var locationView: UIView = {
         let view = UIView()
@@ -52,22 +44,21 @@ class HomeScreenTitleView: UIView {
         return label
     }()
 
+    private lazy var editLocation: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = Fonts.SFProRegular.uifont(with: 14)
+        label.attributedText = NSMutableAttributedString(string: "Update Location", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.41])
+        return label
+    }()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(currentLocationLabel)
-        currentLocationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalTo(self.snp.centerY).offset(-2)
-            $0.centerX.equalToSuperview()
-        }
-
         addSubview(locationView)
         locationView.snp.makeConstraints {
-            $0.top.equalTo(self.snp.centerY).offset(2)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.top.centerX.equalToSuperview()
         }
 
         locationView.addSubview(locationPinIcon)
@@ -93,16 +84,23 @@ class HomeScreenTitleView: UIView {
             $0.leading.equalTo(separatorView.snp.trailing).offset(5)
             $0.trailing.centerY.equalToSuperview()
         }
+
+        addSubview(editLocation)
+        editLocation.snp.makeConstraints {
+            $0.top.equalTo(8)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
 
     func configure(city: String, radius: Double) {
-        cityLabel.text = city
-        radiusLabel.text = "\(radius) mile radius"
+        let attributes = [NSAttributedString.Key.kern: -0.41]
+        cityLabel.attributedText = NSAttributedString(string: city, attributes: attributes)
+        radiusLabel.attributedText = NSAttributedString(string: "\(Int(radius)) mile radius", attributes: attributes)
 
-        currentLocationLabel.isHidden = city.isEmpty || radius == 0
         radiusLabel.isHidden = city.isEmpty || radius == 0
         separatorView.isHidden = city.isEmpty || radius == 0
-        locationPinIcon.isHidden = city.isEmpty
+        locationPinIcon.isHidden = city.isEmpty || radius == 0
     }
 
     required init?(coder: NSCoder) {

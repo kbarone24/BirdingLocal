@@ -48,7 +48,6 @@ class LocationEditorViewModel {
             input.radius
         )
 
-        let combinedInput = inputItems
         let locationPublisher = input.location
             .map { location in
                 self.cachedLocation = location

@@ -36,7 +36,7 @@ final class EBirdService: EBirdServiceProtocol {
                 )
 
                 // go further back in time to fetch enough sightings to fill page
-                while sightings.count < 8, daysBack < 128 {
+                while sightings.count < min(maxResults, 8), daysBack < 128 {
                     daysBack *= 2
 
                     let additionalSightings = await runSightingsFetch(
@@ -140,7 +140,8 @@ final class EBirdService: EBirdServiceProtocol {
 
                             // MARK: Fetch images for widget
                             if fetchImage {
-                                self.imageManager.loadImage(with: URL(string: imageURL), progress: nil) { _, data, _, _, _, _ in
+                                self.imageManager.loadImage(with: URL(string: imageURL), progress: nil) { image, data, error, _, _, _ in
+                                    let data = data ?? image?.sd_imageData() 
                                     continuation.resume(returning: (imageURL, nil, data))
                                 }
                             } else {
@@ -183,6 +184,5 @@ final class EBirdService: EBirdServiceProtocol {
         sharedUserDefaults?.set(radius, forKey: "radius")
         sharedUserDefaults?.synchronize()
         WidgetCenter.shared.reloadAllTimelines()
-        print("get user defaults", sharedUserDefaults?.object(forKey: "latitude"), sharedUserDefaults?.object(forKey: "city"))
     }
 }

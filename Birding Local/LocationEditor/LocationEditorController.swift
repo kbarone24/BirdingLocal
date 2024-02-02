@@ -198,7 +198,7 @@ class LocationEditorController: UIViewController {
         }
 
         radiusContainer.addSubview(radiusSlider)
-        
+
         radiusSlider.delegate = self
         radiusSlider.snp.makeConstraints {
             $0.top.equalTo(radiusLabel.snp.bottom).offset(4)

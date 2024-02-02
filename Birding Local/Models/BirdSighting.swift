@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import UIKit
 
 struct BirdSighting: Codable {
     // MARK: fetched variables
-    var id: String?
+    var id: String = UUID().uuidString
     let speciesCode: String
     var commonName: String
     let scientificName: String
@@ -18,14 +19,13 @@ struct BirdSighting: Codable {
     let lat: Double                // Latitude of the observation point
     let lng: Double                // Longitude of the observation point
     let howMany: Int?              // Number of birds observed (if specified)
-    let obsValid: Bool             // Indicates whether the observation is valid
+    let obsValid: Bool?             // Indicates whether the observation is valid
     // MARK: assigned variables
     var imageURL: String?  // imageURL (fetched from Wikimedia API)
     var audioURL: String?
     var imageData: Data? // only used in widget
 
     enum CodingKeys: String, CodingKey {
-        case id
         case speciesCode
         case commonName = "comName"
         case scientificName = "sciName"
@@ -37,11 +37,11 @@ struct BirdSighting: Codable {
         case obsValid
     }
 
-    init(speciesCode: String, commonName: String, scientificNmae: String, timestamp: String, locationName: String?, lat: Double, lng: Double, howMany: Int?, obsValid: Bool, imageURL: String? = nil, audioURL: String? = nil) {
+    init(speciesCode: String, commonName: String, scientificName: String, timestamp: String, locationName: String?, lat: Double, lng: Double, howMany: Int?, obsValid: Bool, imageURL: String? = nil, audioURL: String? = nil) {
         self.id = UUID().uuidString
         self.speciesCode = speciesCode
         self.commonName = commonName
-        self.scientificName = scientificNmae
+        self.scientificName = scientificName
         self.timestamp = timestamp
         self.locationName = locationName
         self.lat = lat
@@ -61,6 +61,23 @@ struct BirdSighting: Codable {
         self.locationName = ""
         self.lat = 0.0
         self.lng = 0.0
+        self.howMany = 0
+        self.obsValid = false
+        self.imageURL = ""
+        self.audioURL = ""
+    }
+
+    init(commonName: String, image: UIImage?, speciesCode: String) {
+        self.id = UUID().uuidString
+        self.speciesCode = speciesCode
+        self.commonName = commonName
+        self.scientificName = ""
+        self.locationName = ""
+        self.timestamp = ""
+        self.lat = 0
+        self.lng = 0
+        self.imageData = image?.jpegData(compressionQuality: 1.0) ?? Data()
+
         self.howMany = 0
         self.obsValid = false
         self.imageURL = ""

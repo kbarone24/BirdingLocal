@@ -11,13 +11,25 @@ import CoreLocation
 
 struct Provider: TimelineProvider {
     func placeholder(in context: Context) -> SightingEntry {
-        SightingEntry(date: Date(), city: "", sightingData: [])
+        switch context.family {
+        case .systemMedium:
+            return SightingEntry(date: Date(), city: "", sightingData: SightingGenerator().mediumPlaceholder)
+        case .systemLarge:
+            return SightingEntry(date: Date(), city: "", sightingData: SightingGenerator().largePlaceholder)
+        default:
+            return SightingEntry(date: Date(), city: "", sightingData: [])
+        }
     }
 
     func getSnapshot(in context: Context, completion: @escaping (SightingEntry) -> ()) {
-        // TODO: add sample data
-        let entry = SightingEntry(date: Date(), city: "", sightingData: [])
-        completion(entry)
+        switch context.family {
+        case .systemMedium:
+            completion(SightingEntry(date: Date(), city: "Your favorite place", sightingData: SightingGenerator().mediumDefault))
+        case .systemLarge:
+            completion(SightingEntry(date: Date(), city: "Your favorite place", sightingData: SightingGenerator().largeDefault))
+        default:
+            completion(SightingEntry(date: Date(), city: "", sightingData: []))
+        }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
@@ -26,7 +38,6 @@ struct Provider: TimelineProvider {
         let refreshDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate) ?? Date()
 
         let sharedUserDefaults = UserDefaults(suiteName: AppGroupNames.defaultGroup.rawValue)
-        print("defaults", sharedUserDefaults?.dictionaryRepresentation())
         let latitude = sharedUserDefaults?.object(forKey: "latitude") as? Double ?? 0
         let longitude = sharedUserDefaults?.object(forKey: "longitude") as? Double ?? 0
         let city = sharedUserDefaults?.object(forKey: "city") as? String ?? ""
@@ -73,7 +84,19 @@ struct Bird_WidgetEntryView: View {
                     }
                 }
             }
-            .padding(EdgeInsets(top: 8, leading: 16, bottom: 0, trailing: 8))
+            .padding(EdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 8))
+            .background(Color.clear)
+        }
+        .widgetBackground(Color.white.opacity(0.75))
+    }
+}
+
+extension View {
+    func widgetBackground(_ color: Color) -> some View {
+        if #available(iOSApplicationExtension 17.0, macOSApplicationExtension 14.0, *) {
+            return  containerBackground(color, for: .widget)
+        } else {
+            return background(color)
         }
     }
 }
@@ -94,10 +117,10 @@ struct CardView: View {
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50, height: 50)
                 } else {
-                    Image("DefaultBird")
+                    Image(uiImage: UIImage(named: "DefaultBird") ?? UIImage())
                         .resizable()
-                        .frame(width: 50, height: 50)
                         .aspectRatio(contentMode: .fit)
+                        .frame(width: 50, height: 50)
                 }
             }
 
@@ -116,7 +139,7 @@ struct Bird_Widget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Bird_WidgetEntryView(entry: entry)
-            .background(Color("WidgetBackground"))
+                .background(Color.clear)
         }
         .supportedFamilies([.systemMedium, .systemLarge])
         .configurationDisplayName("Bird Widget🦤")
@@ -126,9 +149,18 @@ struct Bird_Widget: Widget {
 
 struct Bird_Widget_Previews: PreviewProvider {
     static var previews: some View {
-        Bird_WidgetEntryView(entry: SightingEntry(date: Date(), city: "", sightingData: []))
+        Bird_WidgetEntryView(entry: SightingEntry(
+            date: Date(),
+            city: "Durham, NC",
+            sightingData: SightingGenerator().mediumDefault))
+            .background(Color.clear)
             .previewContext(WidgetPreviewContext(family: .systemMedium))
-        Bird_WidgetEntryView(entry: SightingEntry(date: Date(), city: "", sightingData: []))
-            .previewContext(WidgetPreviewContext(family: .systemLarge))
+
+        Bird_WidgetEntryView(entry: SightingEntry(
+            date: Date(),
+            city: "Durham, NC",
+            sightingData: SightingGenerator().largeDefault))
+        .background(Color.clear)
+        .previewContext(WidgetPreviewContext(family: .systemLarge))
     }
 }

@@ -63,8 +63,8 @@ class HomeScreenCell: UITableViewCell {
         contentView.addSubview(birdImage)
         birdImage.snp.makeConstraints {
             // adjust when adding play button
-            $0.trailing.equalTo(-16)
-            $0.top.bottom.equalToSuperview().inset(4)
+            $0.trailing.equalTo(-24)
+            $0.top.bottom.equalToSuperview().inset(8)
             $0.height.width.equalTo(110)
         }
 
@@ -92,8 +92,9 @@ class HomeScreenCell: UITableViewCell {
     }
 
     func configure(sighting: BirdSighting) {
-        nameLabel.text = sighting.commonName
-        timestampLabel.text = sighting.timestamp
+        let attributes = [NSAttributedString.Key.kern: -0.45]
+        nameLabel.attributedText = NSAttributedString(string: sighting.commonName, attributes: attributes)
+        timestampLabel.attributedText = NSAttributedString(string: sighting.timestamp, attributes: attributes)
 
         //TODO: format timestamp
 
