@@ -88,7 +88,7 @@ class RadiusSlider: UIView {
 
     private func determineSelectedPosition(offset: CGFloat) {
         let fullSpace = tickWidth + lineWidth
-        if offset > 0 && offset < sideInset + fullSpace / 2 {
+        if offset >= 0 && offset < sideInset + fullSpace / 2 {
             setSelected(position: .left)
         } else if offset < sideInset + fullSpace + fullSpace / 2  {
             setSelected(position: .leftCenter)
@@ -96,10 +96,9 @@ class RadiusSlider: UIView {
             setSelected(position: .center)
         } else if offset < sideInset + fullSpace * 3 + fullSpace / 2 {
             setSelected(position: .rightCenter)
-        } else if offset < UIScreen.main.bounds.width {
+        } else {
             setSelected(position: .right)
         }
-
     }
 
     @objc private func tap(_ gesture: UITapGestureRecognizer) {
@@ -114,7 +113,7 @@ class RadiusSlider: UIView {
         case.began:
             panGestureStartingX = gesture.view?.frame.minX ?? 0
         case .changed:
-            sliderBallXConstraint?.update(offset: panGestureStartingX + translation.x)
+            sliderBallXConstraint?.update(offset: max(min(UIScreen.main.bounds.width, panGestureStartingX + translation.x), 0))
         case .ended, .cancelled, .failed:
             let adjustedVelocity = min(80, velocity.x / 20)
             let composite = panGestureStartingX + sliderBallWidth / 2 + translation.x + adjustedVelocity
@@ -208,8 +207,8 @@ class SliderView: UIView {
 class SliderBall: UIView {
     private lazy var label: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProMedium.font(with: 16)
+        label.textColor = UIColor(color: .PrimaryBlue)
+        label.font = TextStyle.heroLabel.uiFont
         return label
     }()
 
@@ -219,7 +218,7 @@ class SliderBall: UIView {
         backgroundColor = .white
         layer.cornerRadius = 18
         layer.borderWidth = 2
-        layer.borderColor = Colors.PrimaryBlue.color.cgColor
+        layer.borderColor = UIColor(color: .PrimaryBlue)?.cgColor
 
         addSubview(label)
         label.snp.makeConstraints {

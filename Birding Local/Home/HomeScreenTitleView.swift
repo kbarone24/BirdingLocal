@@ -9,14 +9,6 @@ import Foundation
 import UIKit
 
 class HomeScreenTitleView: UIView {
-    private var currentLocationLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Current Location"
-        label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProRegular.font(with: 14)
-        label.isHidden = true
-        return label
-    }()
 
     private lazy var locationView: UIView = {
         let view = UIView()
@@ -25,21 +17,21 @@ class HomeScreenTitleView: UIView {
     }()
 
     private var locationPinIcon: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "LocationPin"))
+        let view = UIImageView(image: UIImage(asset: .LocationPin))
         view.isHidden = true
         return view
     }()
 
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProBold.font(with: 14)
+        label.textColor = UIColor(color: .AccentWhite)
+        label.font = TextStyle.subheader.uiFont
         return label
     }()
 
     private lazy var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.AccentWhite.color
+        view.backgroundColor = UIColor(color: .AccentWhite)
         view.layer.cornerRadius = 3.5 / 2
         view.isHidden = true
         return view
@@ -47,8 +39,19 @@ class HomeScreenTitleView: UIView {
 
     private lazy var radiusLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.color
-        label.font = Fonts.SFProBold.font(with: 14)
+        label.textColor = UIColor(color: .AccentWhite)
+        label.font = TextStyle.subheader.uiFont
+        return label
+    }()
+
+    private lazy var editLocation: UILabel = {
+        let label = UILabel()
+        label.textColor = .white
+        label.font = TextStyle.label.uiFont
+        label.attributedText = NSMutableAttributedString(string: "Edit Location", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.41])
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.isHidden = true
         return label
     }()
 
@@ -56,23 +59,14 @@ class HomeScreenTitleView: UIView {
         super.init(frame: frame)
         translatesAutoresizingMaskIntoConstraints = false
 
-        addSubview(currentLocationLabel)
-        currentLocationLabel.snp.makeConstraints {
-            $0.top.equalToSuperview()
-            $0.bottom.equalTo(self.snp.centerY).offset(-2)
-            $0.centerX.equalToSuperview()
-        }
-
         addSubview(locationView)
         locationView.snp.makeConstraints {
-            $0.top.equalTo(self.snp.centerY).offset(2)
-            $0.centerX.equalToSuperview()
-            $0.bottom.equalToSuperview()
+            $0.top.centerX.equalToSuperview()
         }
 
         locationView.addSubview(locationPinIcon)
         locationPinIcon.snp.makeConstraints {
-            $0.leading.centerY.equalToSuperview()
+            $0.leading.top.bottom.equalToSuperview()
         }
 
         locationView.addSubview(cityLabel)
@@ -93,16 +87,26 @@ class HomeScreenTitleView: UIView {
             $0.leading.equalTo(separatorView.snp.trailing).offset(5)
             $0.trailing.centerY.equalToSuperview()
         }
+
+        addSubview(editLocation)
+        editLocation.snp.makeConstraints {
+            $0.top.equalTo(locationView.snp.bottom).offset(4)
+            $0.centerX.equalToSuperview()
+            $0.bottom.equalToSuperview()
+        }
     }
 
     func configure(city: String, radius: Double) {
-        cityLabel.text = city
-        radiusLabel.text = "\(radius) mile radius"
+        let attributes = [NSAttributedString.Key.kern: -0.41]
+        cityLabel.attributedText = NSAttributedString(string: city, attributes: attributes)
+        let radiusText = radius == 0 ? "" : "\(Int(radius)) mile radius"
+        radiusLabel.attributedText = NSAttributedString(string: radiusText, attributes: attributes)
 
-        currentLocationLabel.isHidden = city.isEmpty || radius == 0
+        cityLabel.isHidden = city.isEmpty
         radiusLabel.isHidden = city.isEmpty || radius == 0
         separatorView.isHidden = city.isEmpty || radius == 0
-        locationPinIcon.isHidden = city.isEmpty
+        locationPinIcon.isHidden = city.isEmpty || radius == 0
+        editLocation.isHidden = city.isEmpty
     }
 
     required init?(coder: NSCoder) {

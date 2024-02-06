@@ -13,16 +13,16 @@ class SearchResultCell: UITableViewCell {
 
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProMedium.font(with: 14)
+        label.textColor = UIColor(color: .PrimaryBlue)
+        label.font = TextStyle.label.uiFont
         label.lineBreakMode = .byTruncatingTail
         return label
     }()
 
     private lazy var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentBlue.color
-        label.font = Fonts.SFProMedium.font(with: 12.5)
+        label.textColor = UIColor(color: .AccentBlue)
+        label.font = TextStyle.sublabel.uiFont
         label.lineBreakMode = .byTruncatingTail
         return label
     }()

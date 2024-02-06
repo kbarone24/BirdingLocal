@@ -13,7 +13,7 @@ import SDWebImage
 class HomeScreenCell: UITableViewCell {
     private lazy var contentArea: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.AccentWhite.color
+        view.backgroundColor = UIColor(color: .AccentWhite)
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 16
         return view
@@ -27,8 +27,8 @@ class HomeScreenCell: UITableViewCell {
 
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProBold.font(with: 18)
+        label.textColor = UIColor(color: .PrimaryBlue)
+        label.font = TextStyle.boldedHeader.uiFont
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
         return label
@@ -36,8 +36,8 @@ class HomeScreenCell: UITableViewCell {
 
     private lazy var timestampLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentGray.color
-        label.font = Fonts.SFProMedium.font(with: 14)
+        label.textColor = UIColor(color: .AccentGray)
+        label.font = TextStyle.label.uiFont
         return label
     }()
 
@@ -51,7 +51,7 @@ class HomeScreenCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        backgroundColor = Colors.PrimaryBlue.color
+        backgroundColor = .clear
 
         contentView.addSubview(contentArea)
         contentArea.snp.makeConstraints {
@@ -63,7 +63,7 @@ class HomeScreenCell: UITableViewCell {
         contentView.addSubview(birdImage)
         birdImage.snp.makeConstraints {
             // adjust when adding play button
-            $0.trailing.equalTo(-16)
+            $0.trailing.equalTo(-24)
             $0.top.bottom.equalToSuperview().inset(4)
             $0.height.width.equalTo(110)
         }
@@ -92,8 +92,9 @@ class HomeScreenCell: UITableViewCell {
     }
 
     func configure(sighting: BirdSighting) {
-        nameLabel.text = sighting.comName
-        timestampLabel.text = sighting.obsDt
+        let attributes = [NSAttributedString.Key.kern: -0.45]
+        nameLabel.attributedText = NSAttributedString(string: sighting.commonName, attributes: attributes)
+        timestampLabel.attributedText = NSAttributedString(string: sighting.timestamp, attributes: attributes)
 
         //TODO: format timestamp
 
@@ -106,7 +107,7 @@ class HomeScreenCell: UITableViewCell {
                 context: [.imageTransformer: transformer]
             )
         } else {
-            birdImage.image = UIImage(named: "DefaultBird")
+            birdImage.image = UIImage(asset: .DefaultBird)
         }
     }
 

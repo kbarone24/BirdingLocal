@@ -42,13 +42,6 @@ class LocationEditorViewModel {
     }
 
     func bind(to input: Input) -> Output {
-        let inputItems = Publishers.CombineLatest3(
-            input.location,
-            input.city,
-            input.radius
-        )
-
-        let combinedInput = inputItems
         let locationPublisher = input.location
             .map { location in
                 self.cachedLocation = location

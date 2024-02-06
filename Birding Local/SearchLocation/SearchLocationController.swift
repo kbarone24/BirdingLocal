@@ -86,7 +86,7 @@ class SearchLocationController: UIViewController {
 
     private lazy var backArrow: UIButton = {
         let button = UIButton(withInsets: NSDirectionalEdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5))
-        button.setImage(UIImage(named: "BackArrow"), for: .normal)
+        button.setImage(UIImage(asset: .BackArrow), for: .normal)
         button.addTarget(self, action: #selector(backTap), for: .touchUpInside)
         return button
     }()
@@ -94,33 +94,33 @@ class SearchLocationController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Search Location"
-        label.textColor = Colors.PrimaryBlue.color
-        label.font = Fonts.SFProBold.font(with: 20)
+        label.textColor = UIColor(color: .PrimaryBlue)
+        label.font = TextStyle.boldedHeader.uiFont
         return label
     }()
 
     private lazy var separatorLine: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.PrimaryGray.color.withAlphaComponent(0.25)
+        view.backgroundColor = UIColor(color: .PrimaryGray)?.withAlphaComponent(0.25)
         return view
     }()
 
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.barStyle = .default
-        searchBar.tintColor = Colors.PrimaryGray.color
+        searchBar.tintColor = UIColor(color: .PrimaryGray)
         searchBar.barTintColor = .white
-        searchBar.searchTextField.textColor = Colors.PrimaryBlue.color
+        searchBar.searchTextField.textColor = UIColor(color: .PrimaryBlue)
         searchBar.searchTextField.backgroundColor = .white
         searchBar.backgroundImage = UIImage()
         searchBar.layer.shadowOpacity = 0
-        searchBar.layer.borderColor = Colors.PrimaryGray.color.withAlphaComponent(0.25).cgColor
+        searchBar.layer.borderColor = UIColor(color: .PrimaryGray)?.withAlphaComponent(0.25).cgColor
         searchBar.layer.borderWidth = 1
         searchBar.layer.cornerRadius = 4
         searchBar.returnKeyType = .done
         searchBar.delegate = self
-        searchBar.setMagnifyingGlassColorTo(color: Colors.PrimaryGray.color)
-        searchBar.setClearButtonColorTo(color: Colors.PrimaryGray.color)
+        searchBar.setMagnifyingGlassColorTo(color: UIColor(color: .PrimaryGray) ?? .gray)
+        searchBar.setClearButtonColorTo(color: UIColor(color: .PrimaryGray) ?? .gray)
         return searchBar
     }()
 

@@ -7,15 +7,21 @@
 
 import Foundation
 import CoreLocation
+import SDWebImage
+import WidgetKit
 
 protocol EBirdServiceProtocol {
-    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting]) async -> [BirdSighting]
+    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting], widgetFetch: Bool) async -> [BirdSighting]
 }
 
 final class EBirdService: EBirdServiceProtocol {
-    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting]) async -> [BirdSighting] {
+    let imageManager = SDWebImageManager()
+
+    func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting], widgetFetch: Bool) async -> [BirdSighting] {
         await withUnsafeContinuation { continuation in
             Task(priority: .high) {
+                if !widgetFetch { saveToAppGroup(location: location, radius: radius) }
+
                 let latitude = location.coordinate.latitude
                 let longitude = location.coordinate.longitude
                 var daysBack = 4
@@ -30,7 +36,7 @@ final class EBirdService: EBirdServiceProtocol {
                 )
 
                 // go further back in time to fetch enough sightings to fill page
-                while sightings.count < 8, daysBack < 128 {
+                while sightings.count < min(maxResults, 8), daysBack < 128 {
                     daysBack *= 2
 
                     let additionalSightings = await runSightingsFetch(
@@ -45,9 +51,10 @@ final class EBirdService: EBirdServiceProtocol {
                 }
 
                 for i in 0..<sightings.count {
-                    let imageInfo = await fetchBirdImageInfo(for: sightings[i])
+                    let imageInfo = await fetchBirdImageInfo(for: sightings[i], fetchImage: widgetFetch)
                     sightings[i].imageURL = imageInfo.imageURL
                     sightings[i].audioURL = imageInfo.audioURL
+                    sightings[i].imageData = imageInfo.imageData
                 }
                 continuation.resume(returning: sightings)
             }
@@ -89,7 +96,7 @@ final class EBirdService: EBirdServiceProtocol {
         }
     }
 
-    private func fetchBirdImageInfo(for birdSighting: BirdSighting) async -> (imageURL: String?, audioURL: String?) {
+    private func fetchBirdImageInfo(for birdSighting: BirdSighting, fetchImage: Bool) async -> (imageURL: String?, audioURL: String?, imageData: Data?) {
         await withUnsafeContinuation { continuation in
             Task(priority: .high) {
                 // MARK: Wikipedia API URL Construction
@@ -104,12 +111,12 @@ final class EBirdService: EBirdServiceProtocol {
                     //    URLQueryItem(name: "rvprop", value: "content"),
                     // ensure URL-encoding for common name value
                     URLQueryItem(name: "titles", value: commonName),
-                    URLQueryItem(name: "pithumbsize", value: "\(500)")
+                    URLQueryItem(name: "pithumbsize", value: "\(200)")
                 ]
 
                 guard let url = urlComponents?.url else {
                     print("Invalid URL")
-                    continuation.resume(returning: (nil, nil))
+                    continuation.resume(returning: (nil, nil, nil))
                     return
                 }
 
@@ -117,7 +124,7 @@ final class EBirdService: EBirdServiceProtocol {
                 URLSession.shared.dataTask(with: url) { (data, response, error) in
                     guard let data, error == nil else {
                         print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-                        continuation.resume(returning: (nil, nil))
+                        continuation.resume(returning: (nil, nil, nil))
                         return
                     }
 
@@ -129,24 +136,32 @@ final class EBirdService: EBirdServiceProtocol {
                            let firstPageID = pages.keys.first,
                            let page = pages[firstPageID] as? [String: Any],
                            let thumbnail = page["thumbnail"] as? [String: Any],
-                           let imageUrl = thumbnail["source"] as? String {
+                           let imageURL = thumbnail["source"] as? String {
 
-                            continuation.resume(returning: (imageUrl, nil))
+                            // MARK: Fetch images for widget
+                            if fetchImage {
+                                self.imageManager.loadImage(with: URL(string: imageURL), progress: nil) { image, data, error, _, _, _ in
+                                    let data = data ?? image?.sd_imageData() 
+                                    continuation.resume(returning: (imageURL, nil, data))
+                                }
+                            } else {
+                                continuation.resume(returning: (imageURL, nil, nil))
+                            }
+
                         } else {
                             print("Failed to extract image URL from the response.")
-                            continuation.resume(returning: (nil, nil))
+                            continuation.resume(returning: (nil, nil, nil ))
                         }
                         //TODO: extract audio file URL
 
                     } catch {
                         print("Error decoding JSON: \(error)")
-                        continuation.resume(returning: (nil, nil))
+                        continuation.resume(returning: (nil, nil, nil))
                     }
                 }.resume()
             }
         }
     }
-
 
     private func getURLString(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, daysBack: Int) -> String {
         var keys: NSDictionary?
@@ -159,5 +174,15 @@ final class EBirdService: EBirdServiceProtocol {
 
         let baseURL = "https://api.ebird.org/v2/data/obs/geo/recent"
         return "\(baseURL)?lat=\(latitude)&lng=\(longitude)&maxResults=\(maxResults)&dist=\(radius)&back=\(daysBack)&key=\(apiKey)"
+    }
+
+    private func saveToAppGroup(location: CLLocation, radius: Double) {
+        // save recent location/radius data to App Group for use in widget
+        let sharedUserDefaults = UserDefaults(suiteName: AppGroupNames.defaultGroup.rawValue)
+        sharedUserDefaults?.set(location.coordinate.latitude, forKey: "latitude")
+        sharedUserDefaults?.set(location.coordinate.longitude, forKey: "longitude")
+        sharedUserDefaults?.set(radius, forKey: "radius")
+        sharedUserDefaults?.synchronize()
+        WidgetCenter.shared.reloadAllTimelines()
     }
 }
