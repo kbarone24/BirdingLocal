@@ -49,7 +49,8 @@ struct Provider: TimelineProvider {
 
         Task {
             let sightings = await ebirdservice.fetchSightings(for: currentLocation, radius: currentRadius, maxResults: maxResults, cachedSightings: [], widgetFetch: true)
-            let entry = SightingEntry(date: currentDate, city: city, sightingData: sightings)
+            let entrySightings = Array(sightings.prefix(maxResults))
+            let entry = SightingEntry(date: currentDate, city: city, sightingData: entrySightings)
             let timeline = Timeline(entries: [entry], policy: .after(refreshDate))
             completion(timeline)
         }
@@ -67,11 +68,11 @@ struct Bird_WidgetEntryView: View {
 
     var body: some View {
         ZStack {
-            Color("WidgetBackground").ignoresSafeArea()
+            Color(color: .WidgetBackground).ignoresSafeArea()
             VStack(alignment: .leading, spacing: 8) {
                 Text(entry.city)
-                    .font(Fonts.SFProRegular.font(with: 9))
-                    .foregroundColor(Colors.PrimaryGray.color)
+                    .font(TextStyle.widgetHeader.font)
+                    .foregroundColor(Color(color: .PrimaryGray))
                 LazyVGrid(
                     columns: [GridItem(.flexible()), GridItem(.flexible())],
                     alignment: .leading,
@@ -84,10 +85,10 @@ struct Bird_WidgetEntryView: View {
                     }
                 }
             }
-            .padding(EdgeInsets(top: 8, leading: 8, bottom: 0, trailing: 8))
+            .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
             .background(Color.clear)
         }
-        .widgetBackground(Color.white.opacity(0.75))
+        .widgetBackground(Color(color: .WidgetBackground) ?? .gray)
     }
 }
 
@@ -108,7 +109,7 @@ struct CardView: View {
     var body: some View {
         HStack(alignment: .center) {
             ZStack {
-                Color.gray
+                Color(color: .AccentGray).opacity(0.3)
                     .frame(width: 50, height: 50)
                     .cornerRadius(4)
                 if let imageData, let uiImage = UIImage(data: imageData) {
@@ -116,19 +117,20 @@ struct CardView: View {
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50, height: 50)
+                        .cornerRadius(4)
+
                 } else {
-                    Image(uiImage: UIImage(named: "DefaultBird") ?? UIImage())
+                    Image(uiImage: UIImage(asset: .DefaultBird) ?? UIImage())
                         .resizable()
                         .aspectRatio(contentMode: .fit)
                         .frame(width: 50, height: 50)
+                        .cornerRadius(4)
                 }
             }
 
             Text(name)
-                .font(Fonts.SFProMedium.font(with: 11))
+                .font(TextStyle.widgetLabel.font)
                 .foregroundColor(.black)
-                .padding(.leading, 8)
-                .padding(.trailing, 8)
         }
     }
 }
@@ -139,7 +141,7 @@ struct Bird_Widget: Widget {
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider()) { entry in
             Bird_WidgetEntryView(entry: entry)
-                .background(Color.clear)
+                .background(.clear)
         }
         .supportedFamilies([.systemMedium, .systemLarge])
         .configurationDisplayName("Bird Widget🦤")

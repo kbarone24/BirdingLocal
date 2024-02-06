@@ -28,15 +28,14 @@ class HomeScreenController: UIViewController {
     let fetchInput = PassthroughSubject<(currentLocation: CLLocation?, radius: Double?, useStartIndex: Bool), Never>()
     let city = PassthroughSubject<(passedLocation: CLLocation?, radius: Double?), Never>()
 
-//    private var passedLocation: CLLocation?
-//    private var passedRadius: Double?
-
     private lazy var viewModel = HomeScreenViewModel(serviceContainer: ServiceContainer.shared)
     private lazy var subscriptions = Set<AnyCancellable>()
 
     private lazy var titleView = HomeScreenTitleView()
 
     private lazy var activityFooterView = ActivityFooterView()
+
+    private lazy var backgroundView = UIImageView(image: UIImage(asset: .CircleBackground))
 
     private lazy var activityIndicator: UIActivityIndicatorView = {
         let view = UIActivityIndicatorView()
@@ -49,7 +48,7 @@ class HomeScreenController: UIViewController {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.delegate = self
         tableView.rowHeight = 118
-        tableView.backgroundColor = Colors.PrimaryBlue.uicolor
+        tableView.backgroundColor = .clear
         tableView.clipsToBounds = true
         tableView.separatorStyle = .none
         tableView.allowsSelection = false
@@ -94,8 +93,12 @@ class HomeScreenController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: gradient background
-        view.backgroundColor = Colors.PrimaryBlue.uicolor
+        view.backgroundColor = .clear
+
+        view.addSubview(backgroundView)
+        backgroundView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
 
         checkLocationAuth()
         registerNotifications()
@@ -167,12 +170,6 @@ class HomeScreenController: UIViewController {
             fetchInput.send((nil, nil, false))
             city.send((passedLocation: nil, radius: nil))
         }
-
-        let sharedUserDefaults = UserDefaults(suiteName: AppGroupNames.defaultGroup.rawValue)
-        let latitude = sharedUserDefaults?.object(forKey: "latitude") as? Double ?? 0
-        let longitude = sharedUserDefaults?.object(forKey: "longitude") as? Double ?? 0
-        let currentRadius = sharedUserDefaults?.object(forKey: "radius") as? Double ?? 1
-        let city = sharedUserDefaults?.object(forKey: "city") as? String ?? ""
     }
 
     private func applySnapshot(snapshot: Snapshot) {
@@ -188,6 +185,7 @@ class HomeScreenController: UIViewController {
 
     private func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(gotInitialLocation), name: NSNotification.Name(NotificationNames.GotInitialLocation.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(deniedLocationAccess), name: NSNotification.Name(NotificationNames.DeniedLocationAccess.rawValue), object: nil)
     }
 
     private func checkLocationAuth() {
@@ -199,6 +197,11 @@ class HomeScreenController: UIViewController {
         // view model -> fetch birds
         fetchInput.send((currentLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius, useStartIndex: false))
         city.send((passedLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius))
+    }
+
+    @objc func deniedLocationAccess() {
+        fetchInput.send((currentLocation: CLLocation(), radius: 0.0, useStartIndex: false))
+        city.send((passedLocation: CLLocation(), radius: 0.0))
     }
 
     @objc func forceRefresh() {
@@ -222,7 +225,7 @@ class HomeScreenController: UIViewController {
 
 extension HomeScreenController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        54
+        return 45
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -251,7 +254,7 @@ extension HomeScreenController: LocationEditorDelegate {
         refresh.send(false)
         city.send((passedLocation: location, radius: radius))
 
-        isRefreshingPagination = true
         fetchInput.send((currentLocation: location, radius: radius, useStartIndex: false))
+        activityIndicator.startAnimating()
     }
 }

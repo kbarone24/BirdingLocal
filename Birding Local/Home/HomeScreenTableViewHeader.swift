@@ -11,8 +11,8 @@ import UIKit
 class HomeScreenTableViewHeader: UITableViewHeaderFooterView {
     private var headerLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.uicolor
-        label.font = Fonts.SFProSemibold.uifont(with: 25)
+        label.textColor = UIColor(color: .AccentWhite)
+        label.font = TextStyle.heroHeader.uiFont
         return label
     }()
 
@@ -27,7 +27,7 @@ class HomeScreenTableViewHeader: UITableViewHeaderFooterView {
     }
 
     func configure(title: String) {
-        headerLabel.text = title
+        headerLabel.attributedText = NSMutableAttributedString(string: "Nearby Sightings", attributes: [NSAttributedString.Key.kern: -0.41]) 
     }
 
     required init?(coder: NSCoder) {

@@ -17,21 +17,21 @@ class HomeScreenTitleView: UIView {
     }()
 
     private var locationPinIcon: UIImageView = {
-        let view = UIImageView(image: UIImage(named: "LocationPin"))
+        let view = UIImageView(image: UIImage(asset: .LocationPin))
         view.isHidden = true
         return view
     }()
 
     private lazy var cityLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.uicolor
-        label.font = Fonts.SFProBold.uifont(with: 14)
+        label.textColor = UIColor(color: .AccentWhite)
+        label.font = TextStyle.subheader.uiFont
         return label
     }()
 
     private lazy var separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = Colors.AccentWhite.uicolor
+        view.backgroundColor = UIColor(color: .AccentWhite)
         view.layer.cornerRadius = 3.5 / 2
         view.isHidden = true
         return view
@@ -39,16 +39,19 @@ class HomeScreenTitleView: UIView {
 
     private lazy var radiusLabel: UILabel = {
         let label = UILabel()
-        label.textColor = Colors.AccentWhite.uicolor
-        label.font = Fonts.SFProBold.uifont(with: 14)
+        label.textColor = UIColor(color: .AccentWhite)
+        label.font = TextStyle.subheader.uiFont
         return label
     }()
 
     private lazy var editLocation: UILabel = {
         let label = UILabel()
         label.textColor = .white
-        label.font = Fonts.SFProRegular.uifont(with: 14)
-        label.attributedText = NSMutableAttributedString(string: "Update Location", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.41])
+        label.font = TextStyle.label.uiFont
+        label.attributedText = NSMutableAttributedString(string: "Edit Location", attributes: [NSAttributedString.Key.underlineStyle: NSUnderlineStyle.single.rawValue, NSAttributedString.Key.kern: -0.41])
+        label.setContentHuggingPriority(.required, for: .vertical)
+        label.setContentCompressionResistancePriority(.required, for: .vertical)
+        label.isHidden = true
         return label
     }()
 
@@ -63,7 +66,7 @@ class HomeScreenTitleView: UIView {
 
         locationView.addSubview(locationPinIcon)
         locationPinIcon.snp.makeConstraints {
-            $0.leading.centerY.equalToSuperview()
+            $0.leading.top.bottom.equalToSuperview()
         }
 
         locationView.addSubview(cityLabel)
@@ -87,7 +90,7 @@ class HomeScreenTitleView: UIView {
 
         addSubview(editLocation)
         editLocation.snp.makeConstraints {
-            $0.top.equalTo(8)
+            $0.top.equalTo(locationView.snp.bottom).offset(4)
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -96,11 +99,14 @@ class HomeScreenTitleView: UIView {
     func configure(city: String, radius: Double) {
         let attributes = [NSAttributedString.Key.kern: -0.41]
         cityLabel.attributedText = NSAttributedString(string: city, attributes: attributes)
-        radiusLabel.attributedText = NSAttributedString(string: "\(Int(radius)) mile radius", attributes: attributes)
+        let radiusText = radius == 0 ? "" : "\(Int(radius)) mile radius"
+        radiusLabel.attributedText = NSAttributedString(string: radiusText, attributes: attributes)
 
+        cityLabel.isHidden = city.isEmpty
         radiusLabel.isHidden = city.isEmpty || radius == 0
         separatorView.isHidden = city.isEmpty || radius == 0
         locationPinIcon.isHidden = city.isEmpty || radius == 0
+        editLocation.isHidden = city.isEmpty
     }
 
     required init?(coder: NSCoder) {

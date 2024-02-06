@@ -40,7 +40,7 @@ final class LocationService: NSObject, LocationServiceProtocol {
             return
 
         case .denied:
-            print("denied")
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: NotificationNames.DeniedLocationAccess.rawValue)))
 
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
@@ -104,7 +104,14 @@ final class LocationService: NSObject, LocationServiceProtocol {
 
 extension LocationService: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        manager.startUpdatingLocation()
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            manager.startUpdatingLocation()
+        case .denied, .restricted:
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: NotificationNames.DeniedLocationAccess.rawValue)))
+        default:
+            return
+        }
     }
 
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {

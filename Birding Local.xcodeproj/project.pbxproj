@@ -9,6 +9,13 @@
 /* Begin PBXBuildFile section */
 		8C25AC0E2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */; };
 		8C25AC0F2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */; };
+		8C25AC112B717FAB00E660E0 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC102B717FAB00E660E0 /* UIColorExtension.swift */; };
+		8C25AC132B717FED00E660E0 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC122B717FED00E660E0 /* CustomColor.swift */; };
+		8C25AC142B717FED00E660E0 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC122B717FED00E660E0 /* CustomColor.swift */; };
+		8C25AC162B71801E00E660E0 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC152B71801E00E660E0 /* ColorExtension.swift */; };
+		8C25AC172B71801E00E660E0 /* ColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC152B71801E00E660E0 /* ColorExtension.swift */; };
+		8C25AC192B7189A300E660E0 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC182B7189A300E660E0 /* CustomFont.swift */; };
+		8C25AC1A2B7189A300E660E0 /* CustomFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C25AC182B7189A300E660E0 /* CustomFont.swift */; };
 		8C69758B2ABB521600D5F3B5 /* EBirdService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758A2ABB521600D5F3B5 /* EBirdService.swift */; };
 		8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758C2ABB539400D5F3B5 /* LocationService.swift */; };
 		8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */; };
@@ -97,6 +104,10 @@
 
 /* Begin PBXFileReference section */
 		8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SightingGenerator.swift; sourceTree = "<group>"; };
+		8C25AC102B717FAB00E660E0 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		8C25AC122B717FED00E660E0 /* CustomColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
+		8C25AC152B71801E00E660E0 /* ColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtension.swift; sourceTree = "<group>"; };
+		8C25AC182B7189A300E660E0 /* CustomFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFont.swift; sourceTree = "<group>"; };
 		8C69758A2ABB521600D5F3B5 /* EBirdService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBirdService.swift; sourceTree = "<group>"; };
 		8C69758C2ABB539400D5F3B5 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceContainer.swift; sourceTree = "<group>"; };
@@ -223,6 +234,8 @@
 				8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */,
 				8CB87A972B3F635800E9B5E8 /* HapticGenerator.swift */,
 				8C25AC0D2B6C1C4300E660E0 /* SightingGenerator.swift */,
+				8C25AC122B717FED00E660E0 /* CustomColor.swift */,
+				8C25AC182B7189A300E660E0 /* CustomFont.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -247,6 +260,8 @@
 				8C69762E2ADC86A100D5F3B5 /* DoubleExtension.swift */,
 				8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */,
 				8CB87A9B2B44C82E00E9B5E8 /* UISearchBarExtension.swift */,
+				8C25AC102B717FAB00E660E0 /* UIColorExtension.swift */,
+				8C25AC152B71801E00E660E0 /* ColorExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -469,8 +484,11 @@
 				8CB87B682B5A12B500E9B5E8 /* Bird_Widget.swift in Sources */,
 				8CB87B762B5B0AAA00E9B5E8 /* LocationService.swift in Sources */,
 				8CB87B742B5B0AA500E9B5E8 /* BirdSighting.swift in Sources */,
+				8C25AC1A2B7189A300E660E0 /* CustomFont.swift in Sources */,
 				8C25AC0F2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */,
 				8CB87B662B5A12B500E9B5E8 /* Bird_WidgetBundle.swift in Sources */,
+				8C25AC142B717FED00E660E0 /* CustomColor.swift in Sources */,
+				8C25AC172B71801E00E660E0 /* ColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -483,9 +501,11 @@
 				8CB87A982B3F635800E9B5E8 /* HapticGenerator.swift in Sources */,
 				8C6976402AE996FE00D5F3B5 /* SearchResult.swift in Sources */,
 				8CC9633F2B142B7F005B1375 /* SearchLocationViewModel.swift in Sources */,
+				8C25AC132B717FED00E660E0 /* CustomColor.swift in Sources */,
 				8C6976312ADCD4B100D5F3B5 /* ActivityFooterView.swift in Sources */,
 				8C6975982ABB841000D5F3B5 /* BirdSighting.swift in Sources */,
 				8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */,
+				8C25AC162B71801E00E660E0 /* ColorExtension.swift in Sources */,
 				8C69762B2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift in Sources */,
 				8CB87A9C2B44C82E00E9B5E8 /* UISearchBarExtension.swift in Sources */,
 				8C6976232ADB1B3100D5F3B5 /* ArrayExtension.swift in Sources */,
@@ -495,6 +515,8 @@
 				8C25AC0E2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */,
 				8CB87A922B3CD43A00E9B5E8 /* MapsService.swift in Sources */,
 				8C6976272ADB45CC00D5F3B5 /* HomeScreenTitleView.swift in Sources */,
+				8C25AC192B7189A300E660E0 /* CustomFont.swift in Sources */,
+				8C25AC112B717FAB00E660E0 /* UIColorExtension.swift in Sources */,
 				8C69762F2ADC86A100D5F3B5 /* DoubleExtension.swift in Sources */,
 				8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */,
 				8C6975FC2AD89B7900D5F3B5 /* CommonNames.swift in Sources */,
@@ -725,7 +747,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
@@ -745,9 +767,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kenny-Barone.Birding-Local";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -759,7 +785,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 4;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
@@ -779,9 +805,13 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "Kenny-Barone.Birding-Local";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

@@ -61,6 +61,8 @@ class HomeScreenViewModel {
             .receive(on: DispatchQueue.main)
             .map { (sightings) in
                 var snapshot = Snapshot()
+                guard !sightings.isEmpty else { return snapshot }
+                
                 snapshot.appendSections([.main(radius: self.cachedRadius, city: self.cachedCity ?? "")])
                 _ = sightings.map {
                     snapshot.appendItems([.item(sighting: $0)])
@@ -89,6 +91,8 @@ class HomeScreenViewModel {
             .receive(on: DispatchQueue.main)
             .map { (sightings) in
                 var snapshot = Snapshot()
+                guard !sightings.isEmpty else { return snapshot }
+
                 snapshot.appendSections([.main(radius: self.cachedRadius, city: self.cachedCity ?? "")])
                 _ = sightings.map {
                     snapshot.appendItems([.item(sighting: $0)])
@@ -109,9 +113,10 @@ class HomeScreenViewModel {
 
         let snapshot = request
             .receive(on: DispatchQueue.main)
-            .map { city in
+            .map { (city, radius) in
                 var snapshot = Snapshot()
-                snapshot.appendSections([.main(radius: self.cachedRadius, city: self.cachedCity ?? "")])
+                let city = city.isEmpty ? "Current location unavailable  " : city
+                snapshot.appendSections([.main(radius: radius, city: city)])
                 _ = self.cachedSightings.map {
                     snapshot.appendItems([.item(sighting: $0)])
                 }
@@ -135,10 +140,11 @@ class HomeScreenViewModel {
 
                 Task {
                     let locationInfo = await self.locationService.getCity(passedLocation: passedLocation)
+                    promise(.success((city: locationInfo.city ?? "", radius: radius)))
+
                     self.cachedCity = locationInfo.city
                     self.cachedLocation = locationInfo.location
                     self.cachedRadius = radius
-                    promise(.success((city: locationInfo.city ?? "", radius: radius)))
                 }
             }
         }
