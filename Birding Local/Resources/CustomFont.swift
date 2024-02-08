@@ -62,9 +62,9 @@ extension TextStyle {
             return CustomFont(font: .SFProBold, size: 16, style: .title2)
 
         case .widgetHeader:
-            return CustomFont(font: .SFProRegular, size: 11, style: .caption1)
+            return CustomFont(font: .SFProRegular, size: 10, style: .body)
         case .widgetLabel:
-            return CustomFont(font: .SFProRegular, size: 12, style: .caption2)
+            return CustomFont(font: .SFProMedium, size: 12, style: .body)
 
         case .custom(fontName: let font, size: let size):
             return CustomFont(font: font, size: size, style: .body)
@@ -83,7 +83,7 @@ extension TextStyle {
     }
 
     var font: Font {
-        return Font(UIFont(name: customFont.font.name, size: customFont.size) ?? .systemFont(ofSize: customFont.size))
+        return Font(UIFont(name: customFont.font.name, size: customFont.size)!)
     }
 }
 
