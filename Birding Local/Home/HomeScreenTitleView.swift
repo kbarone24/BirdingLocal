@@ -99,7 +99,10 @@ class HomeScreenTitleView: UIView {
     func configure(city: String, radius: Double) {
         let attributes = [NSAttributedString.Key.kern: -0.41]
         cityLabel.attributedText = NSAttributedString(string: city, attributes: attributes)
-        let radiusText = radius == 0 ? "" : "\(Int(radius)) mile radius"
+
+        let radiusText = radius == 0 ? ""
+        : radius < 1 ? "\(radius) mile radius"
+        : "\(Int(radius)) mile radius"
         radiusLabel.attributedText = NSAttributedString(string: radiusText, attributes: attributes)
 
         cityLabel.isHidden = city.isEmpty

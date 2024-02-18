@@ -81,7 +81,7 @@ struct Bird_WidgetEntryView: View {
                     ForEach(entry.sightingData, id: \.self) { sighting in
                         CardView(imageData: sighting.imageData, name: sighting.commonName)
                             .padding(.bottom, 8)
-                            .padding(.trailing, 8)
+                            .padding(.trailing, 0)
                     }
                 }
             }
@@ -131,6 +131,8 @@ struct CardView: View {
             Text(name)
                 .font(TextStyle.widgetLabel.font)
                 .foregroundColor(.black)
+                .minimumScaleFactor(0.7)
+                .lineLimit(3)
         }
     }
 }
