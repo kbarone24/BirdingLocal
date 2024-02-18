@@ -41,10 +41,18 @@ class HomeScreenCell: UITableViewCell {
         return label
     }()
 
+    private lazy var imageBackground: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(color: .AccentGray)
+        view.layer.cornerRadius = 110 / 2
+        return view
+    }()
+
     private lazy var birdImage: UIImageView = {
         let view = UIImageView()
         view.layer.masksToBounds = true
         view.layer.cornerRadius = 110 / 2
+        view.contentMode = .scaleAspectFit
         view.backgroundColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.00)
         return view
     }()
@@ -60,12 +68,16 @@ class HomeScreenCell: UITableViewCell {
             $0.top.bottom.equalToSuperview().inset(15)
         }
 
-        contentView.addSubview(birdImage)
-        birdImage.snp.makeConstraints {
-            // adjust when adding play button
+        contentView.addSubview(imageBackground)
+        imageBackground.snp.makeConstraints {
             $0.trailing.equalTo(-24)
             $0.top.bottom.equalToSuperview().inset(4)
             $0.height.width.equalTo(110)
+        }
+
+        contentView.addSubview(birdImage)
+        birdImage.snp.makeConstraints {
+            $0.edges.equalTo(imageBackground)
         }
 
         contentArea.addSubview(nameAndTimestampContainer)
@@ -99,7 +111,7 @@ class HomeScreenCell: UITableViewCell {
         //TODO: format timestamp
 
         if let url = sighting.imageURL, url != "" {
-            let transformer = SDImageResizingTransformer(size: CGSize(width: 200, height: 200), scaleMode: .aspectFill)
+            let transformer = SDImageResizingTransformer(size: CGSize(width: 200, height: 200), scaleMode: .aspectFit)
             birdImage.sd_setImage(
                 with: URL(string: url),
                 placeholderImage: UIImage(color: .lightGray),
