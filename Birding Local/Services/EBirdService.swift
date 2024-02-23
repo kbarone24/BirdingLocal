@@ -20,7 +20,9 @@ final class EBirdService: EBirdServiceProtocol {
     func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting], widgetFetch: Bool) async -> [BirdSighting] {
         await withUnsafeContinuation { continuation in
             Task(priority: .high) {
-                if !widgetFetch { saveToAppGroup(location: location, radius: radius) }
+                if !widgetFetch {
+                    saveToAppGroup(location: location, radius: radius)
+                }
 
                 let latitude = location.coordinate.latitude
                 let longitude = location.coordinate.longitude
@@ -178,7 +180,21 @@ final class EBirdService: EBirdServiceProtocol {
 
     private func saveToAppGroup(location: CLLocation, radius: Double) {
         // save recent location/radius data to App Group for use in widget
+        guard !(location.coordinate.latitude == 0 && location.coordinate.longitude == 0) else {
+            return
+        }
+
+        // check to see if user has updated user defaults before
         let sharedUserDefaults = UserDefaults(suiteName: AppGroupNames.defaultGroup.rawValue)
+        let latitude = sharedUserDefaults?.object(forKey: "latitude") as? Double ?? 0
+        let longitude = sharedUserDefaults?.object(forKey: "longitude") as? Double ?? 0
+        if latitude == 0 && longitude == 0 {
+            // user defaults set for first time
+            NotificationCenter.default.post(name: Notification.Name(NotificationNames.SetLocationForFirstTime.rawValue), object: nil)
+        } else {
+            print("did not set")
+        }
+
         sharedUserDefaults?.set(location.coordinate.latitude, forKey: "latitude")
         sharedUserDefaults?.set(location.coordinate.longitude, forKey: "longitude")
         sharedUserDefaults?.set(radius, forKey: "radius")

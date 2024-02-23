@@ -14,6 +14,9 @@ extension UIImage {
         case DefaultBird
         case DownCarat
         case LocationPin
+        case TutorialImage0
+        case TutorialImage1
+        case TutorialImage2
     }
 
     convenience init?(asset: Asset) {
@@ -40,3 +43,20 @@ extension UIImage {
         self.init(cgImage: cgImage)
     }
 }
+
+extension UIImage {
+    static func gradientImage(bounds: CGRect, colors: [UIColor], startPoint: CGPoint, endPoint: CGPoint, locations: [NSNumber]?) -> UIImage {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = bounds
+        gradientLayer.colors = colors.map { $0.cgColor }
+        gradientLayer.startPoint = startPoint
+        gradientLayer.endPoint = endPoint
+        gradientLayer.locations = locations
+        let renderer = UIGraphicsImageRenderer(bounds: bounds)
+
+        return renderer.image { context in
+            gradientLayer.render(in: context.cgContext)
+        }
+    }
+}
+// reference: https://medium.com/academy-poa/how-to-create-a-uiprogressview-with-gradient-progress-in-swift-2d1fa7d26f24

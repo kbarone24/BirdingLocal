@@ -12,6 +12,7 @@ import SwiftUI
 enum NotificationNames: String {
     case GotInitialLocation
     case DeniedLocationAccess
+    case SetLocationForFirstTime
 }
 
 enum AppGroupNames: String {
