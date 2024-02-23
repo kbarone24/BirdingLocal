@@ -172,6 +172,10 @@ class HomeScreenController: UIViewController {
         }
     }
 
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+
     private func applySnapshot(snapshot: Snapshot) {
         datasource.apply(snapshot, animatingDifferences: false)
         // configure title view
@@ -186,6 +190,7 @@ class HomeScreenController: UIViewController {
     private func registerNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(gotInitialLocation), name: NSNotification.Name(NotificationNames.GotInitialLocation.rawValue), object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(deniedLocationAccess), name: NSNotification.Name(NotificationNames.DeniedLocationAccess.rawValue), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setLocationForFirstTime), name: NSNotification.Name(NotificationNames.SetLocationForFirstTime.rawValue), object: nil)
     }
 
     private func checkLocationAuth() {
@@ -197,11 +202,19 @@ class HomeScreenController: UIViewController {
         // view model -> fetch birds
         fetchInput.send((currentLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius, useStartIndex: false))
         city.send((passedLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius))
+        print("got initial location")
     }
 
     @objc func deniedLocationAccess() {
         fetchInput.send((currentLocation: CLLocation(), radius: 0.0, useStartIndex: false))
         city.send((passedLocation: CLLocation(), radius: 0.0))
+    }
+
+    @objc func setLocationForFirstTime() {
+        DispatchQueue.main.async {
+            let vc = TutorialPageViewController()
+            self.present(vc, animated: true)
+        }
     }
 
     @objc func forceRefresh() {
