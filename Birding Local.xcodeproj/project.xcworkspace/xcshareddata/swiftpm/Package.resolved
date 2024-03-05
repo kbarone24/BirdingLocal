@@ -10,39 +10,12 @@
       }
     },
     {
-      "identity" : "sdwebimageswiftui",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SDWebImage/SDWebImageSwiftUI",
-      "state" : {
-        "revision" : "cd8625b7cf11a97698e180d28bb7d5d357196678",
-        "version" : "2.0.2"
-      }
-    },
-    {
       "identity" : "snapkit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/SnapKit/SnapKit",
       "state" : {
         "revision" : "f222cbdf325885926566172f6f5f06af95473158",
         "version" : "5.6.0"
-      }
-    },
-    {
-      "identity" : "swift-collections",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/apple/swift-collections",
-      "state" : {
-        "revision" : "937e904258d22af6e447a0b72c0bc67583ef64a2",
-        "version" : "1.0.4"
-      }
-    },
-    {
-      "identity" : "swift-identified-collections",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/pointfreeco/swift-identified-collections",
-      "state" : {
-        "revision" : "d1e45f3e1eee2c9193f5369fa9d70a6ddad635e8",
-        "version" : "1.0.0"
       }
     }
   ],

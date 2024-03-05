@@ -276,10 +276,6 @@ class LocationEditorController: UIViewController {
         }
     }
 
-    @objc func radiusTap() {
-        print("tap")
-    }
-
     @objc func applyTap() {
         delegate?.finishPassing(radius: viewModel.cachedRadius, location: viewModel.cachedLocation)
         close()

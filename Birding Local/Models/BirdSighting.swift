@@ -23,7 +23,7 @@ struct BirdSighting: Codable {
     // MARK: assigned variables
     var imageURL: String?  // imageURL (fetched from Wikimedia API)
     var audioURL: String?
-    var imageData: Data? // only used in widget
+    var imageData: Data? // only used for rendering widget images
 
     enum CodingKeys: String, CodingKey {
         case speciesCode
@@ -87,7 +87,6 @@ struct BirdSighting: Codable {
 
 extension BirdSighting: Hashable {
     static func == (lhs: BirdSighting, rhs: BirdSighting) -> Bool {
-        return lhs.id == rhs.id &&
         lhs.speciesCode == rhs.speciesCode &&
         lhs.timestamp == rhs.timestamp &&
         lhs.lat == rhs.lat &&
@@ -95,7 +94,6 @@ extension BirdSighting: Hashable {
     }
 
     func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
         hasher.combine(speciesCode)
         hasher.combine(timestamp)
         hasher.combine(lat)
