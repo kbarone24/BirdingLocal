@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 import Combine
-import IdentifiedCollections
 import CoreLocation
 
 class HomeScreenViewModel {
@@ -191,6 +190,7 @@ class HomeScreenViewModel {
                         widgetFetch: false
                     )
                     // attach to cached sightings on pagination
+
                     let allSightings = useStartIndex ?
                     (self.cachedSightings + sightings).removingDuplicates() :
                     sightings

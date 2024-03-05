@@ -18,151 +18,125 @@ final class EBirdService: EBirdServiceProtocol {
     let imageManager = SDWebImageManager()
 
     func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting], widgetFetch: Bool) async -> [BirdSighting] {
-        await withUnsafeContinuation { continuation in
-            Task(priority: .high) {
-                if !widgetFetch {
-                    saveToAppGroup(location: location, radius: radius)
-                }
-
-                let latitude = location.coordinate.latitude
-                let longitude = location.coordinate.longitude
-                var daysBack = 4
-
-                var sightings = await runSightingsFetch(
-                    latitude: latitude,
-                    longitude: longitude,
-                    radius: radius,
-                    maxResults: maxResults,
-                    daysBack: daysBack,
-                    cachedSightings: cachedSightings
-                )
-
-                // go further back in time to fetch enough sightings to fill page
-                while sightings.count < min(maxResults, 8), daysBack < 128 {
-                    daysBack *= 2
-
-                    let additionalSightings = await runSightingsFetch(
-                        latitude: latitude,
-                        longitude: longitude,
-                        radius: radius,
-                        maxResults: maxResults,
-                        daysBack: daysBack,
-                        cachedSightings: cachedSightings
-                    )
-                    sightings.append(contentsOf: additionalSightings)
-                }
-
-                for i in 0..<sightings.count {
-                    let imageInfo = await fetchBirdImageInfo(for: sightings[i], fetchImage: widgetFetch)
-                    sightings[i].imageURL = imageInfo.imageURL
-                    sightings[i].audioURL = imageInfo.audioURL
-                    sightings[i].imageData = imageInfo.imageData
-                }
-                continuation.resume(returning: sightings)
-            }
+        //TODO: separate fetches for widget and main app
+        if !widgetFetch {
+            saveToAppGroup(location: location, radius: radius)
         }
+
+        let latitude = location.coordinate.latitude
+        let longitude = location.coordinate.longitude
+        var daysBack = 30
+
+        var sightings = await runSightingsFetch(
+            latitude: latitude,
+            longitude: longitude,
+            radius: radius,
+            maxResults: maxResults,
+            daysBack: daysBack,
+            cachedSightings: cachedSightings
+        )
+
+        // Go further back in time to fetch enough sightings to fill the page
+        while sightings.count < min(maxResults, 8), daysBack < 200 {
+            daysBack *= 2
+
+            let additionalSightings = await runSightingsFetch(
+                latitude: latitude,
+                longitude: longitude,
+                radius: radius,
+                maxResults: maxResults,
+                daysBack: daysBack,
+                cachedSightings: cachedSightings
+            )
+            sightings.append(contentsOf: additionalSightings)
+        }
+
+        // Fetch bird image info
+        var updatedSightings = [BirdSighting]()
+        for sighting in sightings {
+            let imageURL = await fetchBirdImageInfo(for: sighting, fetchImage: widgetFetch)
+
+            var updatedSighting = sighting
+            updatedSighting.imageURL = imageURL
+            if widgetFetch, let imageURL {
+                updatedSighting.imageData = try? await fetchImageData(urlString: imageURL)
+            }
+            updatedSightings.append(updatedSighting)
+        }
+
+        return updatedSightings
     }
+
 
     private func runSightingsFetch(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, daysBack: Int, cachedSightings: [BirdSighting]) async -> [BirdSighting] {
-        await withUnsafeContinuation { continuation in
-            Task {
-                let urlString = getURLString(
-                    latitude: latitude,
-                    longitude: longitude,
-                    radius: radius,
-                    maxResults: maxResults,
-                    daysBack: daysBack
-                )
-                guard let url = URL(string: urlString) else {
-                    continuation.resume(returning: [])
-                    return
-                }
+        let urlString = getURLString(
+            latitude: latitude,
+            longitude: longitude,
+            radius: radius,
+            maxResults: maxResults,
+            daysBack: daysBack
+        )
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL string")
+            return []
+        }
 
-                let session = URLSession.shared
-                let (data, _) = try await session.data(from: url)
+        do {
+            let (data, response) = try await URLSession.shared.data(from: url)
+            let decoder = JSONDecoder()
+            let sightings = try decoder.decode([BirdSighting].self, from: data)
 
-                let decoder = JSONDecoder()
-                let sightings = try? decoder.decode([BirdSighting].self, from: data)
+            // Remove sightings that have already been cached
+            let finalSightings = sightings.filter { !cachedSightings.contains($0) }
+            return finalSightings
+        } catch {
+            print("Error fetching or decoding data: \(error)")
+            return []
+        }
+    }
+    private func fetchBirdImageInfo(for birdSighting: BirdSighting, fetchImage: Bool) async -> String? {
+        let baseURL = "https://en.wikipedia.org/w/api.php"
+        var urlComponents = URLComponents(string: baseURL)
+        let commonName = birdSighting.wikiFormattedCommonName()
 
-                // cant use end document / start index with EBird API so fetch everything, remove sightings that have already been cached
-                var finalSightings = [BirdSighting]()
-                if let sightings {
-                    for i in 0..<sightings.count {
-                        if !cachedSightings.contains(sightings[i]) {
-                            finalSightings.append(sightings[i])
-                        }
-                    }
-                }
-                continuation.resume(returning: finalSightings)
+        urlComponents?.queryItems = [
+            URLQueryItem(name: "action", value: "query"),
+            URLQueryItem(name: "format", value: "json"),
+            URLQueryItem(name: "prop", value: "pageimages"),
+            URLQueryItem(name: "titles", value: commonName),
+            URLQueryItem(name: "pithumbsize", value: "200")
+        ]
+
+        guard let url = urlComponents?.url else {
+            print("Invalid URL")
+            return nil
+        }
+
+        do {
+            let (data, _) = try await URLSession.shared.data(from: url)
+
+            if let jsonObject = try JSONSerialization.jsonObject(with: data) as? [String: Any],
+               let query = jsonObject["query"] as? [String: Any],
+               let pages = query["pages"] as? [String: Any],
+               let page = pages.values.first as? [String: Any],
+               let thumbnail = page["thumbnail"] as? [String: Any],
+               let imageURL = thumbnail["source"] as? String {
+
+                return imageURL
+            } else {
+                print("Failed to extract image URL from the response.")
+                return nil
             }
+        } catch {
+            print("Error fetching data or decoding JSON: \(error)")
+            return nil
         }
     }
 
-    private func fetchBirdImageInfo(for birdSighting: BirdSighting, fetchImage: Bool) async -> (imageURL: String?, audioURL: String?, imageData: Data?) {
-        await withUnsafeContinuation { continuation in
-            Task(priority: .high) {
-                // MARK: Wikipedia API URL Construction
-                let baseURL = "https://en.wikipedia.org/w/api.php"
-                var urlComponents = URLComponents(string: baseURL)
-                let commonName = birdSighting.wikiFormattedCommonName()
-
-                urlComponents?.queryItems = [
-                    URLQueryItem(name: "action", value: "query"),
-                    URLQueryItem(name: "format", value: "json"),
-                    URLQueryItem(name: "prop", value: "pageimages"), // images fetches images, revisions fetches the content of the page
-                    //    URLQueryItem(name: "rvprop", value: "content"),
-                    // ensure URL-encoding for common name value
-                    URLQueryItem(name: "titles", value: commonName),
-                    URLQueryItem(name: "pithumbsize", value: "\(200)")
-                ]
-
-                guard let url = urlComponents?.url else {
-                    print("Invalid URL")
-                    continuation.resume(returning: (nil, nil, nil))
-                    return
-                }
-
-                // MARK: Wikimedia API Request
-                URLSession.shared.dataTask(with: url) { (data, response, error) in
-                    guard let data, error == nil else {
-                        print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
-                        continuation.resume(returning: (nil, nil, nil))
-                        return
-                    }
-
-                    do {
-                        // Decode jsonString to extract the article's cover image
-                        if let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any],
-                           let query = jsonObject["query"] as? [String: Any],
-                           let pages = query["pages"] as? [String: Any],
-                           let firstPageID = pages.keys.first,
-                           let page = pages[firstPageID] as? [String: Any],
-                           let thumbnail = page["thumbnail"] as? [String: Any],
-                           let imageURL = thumbnail["source"] as? String {
-
-                            // MARK: Fetch images for widget
-                            if fetchImage {
-                                self.imageManager.loadImage(with: URL(string: imageURL), progress: nil) { image, data, error, _, _, _ in
-                                    let data = data ?? image?.sd_imageData() 
-                                    continuation.resume(returning: (imageURL, nil, data))
-                                }
-                            } else {
-                                continuation.resume(returning: (imageURL, nil, nil))
-                            }
-
-                        } else {
-                            print("Failed to extract image URL from the response.")
-                            continuation.resume(returning: (nil, nil, nil ))
-                        }
-                        //TODO: extract audio file URL
-
-                    } catch {
-                        print("Error decoding JSON: \(error)")
-                        continuation.resume(returning: (nil, nil, nil))
-                    }
-                }.resume()
-            }
-        }
+    private func fetchImageData(urlString: String) async throws -> Data? {
+        guard let url = URL(string: urlString) else { return nil }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        return data
     }
 
     private func getURLString(latitude: CLLocationDegrees, longitude: CLLocationDegrees, radius: Double, maxResults: Int, daysBack: Int) -> String {
@@ -191,8 +165,6 @@ final class EBirdService: EBirdServiceProtocol {
         if latitude == 0 && longitude == 0 {
             // user defaults set for first time
             NotificationCenter.default.post(name: Notification.Name(NotificationNames.SetLocationForFirstTime.rawValue), object: nil)
-        } else {
-            print("did not set")
         }
 
         sharedUserDefaults?.set(location.coordinate.latitude, forKey: "latitude")

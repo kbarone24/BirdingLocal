@@ -18,7 +18,6 @@ class TutorialPageViewController: UIPageViewController {
         let page1 = OnboardingPage1()
         let page2 = OnboardingPage2()
         pages = [page0, page1, page2]
-
         super.init(transitionStyle: .scroll, navigationOrientation: .horizontal)
 
         page2.delegate = self

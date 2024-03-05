@@ -20,7 +20,6 @@
 		8C69758D2ABB539400D5F3B5 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758C2ABB539400D5F3B5 /* LocationService.swift */; };
 		8C69758F2ABB55EC00D5F3B5 /* ServiceContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69758E2ABB55EC00D5F3B5 /* ServiceContainer.swift */; };
 		8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975902ABB595400D5F3B5 /* HomeScreenViewModel.swift */; };
-		8C6975942ABB5C1800D5F3B5 /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */; };
 		8C6975982ABB841000D5F3B5 /* BirdSighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975972ABB841000D5F3B5 /* BirdSighting.swift */; };
 		8C6975FA2AD89AAE00D5F3B5 /* HomeScreenCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975F92AD89AAE00D5F3B5 /* HomeScreenCell.swift */; };
 		8C6975FC2AD89B7900D5F3B5 /* CommonNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6975FB2AD89B7900D5F3B5 /* CommonNames.swift */; };
@@ -44,9 +43,7 @@
 		8C6976422AE99A8B00D5F3B5 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */; };
 		8C8D1D0F2B5B221E004C8ED5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */; };
 		8C8D1D4B2B609D81004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4A2B609D81004C8ED5 /* SDWebImage */; };
-		8C8D1D4E2B609E46004C8ED5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4D2B609E46004C8ED5 /* SDWebImageSwiftUI */; };
 		8C8D1D502B60A2C7004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */; };
-		8C8D1D522B60A2C7004C8ED5 /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D512B60A2C7004C8ED5 /* SDWebImageSwiftUI */; };
 		8C8D1D672B61960F004C8ED5 /* SF-Pro-Text-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C69762C2ADB4C5500D5F3B5 /* SF-Pro-Text-Semibold.otf */; };
 		8C8D1D682B619610004C8ED5 /* SF-Pro-Text-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976282ADB464500D5F3B5 /* SF-Pro-Text-Regular.otf */; };
 		8C8D1D692B619612004C8ED5 /* SF-Pro-Text-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8C6976002AD89C7E00D5F3B5 /* SF-Pro-Text-Bold.otf */; };
@@ -174,7 +171,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C8D1D522B60A2C7004C8ED5 /* SDWebImageSwiftUI in Frameworks */,
 				8C8D1D502B60A2C7004C8ED5 /* SDWebImage in Frameworks */,
 				8CB87B632B5A12B500E9B5E8 /* SwiftUI.framework in Frameworks */,
 				8CB87B612B5A12B500E9B5E8 /* WidgetKit.framework in Frameworks */,
@@ -185,8 +181,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8C8D1D4E2B609E46004C8ED5 /* SDWebImageSwiftUI in Frameworks */,
-				8C6975942ABB5C1800D5F3B5 /* IdentifiedCollections in Frameworks */,
 				8C8D1D4B2B609D81004C8ED5 /* SDWebImage in Frameworks */,
 				8C69761B2AD8A7EE00D5F3B5 /* SnapKit in Frameworks */,
 			);
@@ -390,7 +384,6 @@
 			name = "Bird WidgetExtension";
 			packageProductDependencies = (
 				8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */,
-				8C8D1D512B60A2C7004C8ED5 /* SDWebImageSwiftUI */,
 			);
 			productName = "Bird WidgetExtension";
 			productReference = 8CB87B5F2B5A12B500E9B5E8 /* Bird WidgetExtension.appex */;
@@ -412,10 +405,8 @@
 			);
 			name = "Birding Local";
 			packageProductDependencies = (
-				8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */,
 				8C69761A2AD8A7EE00D5F3B5 /* SnapKit */,
 				8C8D1D4A2B609D81004C8ED5 /* SDWebImage */,
-				8C8D1D4D2B609E46004C8ED5 /* SDWebImageSwiftUI */,
 			);
 			productName = "Birding Local";
 			productReference = 8CE9F4B52AB0D17F006DCD54 /* Birding Local.app */;
@@ -449,10 +440,8 @@
 			);
 			mainGroup = 8CE9F4AC2AB0D17F006DCD54;
 			packageReferences = (
-				8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */,
 				8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				8C8D1D492B609D81004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImage" */,
-				8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 8CE9F4B62AB0D17F006DCD54 /* Products */;
 			projectDirPath = "";
@@ -775,7 +764,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
@@ -813,7 +802,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 0;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
@@ -876,14 +865,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-identified-collections";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
 		8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -900,22 +881,9 @@
 				minimumVersion = 5.18.0;
 			};
 		};
-		8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8C6975932ABB5C1800D5F3B5 /* IdentifiedCollections */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C6975922ABB5C1700D5F3B5 /* XCRemoteSwiftPackageReference "swift-identified-collections" */;
-			productName = IdentifiedCollections;
-		};
 		8C69761A2AD8A7EE00D5F3B5 /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8C6976192AD8A7ED00D5F3B5 /* XCRemoteSwiftPackageReference "SnapKit" */;
@@ -926,20 +894,10 @@
 			package = 8C8D1D492B609D81004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
 		};
-		8C8D1D4D2B609E46004C8ED5 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
-		};
 		8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 8C8D1D492B609D81004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
-		};
-		8C8D1D512B60A2C7004C8ED5 /* SDWebImageSwiftUI */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 8C8D1D4C2B609E46004C8ED5 /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

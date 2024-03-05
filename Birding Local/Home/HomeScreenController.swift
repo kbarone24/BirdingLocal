@@ -139,7 +139,6 @@ class HomeScreenController: UIViewController {
         cachedOutput.snapshot
             .receive(on: DispatchQueue.main)
             .sink { [weak self] snapshot in
-                // apply to datasource
                 self?.applySnapshot(snapshot: snapshot)
             }
             .store(in: &subscriptions)
@@ -148,7 +147,6 @@ class HomeScreenController: UIViewController {
         sightingsOutput.snapshot
             .receive(on: DispatchQueue.main)
             .sink { [weak self] snapshot in
-                // apply to datasource
                 self?.applySnapshot(snapshot: snapshot)
                 self?.activityIndicator.stopAnimating()
                 self?.refreshControl.endRefreshing()
@@ -160,7 +158,6 @@ class HomeScreenController: UIViewController {
         cityOutput.snapshot
             .receive(on: DispatchQueue.main)
             .sink { [weak self] snapshot in
-                // apply to datasource
                 self?.applySnapshot(snapshot: snapshot)
             }
             .store(in: &subscriptions)
@@ -202,7 +199,6 @@ class HomeScreenController: UIViewController {
         // view model -> fetch birds
         fetchInput.send((currentLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius, useStartIndex: false))
         city.send((passedLocation: viewModel.cachedLocation, radius: viewModel.cachedRadius))
-        print("got initial location")
     }
 
     @objc func deniedLocationAccess() {

@@ -33,7 +33,7 @@ struct Provider: TimelineProvider {
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        // Generate a timeline consisting of up to 4/10 sightings, refresh every minute
+        // Generate a timeline consisting of up to 4/10 sightings, refresh every hour
         let currentDate = Date()
         let refreshDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate) ?? Date()
 
