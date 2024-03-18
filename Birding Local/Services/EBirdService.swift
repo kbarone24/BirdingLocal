@@ -18,7 +18,7 @@ final class EBirdService: EBirdServiceProtocol {
     let imageManager = SDWebImageManager()
 
     func fetchSightings(for location: CLLocation, radius: Double, maxResults: Int, cachedSightings: [BirdSighting], widgetFetch: Bool) async -> [BirdSighting] {
-        //TODO: separate fetches for widget and main app
+        // TODO: separate fetches for widget and main app
         if !widgetFetch {
             saveToAppGroup(location: location, radius: radius)
         }
@@ -52,19 +52,30 @@ final class EBirdService: EBirdServiceProtocol {
         }
 
         // Fetch bird image info
-        var updatedSightings = [BirdSighting]()
-        for sighting in sightings {
-            let imageURL = await fetchBirdImageInfo(for: sighting, fetchImage: widgetFetch)
+        var updatedSightings: [BirdSighting] = []
+        // Use TaskGroup for parallelized fetching
+        await withTaskGroup(of: BirdSighting?.self) { group in
+            for sighting in sightings {
+                group.addTask {
+                    let imageURL = await self.fetchBirdImageInfo(for: sighting, fetchImage: widgetFetch)
 
-            var updatedSighting = sighting
-            updatedSighting.imageURL = imageURL
-            if widgetFetch, let imageURL {
-                updatedSighting.imageData = try? await fetchImageData(urlString: imageURL)
+                    var updatedSighting = sighting
+                    updatedSighting.imageURL = imageURL
+                    if widgetFetch, let imageURL {
+                        updatedSighting.imageData = try? await self.fetchImageData(urlString: imageURL)
+                    }
+                    return updatedSighting
+                }
             }
-            updatedSightings.append(updatedSighting)
+
+        for await result in group {
+              if let sighting = result {
+                  updatedSightings.append(sighting)
+              }
+          }
         }
 
-        return updatedSightings
+        return updatedSightings.sorted(by: { $0.timestamp > $1.timestamp })
     }
 
 
@@ -82,7 +93,7 @@ final class EBirdService: EBirdServiceProtocol {
         }
 
         do {
-            let (data, response) = try await URLSession.shared.data(from: url)
+            let (data, _) = try await URLSession.shared.data(from: url)
             let decoder = JSONDecoder()
             let sightings = try decoder.decode([BirdSighting].self, from: data)
 
@@ -171,6 +182,7 @@ final class EBirdService: EBirdServiceProtocol {
         sharedUserDefaults?.set(location.coordinate.longitude, forKey: "longitude")
         sharedUserDefaults?.set(radius, forKey: "radius")
         sharedUserDefaults?.synchronize()
+        
         WidgetCenter.shared.reloadAllTimelines()
     }
 }

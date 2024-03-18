@@ -41,6 +41,8 @@
 		8C69763E2AE9969200D5F3B5 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */; };
 		8C6976402AE996FE00D5F3B5 /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */; };
 		8C6976422AE99A8B00D5F3B5 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */; };
+		8C7BA2E62BA8DFF400BE7BCE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */; };
+		8C7BA2E72BA8E04900BE7BCE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */; };
 		8C8D1D0F2B5B221E004C8ED5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */; };
 		8C8D1D4B2B609D81004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4A2B609D81004C8ED5 /* SDWebImage */; };
 		8C8D1D502B60A2C7004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */; };
@@ -134,6 +136,7 @@
 		8C69763D2AE9969200D5F3B5 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
+		8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		8C975B742B829300009948B8 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		8C975B782B829412009948B8 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		8C975B7B2B82941C009948B8 /* OnboardingPage0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage0.swift; sourceTree = "<group>"; };
@@ -266,6 +269,7 @@
 				8CB87A9B2B44C82E00E9B5E8 /* UISearchBarExtension.swift */,
 				8C25AC102B717FAB00E660E0 /* UIColorExtension.swift */,
 				8C25AC152B71801E00E660E0 /* ColorExtension.swift */,
+				8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -498,6 +502,7 @@
 				8CB87B742B5B0AA500E9B5E8 /* BirdSighting.swift in Sources */,
 				8C25AC1A2B7189A300E660E0 /* CustomFont.swift in Sources */,
 				8C25AC0F2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */,
+				8C7BA2E72BA8E04900BE7BCE /* StringExtension.swift in Sources */,
 				8CB87B662B5A12B500E9B5E8 /* Bird_WidgetBundle.swift in Sources */,
 				8C25AC142B717FED00E660E0 /* CustomColor.swift in Sources */,
 				8C25AC172B71801E00E660E0 /* ColorExtension.swift in Sources */,
@@ -520,6 +525,7 @@
 				8C6975982ABB841000D5F3B5 /* BirdSighting.swift in Sources */,
 				8C975B852B859A2B009948B8 /* OnboardingButton.swift in Sources */,
 				8C6975912ABB595400D5F3B5 /* HomeScreenViewModel.swift in Sources */,
+				8C7BA2E62BA8DFF400BE7BCE /* StringExtension.swift in Sources */,
 				8C25AC162B71801E00E660E0 /* ColorExtension.swift in Sources */,
 				8C69762B2ADB4BF800D5F3B5 /* HomeScreenTableViewHeader.swift in Sources */,
 				8CB87A9C2B44C82E00E9B5E8 /* UISearchBarExtension.swift in Sources */,

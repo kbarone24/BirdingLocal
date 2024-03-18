@@ -106,7 +106,7 @@ class HomeScreenCell: UITableViewCell {
     func configure(sighting: BirdSighting) {
         let attributes = [NSAttributedString.Key.kern: -0.45]
         nameLabel.attributedText = NSAttributedString(string: sighting.commonName, attributes: attributes)
-        timestampLabel.attributedText = NSAttributedString(string: sighting.timestamp, attributes: attributes)
+        timestampLabel.attributedText = NSAttributedString(string: sighting.visibleTime ?? sighting.timestamp, attributes: attributes)
 
         //TODO: format timestamp
 
