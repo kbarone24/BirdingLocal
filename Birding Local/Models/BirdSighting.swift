@@ -15,15 +15,29 @@ struct BirdSighting: Codable {
     var commonName: String
     let scientificName: String
     let timestamp: String          // Observation date and time
-    let locationName: String?           // Location name where the bird was observed
+    let locationName: String?      // Location name where the bird was observed
     let lat: Double                // Latitude of the observation point
     let lng: Double                // Longitude of the observation point
     let howMany: Int?              // Number of birds observed (if specified)
-    let obsValid: Bool?             // Indicates whether the observation is valid
+    let obsValid: Bool?            // Indicates whether the observation is valid
     // MARK: assigned variables
     var imageURL: String?  // imageURL (fetched from Wikimedia API)
     var audioURL: String?
     var imageData: Data? // only used for rendering widget images
+
+    var visibleTime: String? {
+        let formatter = RelativeDateTimeFormatter()
+        formatter.dateTimeStyle = .named
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+        dateFormatter.timeZone = TimeZone(secondsFromGMT: 0)
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+
+        if let date = dateFormatter.date(from: timestamp) {
+            return formatter.localizedString(for: date, relativeTo: Date()).capitalizingFirstLetter()
+        }
+        return nil
+    }
 
     enum CodingKeys: String, CodingKey {
         case speciesCode
