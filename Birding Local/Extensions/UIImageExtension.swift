@@ -11,6 +11,7 @@ extension UIImage {
         case BackArrow
         case CircleBackground
         case CloseButton
+        case CurrentLocationButton
         case DefaultBird
         case DownCarat
         case LocationPin
