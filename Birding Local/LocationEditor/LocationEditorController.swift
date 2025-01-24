@@ -21,7 +21,7 @@ class LocationEditorController: UIViewController {
     private let viewModel: LocationEditorViewModel
 
     private let location = PassthroughSubject<CLLocation, Never>()
-    private let city = PassthroughSubject<String, Never>()
+    private let city = PassthroughSubject<String?, Never>()
     private let radius = PassthroughSubject<Double, Never>()
     private var subscriptions = Set<AnyCancellable>()
 
@@ -112,12 +112,19 @@ class LocationEditorController: UIViewController {
 
     private lazy var mapView: MKMapView = {
         let mapView = MKMapView()
-        // TODO: enable user interaction with ability to change radius
-        mapView.isUserInteractionEnabled = false
+   //     mapView.isUserInteractionEnabled = false
         mapView.showsUserLocation = true
         mapView.mapType = .mutedStandard
         mapView.delegate = self
         return mapView
+    }()
+
+    private lazy var userLocationButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(asset: .CurrentLocationButton), for: .normal)
+        button.addTarget(self, action: #selector(currentLocationTap), for: .touchUpInside)
+        button.isHidden = true
+        return button
     }()
 
     init(viewModel: LocationEditorViewModel) {
@@ -219,25 +226,32 @@ class LocationEditorController: UIViewController {
             $0.bottom.equalTo(saveButton.snp.top).offset(-16)
         }
 
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPress))
+        longPress.minimumPressDuration = 0.5
+        mapView.addGestureRecognizer(longPress)
+
+        mapView.addSubview(userLocationButton)
+        userLocationButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().offset(-12)
+            $0.top.equalToSuperview().offset(12)
+        }
+
         let input = Input(
             location: location,
             city: city,
             radius: radius)
         let output = viewModel.bind(to: input)
 
-        output.location
-            .sink { [weak self] location in
+        output.combinedOutput
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (location, city) in
                 self?.setMapView(location: location, radius: self?.viewModel.cachedRadius ?? 1000)
-            }
-            .store(in: &subscriptions)
-
-        output.city
-            .sink { [weak self] city in
                 self?.setCity(city: city)
             }
             .store(in: &subscriptions)
 
         output.radius
+            .receive(on: DispatchQueue.main)
             .sink { [weak self] radius in
                 self?.setMapView(location: self?.viewModel.cachedLocation ?? CLLocation(), radius: radius)
             }
@@ -276,6 +290,25 @@ class LocationEditorController: UIViewController {
         }
     }
 
+    @objc func currentLocationTap() {
+        if let userLocation = viewModel.currentLocation {
+            location.send(userLocation)
+            city.send(nil)
+        }
+    }
+
+    @objc func longPress(gesture: UILongPressGestureRecognizer) {
+        guard gesture.state == .began else {
+            return
+        }
+
+        let touchLocation = gesture.location(in: mapView)
+        let coordinate = mapView.convert(touchLocation, toCoordinateFrom: mapView)
+
+        location.send(CLLocation(latitude: coordinate.latitude, longitude: coordinate.longitude))
+        city.send(nil)
+    }
+
     @objc func applyTap() {
         delegate?.finishPassing(radius: viewModel.cachedRadius, location: viewModel.cachedLocation)
         close()
@@ -308,6 +341,14 @@ extension LocationEditorController: MKMapViewDelegate {
             return circleRenderer
         }
         return MKOverlayRenderer(overlay: overlay)
+    }
+
+    func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+        guard let userLocation = viewModel.currentLocation else {
+            userLocationButton.isHidden = true
+            return
+        }
+        userLocationButton.isHidden = mapView.centerCoordinate == userLocation.coordinate
     }
 }
 

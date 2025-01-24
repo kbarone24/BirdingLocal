@@ -43,6 +43,7 @@
 		8C6976422AE99A8B00D5F3B5 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */; };
 		8C7BA2E62BA8DFF400BE7BCE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */; };
 		8C7BA2E72BA8E04900BE7BCE /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */; };
+		8C7BA2E92BA92EEF00BE7BCE /* CLLocationCoordinate2DExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7BA2E82BA92EEF00BE7BCE /* CLLocationCoordinate2DExtension.swift */; };
 		8C8D1D0F2B5B221E004C8ED5 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C6976242ADB274100D5F3B5 /* UIImageExtension.swift */; };
 		8C8D1D4B2B609D81004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4A2B609D81004C8ED5 /* SDWebImage */; };
 		8C8D1D502B60A2C7004C8ED5 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 8C8D1D4F2B60A2C7004C8ED5 /* SDWebImage */; };
@@ -137,6 +138,7 @@
 		8C69763F2AE996FE00D5F3B5 /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		8C6976412AE99A8B00D5F3B5 /* UIButtonExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonExtension.swift; sourceTree = "<group>"; };
 		8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
+		8C7BA2E82BA92EEF00BE7BCE /* CLLocationCoordinate2DExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationCoordinate2DExtension.swift; sourceTree = "<group>"; };
 		8C975B742B829300009948B8 /* Keys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Keys.plist; sourceTree = "<group>"; };
 		8C975B782B829412009948B8 /* TutorialPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageViewController.swift; sourceTree = "<group>"; };
 		8C975B7B2B82941C009948B8 /* OnboardingPage0.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingPage0.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 				8C25AC102B717FAB00E660E0 /* UIColorExtension.swift */,
 				8C25AC152B71801E00E660E0 /* ColorExtension.swift */,
 				8C7BA2E52BA8DFF400BE7BCE /* StringExtension.swift */,
+				8C7BA2E82BA92EEF00BE7BCE /* CLLocationCoordinate2DExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 				8C25AC0E2B6C1C4300E660E0 /* SightingGenerator.swift in Sources */,
 				8CB87A922B3CD43A00E9B5E8 /* MapsService.swift in Sources */,
 				8C6976272ADB45CC00D5F3B5 /* HomeScreenTitleView.swift in Sources */,
+				8C7BA2E92BA92EEF00BE7BCE /* CLLocationCoordinate2DExtension.swift in Sources */,
 				8C25AC192B7189A300E660E0 /* CustomFont.swift in Sources */,
 				8C25AC112B717FAB00E660E0 /* UIColorExtension.swift in Sources */,
 				8C69762F2ADC86A100D5F3B5 /* DoubleExtension.swift in Sources */,
@@ -770,10 +774,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Birding Local will use your location to find birds near you!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
@@ -808,10 +813,11 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = "Birding Local/Birding Local.entitlements";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = H5355TZ8Q3;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Birding Local/Info.plist";
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.reference";
 				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
 				INFOPLIST_KEY_NSLocationUsageDescription = "Birding Local will use your location to find birds near you!";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Birding Local uses your location to find birds near you!";
