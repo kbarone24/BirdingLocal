@@ -24,16 +24,16 @@ struct Provider: TimelineProvider {
     func getSnapshot(in context: Context, completion: @escaping (SightingEntry) -> ()) {
         switch context.family {
         case .systemMedium:
-            completion(SightingEntry(date: Date(), city: "Your favorite place", sightingData: SightingGenerator().mediumDefault))
+            completion(SightingEntry(date: Date(), city: "NEW YORK, NY", sightingData: SightingGenerator().mediumDefault))
         case .systemLarge:
-            completion(SightingEntry(date: Date(), city: "Your favorite place", sightingData: SightingGenerator().largeDefault))
+            completion(SightingEntry(date: Date(), city: "NEW YORK, NY", sightingData: SightingGenerator().largeDefault))
         default:
             completion(SightingEntry(date: Date(), city: "", sightingData: []))
         }
     }
 
     func getTimeline(in context: Context, completion: @escaping (Timeline<Entry>) -> ()) {
-        // Generate a timeline consisting of up to 4/10 sightings, refresh every hour
+        // Generate a timeline consisting of up to 2 or 5 sightings, refresh every hour
         let currentDate = Date()
         let refreshDate = Calendar.current.date(byAdding: .hour, value: 1, to: currentDate) ?? Date()
 
@@ -45,7 +45,7 @@ struct Provider: TimelineProvider {
 
         let currentLocation = CLLocation(latitude: latitude, longitude: longitude)
         let ebirdservice = EBirdService()
-        let maxResults = context.family == .systemMedium ? 4 : 10
+        let maxResults = context.family == .systemMedium ? 2 : 5
 
         Task {
             let sightings = await ebirdservice.fetchSightings(for: currentLocation, radius: currentRadius, maxResults: maxResults, cachedSightings: [], widgetFetch: true)
@@ -70,17 +70,21 @@ struct Bird_WidgetEntryView: View {
         ZStack {
             Color(color: .WidgetBackground).ignoresSafeArea()
             VStack(alignment: .leading, spacing: 8) {
-                Text(entry.city)
+                Text(entry.city.uppercased())
                     .font(TextStyle.widgetHeader.font)
-                    .foregroundColor(Color(color: .PrimaryGray))
+                    .foregroundColor(Color(color: .AccentWhite))
+                    .padding(.top, 8)
+                    .padding(.bottom, 2)
                 LazyVGrid(
-                    columns: [GridItem(.flexible()), GridItem(.flexible())],
+                    columns: [GridItem(.flexible())],
                     alignment: .leading,
                     spacing: 0
                 ) {
                     ForEach(entry.sightingData, id: \.self) { sighting in
-                        CardView(imageData: sighting.imageData, name: sighting.commonName)
-                            .padding(.bottom, 8)
+                        CardView(imageData: sighting.imageData,
+                                 name: sighting.commonName,
+                            timestamp: sighting.visibleTime)
+                            .padding(.bottom, 12)
                             .padding(.trailing, 0)
                     }
                 }
@@ -105,34 +109,42 @@ extension View {
 struct CardView: View {
     let imageData: Data?
     let name: String
+    let timestamp: String?
 
     var body: some View {
         HStack(alignment: .center) {
             ZStack {
                 Color(color: .AccentGray).opacity(0.3)
-                    .frame(width: 50, height: 50)
+                    .frame(width: 48, height: 48)
                     .cornerRadius(4)
                 if let imageData, let uiImage = UIImage(data: imageData) {
                     Image(uiImage: uiImage)
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
+                        .frame(width: 48, height: 48)
                         .cornerRadius(4)
 
                 } else {
                     Image(uiImage: UIImage(asset: .DefaultBird) ?? UIImage())
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 50, height: 50)
+                        .frame(width: 48, height: 48)
                         .cornerRadius(4)
                 }
             }
+            VStack(alignment: .leading, spacing: 2) {
+                Text(name)
+                    .font(TextStyle.widgetLabel.font)
+                    .foregroundColor(Color(color: .AccentWhite))
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(2)
 
-            Text(name)
-                .font(TextStyle.widgetLabel.font)
-                .foregroundColor(.black)
-                .minimumScaleFactor(0.7)
-                .lineLimit(3)
+                Text(timestamp ?? "")
+                    .font(TextStyle.widgetSublabel.font)
+                    .foregroundColor(Color(color: .AccentWhite))
+                    .minimumScaleFactor(0.7)
+                    .lineLimit(1)
+            }
         }
     }
 }
