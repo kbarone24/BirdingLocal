@@ -37,6 +37,8 @@ enum TextStyle {
 
     case widgetHeader
     case widgetLabel
+    case widgetSublabel
+
     case custom(fontName: FontName, size: CGFloat)
 }
 
@@ -62,9 +64,11 @@ extension TextStyle {
             return CustomFont(font: .SFProBold, size: 16, style: .title2)
 
         case .widgetHeader:
-            return CustomFont(font: .SFProRegular, size: 10, style: .body)
+            return CustomFont(font: .SFProBold, size: 12, style: .headline)
         case .widgetLabel:
             return CustomFont(font: .SFProMedium, size: 12, style: .body)
+        case .widgetSublabel:
+            return CustomFont(font: .SFProRegular, size: 12, style: .body)
 
         case .custom(fontName: let font, size: let size):
             return CustomFont(font: font, size: size, style: .body)
@@ -83,7 +87,7 @@ extension TextStyle {
     }
 
     var font: Font {
-        return Font(UIFont(name: customFont.font.name, size: customFont.size)!)
+        return Font(UIFont(name: customFont.font.name, size: customFont.size) ?? UIFont.systemFont(ofSize: customFont.size))
     }
 }
 

@@ -36,7 +36,7 @@ struct BirdSighting: Codable {
         if let date = dateFormatter.date(from: timestamp) {
             return formatter.localizedString(for: date, relativeTo: Date()).capitalizingFirstLetter()
         }
-        return nil
+        return timestamp
     }
 
     enum CodingKeys: String, CodingKey {
@@ -81,13 +81,13 @@ struct BirdSighting: Codable {
         self.audioURL = ""
     }
 
-    init(commonName: String, image: UIImage?, speciesCode: String) {
+    init(commonName: String, timestamp: String, image: UIImage?, speciesCode: String) {
         self.id = UUID().uuidString
         self.speciesCode = speciesCode
         self.commonName = commonName
         self.scientificName = ""
         self.locationName = ""
-        self.timestamp = ""
+        self.timestamp = timestamp
         self.lat = 0
         self.lng = 0
         self.imageData = image?.jpegData(compressionQuality: 1.0) ?? Data()
